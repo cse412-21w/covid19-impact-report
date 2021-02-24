@@ -7,6 +7,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <!-- For using d3 -->
         <script src="https://d3js.org/d3.v6.min.js"></script>
+        <script src="https://d3js.org/topojson.v1.min.js"></script>
         <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
         <!-- For using vega-lite -->
         <script src="https://cdn.jsdelivr.net/npm/vega"></script>
@@ -82,6 +83,11 @@
         <div id="d3-demo"></div>
       </section>
 
+      <section id = "DD3">
+        <h3>Embed a dynamic D3 Visualization:</h3>
+        <div id="dd3"></div>
+      </section>
+
       <div class="footer">
         <a href="https://courses.cs.washington.edu/courses/cse412/21wi/">CSE 412 Data Visualization</a>
         <a href="http://www.washington.edu">University of Washington</a>
@@ -90,6 +96,7 @@
       <!-- it is recommended to put js files before </body> -->
       <!-- or check load event fot addEventListener() if you want to put js in the <head> -->
       <script src="d3Demo.js"></script>
+      <script src="dd3Test.js"></script>
       <script src="vegaDemo.js"></script>
     </body>
 
