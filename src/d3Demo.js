@@ -1,46 +1,58 @@
-import sunshineData from '../static/sunshine.csv'    // import dataset
+import covidData from '../static/covid19_us.csv'    // import dataset
 "use strict";     // the code should be executed in "strict mode".
                   // With strict mode, you can not, for example, use undeclared variables
 
 var line_svg;    // used for svg later
 var colorSet;    // used for color scheme later
-var sunshineArray = [];   // used to store data later
+var confirmedArray = [];   // used to store data later
 
 // preparation for our svg
-var margin = { top: 50, right: 35, bottom: 50, left: 50 },
-w = 650 - (margin.left + margin.right),
-h = 520 - (margin.top + margin.bottom);
+var margin = { top: 50, right: 35, bottom: 50, left: 50};
+var w = 1200 - (margin.left + margin.right);
+var h = 520 - (margin.top + margin.bottom);
 var legendSpace = 130;
 console.log(margin);
 
 // preparation for our x/y axis
-var y = d3.scaleLinear()
-          .range([h, 0]);
-var x = d3.scaleTime()
-          .range([0, w]);
-var yAxis = d3.axisLeft(y);
-var xAxis = d3.axisBottom(x)
-  .tickFormat(d3.timeFormat("%b"));   // %b: abbreviated Month format (Mon, Jun..)
+var states = [];
+// change the numerical x axis to names of states
+var formatStates = function(d) {
+    return states[d % 56];
+}
 
-var citySet = [];
+var y = d3.scaleLinear()
+          .domain([0, d3.max(covidData, d => parseInt(d.Confirmed))])
+          .range([h, 0]).nice();
+var x = d3.scaleLinear()
+          .domain([0, 59])
+          .range([0, w]).nice();
+var yAxis = d3.axisLeft(y);
+var xAxis = d3.axisBottom(x).tickFormat(formatStates);
+  //.tickFormat(d3.timeFormat("%b"));   // %b: abbreviated Month format (Mon, Jun..)
+
+console.log(d3.max(covidData, d => parseInt(d.Confirmed)));
 
 // once finish processing data, make a graph!
-d3.csv(sunshineData).then(function(data) {
+d3.csv(covidData).then(function(data) {
   data.forEach(function(d){
-    sunshineArray.push(d);
-    if (!citySet.includes(d.city)) {
-      citySet.push(d.city);
+    //states.push(d);
+    if (!states.includes(d.Province_State)) {
+      states.push(d.Province_State);
     }
   })
+
+  //print out all states in the console, check with inspect
+  console.log(states);
   drawLineD3();
 });
 
 function drawLineD3() {
   colorSet = d3.scaleOrdinal()
-               .domain(citySet)
+               .domain(states)
                .range(d3.schemeSet2);
-  x.domain(d3.extent(sunshineArray, d => d3.timeParse("%b")(d.month)));
-  y.domain(d3.extent(sunshineArray, d => parseFloat(d.sunshine)));
+  //x.domain(d3.extent(confirmedArray, d => d.Province_State));
+  //x.domain([1,56]);
+  //y.domain(d3.extent(confirmedArray, d => parseFloat(d.Confirmed)));
 
   // create our svg
   line_svg = d3.select('#d3-demo')
@@ -67,14 +79,14 @@ function drawLineD3() {
                         .attr("id","paths-group");
 
   var line = d3.line()
-              .x(d => x(d3.timeParse("%b")(d.month)))
-              .y(d => y(parseFloat(d.sunshine)));  
+              .x(d => x(d.Province_State))
+              .y(d => y(parseFloat(d.Confirmed)));
 
   // make a line for each city
-  citySet.forEach(function(d) {
-      var currentCity = sunshineArray.filter(e => e.city === d);
+  states.forEach(function(d) {
+      var currentState = confirmedArray.filter(e => e.Province_State === d);
       path.append("path")
-            .datum(currentCity)
+            .datum(currentState)
             .attr("class", "lines")
             .attr('d', line)
             .style("stroke-width", 2.5)
@@ -83,7 +95,7 @@ function drawLineD3() {
   });
 
   // add legend
-  var legend = line_svg.append('g')
+  /*var legend = line_svg.append('g')
                         .attr("id","legend-group");
 
   legend.selectAll("rect").data(citySet)
@@ -102,7 +114,5 @@ function drawLineD3() {
         .attr("y", d => 30+30*(citySet.indexOf(d)))
         .text(d => d)
         .style("font-size", "15px")
-        .attr("alignment-baseline","middle");
+        .attr("alignment-baseline","middle");*/
 }
-
-
