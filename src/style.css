@@ -47,3 +47,48 @@ p { margin: 0 0 10px 0; }
 .footer a:hover {
   color: #ce3333;
 }
+
+
+
+/* Added for only DD3 Testing */
+svg#dd3bar-chart {
+  display: block;
+  width: 400%;
+  height: 100%;
+}
+
+div#dd3-bar {
+  width: 1000px;
+  height: 800px;
+  margin: auto;
+  background-color: #2F4A6D;
+  overflow-x: scroll;  /* for scrolling */
+}
+
+.bar {
+  fill: #80cbc4;
+}
+
+line {
+  stroke: gray;
+}
+
+line#limit {
+  stroke: #FED966;
+  stroke-width: 3;
+  stroke-dasharray: 3 6;
+}
+
+.grid path {
+  stroke-width: 0;
+}
+
+.grid .tick line {
+  stroke: #9FAAAE;
+  stroke-opacity: 0.3;
+}
+
+text.divergence {
+  font-size: 14px;
+  fill: #2F4A6D;
+}
