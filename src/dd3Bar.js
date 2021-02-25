@@ -20,7 +20,7 @@ d3.csv(covidData).then(function(data) {
     covidArray.push(d);
   });
   data.forEach(function(d){
-    if (d["Source.Name"] == "04-12-2020.csv") csv412Array.push(d);
+    if (d["Source.Name"] == "01-12-2021.csv") csv412Array.push(d);
   });
   console.log(csv412Array);  // all the states for a single day
   console.log("The # of rows of the covid US data: " + covidArray.length);
@@ -63,47 +63,69 @@ d3.csv(covidData).then(function(data) {
   barGroups
     .append('rect')
     .attr('class', 'bar')
-    .attr('x', (g) => xScale(g.language))
-    .attr('y', (g) => yScale(g.value))
-    .attr('height', (g) => height - yScale(g.value))
+    .attr('x', (g) => xScale(g.Province_State))
+    .attr('y', (g) => yScale(g.Confirmed))
+    .attr('height', (g) => height - yScale(g.Confirmed))
     .attr('width', xScale.bandwidth())
-    .on('mouseenter', function (actual, i) {
+    .on('mouseenter', function (mouseEvent, d) {  // mouseEnter event
+      // console.log(d);
       d3.selectAll('.value')
         .attr('opacity', 0)
-  
+
       d3.select(this)
-        .transition()
-        .duration(300)
-        .attr('opacity', 0.6)
-        .attr('x', (a) => xScale(a.language) - 5)
-        .attr('width', xScale.bandwidth() + 10)
+          .transition()
+          .duration(300)
+          .attr('opacity', 0.6)
+          .attr('x', (d) => xScale(d.Province_State) - 5)
+          .attr('width', xScale.bandwidth() + 10)
 
-      const y = yScale(actual.value)
+      const y = yScale(d.Confirmed)
 
-      line = chart.append('line')
-        .attr('id', 'limit')
-        .attr('x1', 0)
-        .attr('y1', y)
-        .attr('x2', width)
-        .attr('y2', y)
+      chart.append('line')  // line = ...
+          .attr('id', 'limit')
+          .attr('x1', 0)
+          .attr('y1', y)
+          .attr('x2', width)
+          .attr('y2', y)
 
       barGroups.append('text')
         .attr('class', 'divergence')
-        .attr('x', (a) => xScale(a.language) + xScale.bandwidth() / 2)
-        .attr('y', (a) => yScale(a.value) + 30)
+        .attr('x', (d) => xScale(d.Province_State) + xScale.bandwidth() / 2)
+        .attr('y', (d) => yScale(d.Confirmed) + 30)
         .attr('fill', 'white')
         .attr('text-anchor', 'middle')
-        .text((a, idx) => {
-          const divergence = (a.value - actual.value).toFixed(1)
-
+        .text((thisD, idx) => {
+          const divergence = (thisD.Confirmed - d.Confirmed).toFixed(1)
           let text = ''
           if (divergence > 0) text += '+'
-          text += `${divergence}%`
+          text += +`${divergence}`
 
-          return idx !== i ? text : '';
+          // hide the text of the current bar
+          return thisD.Province_State !== d.Province_State ? text : '';
         })
-
     })
+    .on('mouseleave', function () {
+      d3.selectAll('.value')
+        .attr('opacity', 1)
+
+      d3.select(this)
+        .transition()
+        .duration(300)
+        .attr('opacity', 1)
+        .attr('x', (d) => xScale(d.Province_State))
+        .attr('width', xScale.bandwidth())
+
+      chart.selectAll('#limit').remove()
+      chart.selectAll('.divergence').remove()
+    })
+
+    barGroups
+      .append('text')
+      .attr('class', 'value')
+      .attr('x', (d) => xScale(d.Province_State) + xScale.bandwidth() / 2)
+      .attr('y', (d) => yScale(d.Confirmed) + 30)
+      .attr('text-anchor', 'middle')
+      .text((d) => +`${d.Confirmed}`)
 });
 
 
@@ -127,73 +149,6 @@ d3.csv(covidData).then(function(data) {
 
 
 
-
-// barGroups
-//   .append('rect')
-//   .attr('class', 'bar')
-//   .attr('x', (g) => xScale(g.language))
-//   .attr('y', (g) => yScale(g.value))
-//   .attr('height', (g) => height - yScale(g.value))
-//   .attr('width', xScale.bandwidth())
-//   .on('mouseenter', function (actual, i) {
-//     d3.selectAll('.value')
-//       .attr('opacity', 0)
-//
-//     d3.select(this)
-//       .transition()
-//       .duration(300)
-//       .attr('opacity', 0.6)
-//       .attr('x', (a) => xScale(a.language) - 5)
-//       .attr('width', xScale.bandwidth() + 10)
-//
-//     const y = yScale(actual.value)
-//
-//     line = chart.append('line')
-//       .attr('id', 'limit')
-//       .attr('x1', 0)
-//       .attr('y1', y)
-//       .attr('x2', width)
-//       .attr('y2', y)
-//
-//     barGroups.append('text')
-//       .attr('class', 'divergence')
-//       .attr('x', (a) => xScale(a.language) + xScale.bandwidth() / 2)
-//       .attr('y', (a) => yScale(a.value) + 30)
-//       .attr('fill', 'white')
-//       .attr('text-anchor', 'middle')
-//       .text((a, idx) => {
-//         const divergence = (a.value - actual.value).toFixed(1)
-//
-//         let text = ''
-//         if (divergence > 0) text += '+'
-//         text += `${divergence}%`
-//
-//         return idx !== i ? text : '';
-//       })
-//
-//   })
-//   .on('mouseleave', function () {
-//     d3.selectAll('.value')
-//       .attr('opacity', 1)
-//
-//     d3.select(this)
-//       .transition()
-//       .duration(300)
-//       .attr('opacity', 1)
-//       .attr('x', (a) => xScale(a.language))
-//       .attr('width', xScale.bandwidth())
-//
-//     chart.selectAll('#limit').remove()
-//     chart.selectAll('.divergence').remove()
-//   })
-//
-// barGroups
-//   .append('text')
-//   .attr('class', 'value')
-//   .attr('x', (a) => xScale(a.language) + xScale.bandwidth() / 2)
-//   .attr('y', (a) => yScale(a.value) + 30)
-//   .attr('text-anchor', 'middle')
-//   .text((a) => `${a.value}%`)
 
 
 
