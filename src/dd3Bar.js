@@ -2,7 +2,7 @@ import covidData from '../static/covid19_us.csv' // import covid 19 US data
 "use strict"
 
 var covidArray = [];
-var csv412Array = [];
+var csv112Array = [];
 const abbrStates = {
   'Alabama': "AL",
   'Alaska': "AK",
@@ -62,65 +62,6 @@ const abbrStates = {
   'Northern Mariana Islands': "MP"
 }
 
-// const abbrStates = {
-//   Alabama: "AL",
-//   Alaska: "AK",
-//   Arizona: "AZ",
-//   Arkansas: "AR",
-//   California: "CA",
-//   Colorado: "CO",
-//   Connecticut: "CT",
-//   Delaware: "DE",
-//   "Diamond Princess": "DPShip",  // the ship
-//   "District of Columbia": "DC",
-//   Florida: "FL",
-//   Georgia: "GA",
-//   "Grand Princess": "GPShip",  // the other ship
-//   Guam: "GU",
-//   Hawaii: "HI",
-//   Idaho: "ID",
-//   Illinois: "IL",
-//   Indiana: "IN",
-//   Iowa: "IA",
-//   Kansas: "KS",
-//   Kentucky: "KY",
-//   Louisiana: "LA",
-//   Maine: "ME",
-//   Maryland: "MD",
-//   Massachusetts: "MA",
-//   Michigan: "MI",
-//   Minnesota: "MN",
-//   Mississippi: "MS",
-//   Missouri: "MO",
-//   Montana: "MT",
-//   Nebraska: "NE",
-//   Nevada: "NV",
-//   "New Hampshire": "NH",
-//   "New Jersey": "NJ",
-//   "New Mexico": "NM",
-//   "New York": "NY",
-//   "North Carolina": "NC",
-//   "North Dakota": "ND",
-//   Ohio: "OH",
-//   Oklahoma: "OK",
-//   Oregon: "OR",
-//   Pennsylvania: "PA",
-//   "Puerto Rico": "PR",
-//   "Rhode Island": "RI",
-//   "South Carolina": "SC",
-//   "South Dakota": "SD",
-//   Tennessee: "TN",
-//   Texas: "TX",
-//   Utah: "UT",
-//   Vermont: "VT",
-//   Virginia: "VA",
-//   Washington: "WA",
-//   "West Virginia": "WV",
-//   Wisconsin: "WI",
-//   Wyoming: "WY",
-//   "Northern Mariana Islands": "MP"
-// }
-
 const svg = d3.select('svg')
               .attr("id", "dd3bar-chart");
 const svgContainer = d3.select('#dd3-bar');
@@ -132,30 +73,40 @@ const height = 800 - 2 * margin;
 const chart = svg.append('g')
   .attr('transform', `translate(${margin}, ${margin})`);
 
+
 d3.csv(covidData).then(function(data) {
   data.forEach(function(d){
     covidArray.push(d);
   });
   data.forEach(function(d){
-    if (d["Source.Name"] == "01-12-2021.csv") csv412Array.push(d);
+    if (d["Source.Name"] == "01-12-2021.csv") csv112Array.push(d);
   });
-  console.log(csv412Array);  // all the states for a single day
+
+  // For the slider
+  var dateValues = Array.from(d3.rollup(covidArray, ([d]) => d.Confirmed, d => d.Last_Update, d => d.Province_State))
+                  .map(([date, data]) => [formatDate(date), data])
+                  // .sort(([a], [b]) => d3.ascending(a, b))
+  // console.log(dateValues);
+
+  console.log(csv112Array);  // all the states for a single day
   console.log("The # of rows of the covid US data: " + covidArray.length);
   console.log("Example row: ");
   console.log(covidArray[0]);  // covidArray is an array of objects now
   // method to find the max value of a column
   console.log(d3.max(covidArray, d => +d["Confirmed"]));
+  // const tParser = d3.timeParse("%d/%m/%Y %H:%M");
+  // console.log(tParser(covidArray[0].Last_Update));
 
-  const xScale = d3.scaleBand()
+  var xScale = d3.scaleBand()
     .range([0, width])
     .domain(covidArray.map((d) => abbrStates[d.Province_State]));
-  const makeXLines = () => d3.axisBottom()
+  var makeXLines = () => d3.axisBottom()
       .scale(xScale)
 
-  const yScale = d3.scaleLinear()
+  var yScale = d3.scaleLinear()
     .range([height, 0])
     .domain([0, 3600000]);
-  const makeYLines = () => d3.axisLeft()
+  var makeYLines = () => d3.axisLeft()
     .scale(yScale)
 
 
@@ -173,7 +124,7 @@ d3.csv(covidData).then(function(data) {
     )
 
   const barGroups = chart.selectAll()
-    .data(csv412Array)
+    .data(csv112Array)
     .enter()
     .append('g')
 
@@ -245,27 +196,6 @@ d3.csv(covidData).then(function(data) {
       .text((d) => +`${d.Confirmed}`)
 });
 
-
-// const xScale = d3.scaleBand()
-//   .range([0, width])
-//   .domain(covidArray.map((d) => d.Province_State));
-  // .padding(0.4)
-
-// vertical grid lines
-// const makeXLines = () => d3.axisBottom()
-//   .scale(xScale)
-
-// vertical grid lines
-// chart.append('g')
-//   .attr('class', 'grid')
-//   .attr('transform', `translate(0, ${height})`)
-//   .call(makeXLines()
-//     .tickSize(-height, 0, 0)
-//     .tickFormat('')
-//   )
-
-
-
 svg
   .append('text')
   .attr('class', 'label')
@@ -281,7 +211,7 @@ svg.append('text')
   .attr('y', height + margin * 1.7)
   .attr('text-anchor', 'middle')
   .text('States')
-//
+
 // svg.append('text')
 //   .attr('class', 'title')
 //   .attr('x', width / 2 + margin)
@@ -295,3 +225,34 @@ svg.append('text')
 //   .attr('y', height + margin * 1.7)
 //   .attr('text-anchor', 'start')
 //   .text('Source: Stack Overflow, 2018')
+
+// test();
+//
+// function test() {
+//   console.log("TESTTING FOR THE SLIDER");
+//   const formatDate = d3.utcParse("%m/%d/%Y %H:%M");
+//   console.log(formatDate("4/12/2020 23:18"));
+// }
+
+const barSize = 48;
+
+const n = 59;
+
+const margin2 = ({top: 16, right: 6, bottom: 6, left: 0});
+
+const formatDate = d3.utcParse("%m/%d/%Y %H:%M");
+
+function ticker(svg) {
+  const now = svg.append("text")
+                .style("font", `bold ${barSize}px var(--sans-serif)`)
+                .style("font-variant-numeric", "tabular-nums")
+                .attr("text-anchor", "end")
+                .attr("x", width - 6)
+                .attr("y", margin2.top + barSize * (n - 0.45))
+                .attr("dy", "0.32em")
+                .text(formatDate(keyframes[0][0]));
+
+  return ([date], transition) => {
+    transition.end().then(() => now.text(formatDate(date)));
+  };
+}
