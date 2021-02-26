@@ -3,6 +3,123 @@ import covidData from '../static/covid19_us.csv' // import covid 19 US data
 
 var covidArray = [];
 var csv412Array = [];
+const abbrStates = {
+  'Alabama': "AL",
+  'Alaska': "AK",
+  'Arizona': "AZ",
+  'Arkansas': "AR",
+  'California': "CA",
+  'Colorado': "CO",
+  'Connecticut': "CT",
+  'Delaware': "DE",
+  'Diamond Princess': "DPShip",  // the ship
+  'District of Columbia': "DC",
+  'Florida': "FL",
+  'Georgia': "GA",
+  'Grand Princess': "GPShip",  // the other ship
+  'Guam': "GU",
+  'Hawaii': "HI",
+  'Idaho': "ID",
+  'Illinois': "IL",
+  'Indiana': "IN",
+  'Iowa': "IA",
+  'Kansas': "KS",
+  'Kentucky': "KY",
+  'Louisiana': "LA",
+  'Maine': "ME",
+  'Maryland': "MD",
+  'Massachusetts': "MA",
+  'Michigan': "MI",
+  'Minnesota': "MN",
+  'Mississippi': "MS",
+  'Missouri': "MO",
+  'Montana': "MT",
+  'Nebraska': "NE",
+  'Nevada': "NV",
+  'New Hampshire': "NH",
+  'New Jersey': "NJ",
+  'New Mexico': "NM",
+  'New York': "NY",
+  'North Carolina': "NC",
+  'North Dakota': "ND",
+  'Ohio': "OH",
+  'Oklahoma': "OK",
+  'Oregon': "OR",
+  'Pennsylvania': "PA",
+  'Puerto Rico': "PR",
+  'Rhode Island': "RI",
+  'South Carolina': "SC",
+  'South Dakota': "SD",
+  'Tennessee': "TN",
+  'Texas': "TX",
+  'Utah': "UT",
+  'Vermont': "VT",
+  'Virginia': "VA",
+  'Washington': "WA",
+  'West Virginia': "WV",
+  'Wisconsin': "WI",
+  'Wyoming': "WY",
+  'Northern Mariana Islands': "MP"
+}
+
+// const abbrStates = {
+//   Alabama: "AL",
+//   Alaska: "AK",
+//   Arizona: "AZ",
+//   Arkansas: "AR",
+//   California: "CA",
+//   Colorado: "CO",
+//   Connecticut: "CT",
+//   Delaware: "DE",
+//   "Diamond Princess": "DPShip",  // the ship
+//   "District of Columbia": "DC",
+//   Florida: "FL",
+//   Georgia: "GA",
+//   "Grand Princess": "GPShip",  // the other ship
+//   Guam: "GU",
+//   Hawaii: "HI",
+//   Idaho: "ID",
+//   Illinois: "IL",
+//   Indiana: "IN",
+//   Iowa: "IA",
+//   Kansas: "KS",
+//   Kentucky: "KY",
+//   Louisiana: "LA",
+//   Maine: "ME",
+//   Maryland: "MD",
+//   Massachusetts: "MA",
+//   Michigan: "MI",
+//   Minnesota: "MN",
+//   Mississippi: "MS",
+//   Missouri: "MO",
+//   Montana: "MT",
+//   Nebraska: "NE",
+//   Nevada: "NV",
+//   "New Hampshire": "NH",
+//   "New Jersey": "NJ",
+//   "New Mexico": "NM",
+//   "New York": "NY",
+//   "North Carolina": "NC",
+//   "North Dakota": "ND",
+//   Ohio: "OH",
+//   Oklahoma: "OK",
+//   Oregon: "OR",
+//   Pennsylvania: "PA",
+//   "Puerto Rico": "PR",
+//   "Rhode Island": "RI",
+//   "South Carolina": "SC",
+//   "South Dakota": "SD",
+//   Tennessee: "TN",
+//   Texas: "TX",
+//   Utah: "UT",
+//   Vermont: "VT",
+//   Virginia: "VA",
+//   Washington: "WA",
+//   "West Virginia": "WV",
+//   Wisconsin: "WI",
+//   Wyoming: "WY",
+//   "Northern Mariana Islands": "MP"
+// }
 
 const svg = d3.select('svg')
               .attr("id", "dd3bar-chart");
@@ -31,7 +148,7 @@ d3.csv(covidData).then(function(data) {
 
   const xScale = d3.scaleBand()
     .range([0, width])
-    .domain(covidArray.map((d) => d.Province_State));
+    .domain(covidArray.map((d) => abbrStates[d.Province_State]));
   const makeXLines = () => d3.axisBottom()
       .scale(xScale)
 
@@ -63,7 +180,7 @@ d3.csv(covidData).then(function(data) {
   barGroups
     .append('rect')
     .attr('class', 'bar')
-    .attr('x', (g) => xScale(g.Province_State))
+    .attr('x', (g) => xScale(abbrStates[g.Province_State]))
     .attr('y', (g) => yScale(g.Confirmed))
     .attr('height', (g) => height - yScale(g.Confirmed))
     .attr('width', xScale.bandwidth())
@@ -76,7 +193,7 @@ d3.csv(covidData).then(function(data) {
           .transition()
           .duration(300)
           .attr('opacity', 0.6)
-          .attr('x', (d) => xScale(d.Province_State) - 5)
+          .attr('x', (d) => xScale(abbrStates[d.Province_State]) - 5)
           .attr('width', xScale.bandwidth() + 10)
 
       const y = yScale(d.Confirmed)
@@ -90,8 +207,8 @@ d3.csv(covidData).then(function(data) {
 
       barGroups.append('text')
         .attr('class', 'divergence')
-        .attr('x', (d) => xScale(d.Province_State) + xScale.bandwidth() / 2)
-        .attr('y', (d) => yScale(d.Confirmed) + 30)
+        .attr('x', (d) => xScale(abbrStates[d.Province_State]) + xScale.bandwidth() / 2)
+        .attr('y', (d) => yScale(d.Confirmed) - 10)
         .attr('fill', 'white')
         .attr('text-anchor', 'middle')
         .text((thisD, idx) => {
@@ -112,7 +229,7 @@ d3.csv(covidData).then(function(data) {
         .transition()
         .duration(300)
         .attr('opacity', 1)
-        .attr('x', (d) => xScale(d.Province_State))
+        .attr('x', (d) => xScale(abbrStates[d.Province_State]))
         .attr('width', xScale.bandwidth())
 
       chart.selectAll('#limit').remove()
@@ -122,8 +239,8 @@ d3.csv(covidData).then(function(data) {
     barGroups
       .append('text')
       .attr('class', 'value')
-      .attr('x', (d) => xScale(d.Province_State) + xScale.bandwidth() / 2)
-      .attr('y', (d) => yScale(d.Confirmed) + 30)
+      .attr('x', (d) => xScale(abbrStates[d.Province_State]) + xScale.bandwidth() / 2)
+      .attr('y', (d) => yScale(d.Confirmed) - 10)
       .attr('text-anchor', 'middle')
       .text((d) => +`${d.Confirmed}`)
 });
@@ -149,25 +266,21 @@ d3.csv(covidData).then(function(data) {
 
 
 
+svg
+  .append('text')
+  .attr('class', 'label')
+  .attr('x', -(height / 2) - margin)
+  .attr('y', margin / 4)
+  .attr('transform', 'rotate(-90)')
+  .attr('text-anchor', 'middle')
+  .text('# of people confirmed')
 
-
-
-
-// svg
-//   .append('text')
-//   .attr('class', 'label')
-//   .attr('x', -(height / 2) - margin)
-//   .attr('y', margin / 2.4)
-//   .attr('transform', 'rotate(-90)')
-//   .attr('text-anchor', 'middle')
-//   .text('Love meter (%)')
-//
-// svg.append('text')
-//   .attr('class', 'label')
-//   .attr('x', width / 2 + margin)
-//   .attr('y', height + margin * 1.7)
-//   .attr('text-anchor', 'middle')
-//   .text('Languages')
+svg.append('text')
+  .attr('class', 'label')
+  .attr('x', width / 10 + margin)
+  .attr('y', height + margin * 1.7)
+  .attr('text-anchor', 'middle')
+  .text('States')
 //
 // svg.append('text')
 //   .attr('class', 'title')
@@ -175,7 +288,7 @@ d3.csv(covidData).then(function(data) {
 //   .attr('y', 40)
 //   .attr('text-anchor', 'middle')
 //   .text('Most loved programming languages in 2018')
-//
+
 // svg.append('text')
 //   .attr('class', 'source')
 //   .attr('x', width - margin / 2)
