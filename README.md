@@ -5,9 +5,16 @@ Place your team member names here.
 Testing 3:46pm
 
 ### Contribution Statements
-Add individual contribution statements here.
+
+- Bobin Hu, bobinh@uw.edu
+- Ellie Liu: yliu617@uw.edu
+- Jonathan Zhao, zhaoy43@uw.edu
+- Mingyang Xue, mingyx@uw.edu
+- Zealer Xiao zilex@uw.edu
 ## Project Proposal Abstract
-This is the space for you to add a description for your project.
+As Covid-19 vaccines seem to raise hope to the world, the health crisis has made huge impacts on people’s lives and would still be a black cloud hanging over our heads for at least several months, or even years. We are interested in how the cases of coronavirus fluctuated and how the conditions in different geolocations changed in these months. Additionally, how the cases of coronavirus can be correlated with some economic factors, such as unemployment rate and price? Tracing back into those history data might provide us insights about the influence of this crisis. 
+	
+We are going to do exploratory data analysis on the datasets related to cases of Covid-19 and economy (or any other fields impacted). By using maps/symbol maps, we will create visualizations to show the cases in different states, and by making it an interactive data visualization, we will display the changing over time. Furthermore, we will research and link relatable variables impacted with specific columns of the conditions of coronavirus, and try our best to build intuitive stories with reasonable design elements, such as positions, shapes, sizes, and colors.
 
 ## Getting Started
 
