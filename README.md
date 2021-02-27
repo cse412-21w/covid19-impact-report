@@ -1,16 +1,14 @@
 # Final Project Demo
 ## Team Members
-Place your team member names here.
-
-Testing 3:46pm
-
-### Contribution Statements
-
 - Bobin Hu, bobinh@uw.edu
 - Ellie Liu: yliu617@uw.edu
 - Jonathan Zhao, zhaoy43@uw.edu
 - Mingyang Xue, mingyx@uw.edu
 - Zealer Xiao zilex@uw.edu
+
+### Contribution Statements
+
+Add individual contribution statements here.
 ## Project Proposal Abstract
 As Covid-19 vaccines seem to raise hope to the world, the health crisis has made huge impacts on people’s lives and would still be a black cloud hanging over our heads for at least several months, or even years. We are interested in how the cases of coronavirus fluctuated and how the conditions in different geolocations changed in these months. Additionally, how the cases of coronavirus can be correlated with some economic factors, such as unemployment rate and price? Tracing back into those history data might provide us insights about the influence of this crisis. 
 	
