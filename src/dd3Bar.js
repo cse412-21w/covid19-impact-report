@@ -62,16 +62,17 @@ const abbrStates = {
   'Northern Mariana Islands': "MP"
 }
 
-const svg = d3.select('svg')
-              .attr("id", "dd3bar-chart");
-const svgContainer = d3.select('#dd3-bar');
-
 const margin = 80;
 const width = 4000 - 2 * margin;
 const height = 800 - 2 * margin;
 
-const chart = svg.append('g')
-  .attr('transform', `translate(${margin}, ${margin})`);
+
+const svg = d3.select('svg')
+              .attr("id", "dd3bar-chart");
+const svgContainer = d3.select('#dd3-bar');
+
+// const chart = svg.append('g')
+//   .attr('transform', `translate(${margin}, ${margin})`);
 
 
 d3.csv(covidData).then(function(data) {
@@ -82,33 +83,72 @@ d3.csv(covidData).then(function(data) {
     if (d["Source.Name"] == "01-12-2021.csv") csv112Array.push(d);
   });
 
-  // For the slider
-  var dateValues = Array.from(d3.rollup(covidArray, ([d]) => d.Confirmed, d => d.Last_Update, d => d.Province_State))
-                  .map(([date, data]) => [formatDate(date), data])
+  // For later revising (slider)
+  var dateValues = Array.from(d3.rollup(covidArray, ([d]) => d.Confirmed, d => d['Source.Name'], d => d.Province_State))
+                  .map(([filename, data]) => [filename, data])
+                  // .map(([date, data]) => [parseDateCSV(date), data])
                   // .sort(([a], [b]) => d3.ascending(a, b))
   // console.log(dateValues);
 
-  console.log(csv112Array);  // all the states for a single day
-  console.log("The # of rows of the covid US data: " + covidArray.length);
-  console.log("Example row: ");
-  console.log(covidArray[0]);  // covidArray is an array of objects now
-  // method to find the max value of a column
-  console.log(d3.max(covidArray, d => +d["Confirmed"]));
-  // const tParser = d3.timeParse("%d/%m/%Y %H:%M");
-  // console.log(tParser(covidArray[0].Last_Update));
+  // console.log(csv112Array);  // all the states for a single day
+  // console.log(covidArray[0]);  // covidArray is an array of objects now
+  //
+  // // console.log(d3.max(csv112Array, function(d) {return +d.Confirmed}));
+  // console.log("The # of rows of the covid US data: " + covidArray.length);
+  // console.log("Example row: ");
+  // // method to find the max value of a column
+  // console.log(d3.max(covidArray, d => +d["Confirmed"]));
+  // // const tParser = d3.timeParse("%d/%m/%Y %H:%M");
+  // // console.log(tParser(covidArray[0].Last_Update));
+
+  draw("01-01-2021.csv");
+});
+
+// svg
+//   .append('text')
+//   .attr('class', 'label')
+//   .attr('x', -(height / 2) - margin)
+//   .attr('y', margin / 4)
+//   .attr('transform', 'rotate(-90)')
+//   .attr('text-anchor', 'middle')
+//   .text('# of people confirmed')
+//
+// svg.append('text')
+//   .attr('class', 'label')
+//   .attr('x', width / 10 + margin)
+//   .attr('y', height + margin * 1.7)
+//   .attr('text-anchor', 'middle')
+//   .text('States')
+
+
+
+const parseDateCSV = d3.utcParse("%m/%d/%Y %M:%M");
+const parseDate = d3.utcParse("%Y-%m-%d");
+const formatDate = d3.utcFormat("%m-%d-%Y");
+
+function draw(filename) {
+
+  const chart = svg.append('g')
+    .attr('transform', `translate(${margin}, ${margin})`);
+
+  // console.log(rowMap[1].values());
+  var currentArray = [];
+  covidArray.forEach(function(d){
+    if (d["Source.Name"] == filename) currentArray.push(d);
+  });
+  console.log(currentArray);
 
   var xScale = d3.scaleBand()
     .range([0, width])
-    .domain(covidArray.map((d) => abbrStates[d.Province_State]));
+    .domain(currentArray.map((d) => abbrStates[d.Province_State]));
   var makeXLines = () => d3.axisBottom()
       .scale(xScale)
 
   var yScale = d3.scaleLinear()
     .range([height, 0])
-    .domain([0, 3600000]);
+    .domain([0, d3.max(currentArray, function(d) {return +d.Confirmed})]);
   var makeYLines = () => d3.axisLeft()
     .scale(yScale)
-
 
   chart.append('g')
     .attr('transform', `translate(0, ${height})`)
@@ -124,7 +164,7 @@ d3.csv(covidData).then(function(data) {
     )
 
   const barGroups = chart.selectAll()
-    .data(csv112Array)
+    .data(currentArray)
     .enter()
     .append('g')
 
@@ -194,65 +234,51 @@ d3.csv(covidData).then(function(data) {
       .attr('y', (d) => yScale(d.Confirmed) - 10)
       .attr('text-anchor', 'middle')
       .text((d) => +`${d.Confirmed}`)
-});
+}
 
-svg
-  .append('text')
-  .attr('class', 'label')
-  .attr('x', -(height / 2) - margin)
-  .attr('y', margin / 4)
-  .attr('transform', 'rotate(-90)')
-  .attr('text-anchor', 'middle')
-  .text('# of people confirmed')
 
-svg.append('text')
-  .attr('class', 'label')
-  .attr('x', width / 10 + margin)
-  .attr('y', height + margin * 1.7)
-  .attr('text-anchor', 'middle')
-  .text('States')
 
-// svg.append('text')
-//   .attr('class', 'title')
-//   .attr('x', width / 2 + margin)
-//   .attr('y', 40)
-//   .attr('text-anchor', 'middle')
-//   .text('Most loved programming languages in 2018')
+var dateControl = document.getElementById("dateUpdated");
 
-// svg.append('text')
-//   .attr('class', 'source')
-//   .attr('x', width - margin / 2)
-//   .attr('y', height + margin * 1.7)
-//   .attr('text-anchor', 'start')
-//   .text('Source: Stack Overflow, 2018')
+dateControl.onchange = function() {
+  // console.log("dateControl Testing:");
+  // console.log(parseDate(dateControl.value));
+  var filename = formatDate(parseDate(dateControl.value)).concat(".csv");
+  console.log(filename);
 
-// test();
-//
-// function test() {
-//   console.log("TESTTING FOR THE SLIDER");
-//   const formatDate = d3.utcParse("%m/%d/%Y %H:%M");
-//   console.log(formatDate("4/12/2020 23:18"));
-// }
+  // clear the previous visualizations
+  svg.selectAll('*').remove();
 
+  draw(filename);
+}
+
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+
+
+
+
+// For later revising
 const barSize = 48;
 
 const n = 59;
 
 const margin2 = ({top: 16, right: 6, bottom: 6, left: 0});
 
-const formatDate = d3.utcParse("%m/%d/%Y %H:%M");
-
-function ticker(svg) {
-  const now = svg.append("text")
-                .style("font", `bold ${barSize}px var(--sans-serif)`)
-                .style("font-variant-numeric", "tabular-nums")
-                .attr("text-anchor", "end")
-                .attr("x", width - 6)
-                .attr("y", margin2.top + barSize * (n - 0.45))
-                .attr("dy", "0.32em")
-                .text(formatDate(keyframes[0][0]));
-
-  return ([date], transition) => {
-    transition.end().then(() => now.text(formatDate(date)));
-  };
-}
+// function ticker(svg) {
+//   const now = svg.append("text")
+//                 .style("font", `bold ${barSize}px var(--sans-serif)`)
+//                 .style("font-variant-numeric", "tabular-nums")
+//                 .attr("text-anchor", "end")
+//                 .attr("x", width - 6)
+//                 .attr("y", margin2.top + barSize * (n - 0.45))
+//                 .attr("dy", "0.32em")
+//                 .text(formatDate(keyframes[0][0]));
+//
+//   return ([date], transition) => {
+//     transition.end().then(() => now.text(formatDate(date)));
+//   };
+// }

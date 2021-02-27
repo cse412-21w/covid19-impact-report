@@ -91,8 +91,13 @@
       <section id = "DD3Bar">
         <h3>Embed a dynamic D3 Bar Visualization:</h3>
 
-        <!-- The slider/scrubber -->
-
+        <!-- The slider/scrubber/form -->
+        <form>
+            <label for="date">Please select a date: </label>
+            <input type="date" id="dateUpdated" min="2020-04-12" max="2021-02-20" name="Confirmed # on ">
+            <!-- <input type="submit" id="select_date"> -->
+            <!-- <output name="selected_year" id="selected_date">2014</output> -->
+        </form>
 
         <div id="dd3-bar">
           <svg />
