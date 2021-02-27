@@ -97,7 +97,7 @@ p {
 }
 
 /* Added for only DD3 Testing */
-svg#dd3bar-chart {
+svg#dd3bar-svg {
   display: block;
   width: 400%;
   height: 100%;

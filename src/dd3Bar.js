@@ -67,8 +67,8 @@ const width = 4000 - 2 * margin;
 const height = 800 - 2 * margin;
 
 
-const svg = d3.select('svg')
-              .attr("id", "dd3bar-chart");
+const svg = d3.select('#dd3bar-svg')
+              .attr("id", "dd3bar-svg");
 const svgContainer = d3.select('#dd3-bar');
 
 // const chart = svg.append('g')
@@ -84,8 +84,8 @@ d3.csv(covidData).then(function(data) {
   });
 
   // For later revising (slider)
-  var dateValues = Array.from(d3.rollup(covidArray, ([d]) => d.Confirmed, d => d['Source.Name'], d => d.Province_State))
-                  .map(([filename, data]) => [filename, data])
+  // var dateValues = Array.from(d3.rollup(covidArray, ([d]) => d.Confirmed, d => d['Source.Name'], d => d.Province_State))
+  //                 .map(([filename, data]) => [filename, data])
                   // .map(([date, data]) => [parseDateCSV(date), data])
                   // .sort(([a], [b]) => d3.ascending(a, b))
   // console.log(dateValues);
