@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+
+  <head>
 		<meta charset="utf-8" />
 		<title>CSE 412 Project Demo</title>
 		<link rel="stylesheet" href="style.css" />
@@ -87,6 +88,22 @@
       <button  id="thirdB">Producer Price Index</button>
       <div id="econ-indct"></div>
     </section>
+    
+    <section id = "DD3Bar">
+      <h3>Embed a dynamic D3 Bar Visualization:</h3>
+
+      <!-- The slider/scrubber/form -->
+      <form>
+          <label for="date">Please select a date: </label>
+          <input type="date" id="dateUpdated" min="2020-04-12" max="2021-02-20" name="Confirmed # on ">
+          <!-- <input type="submit" id="select_date"> -->
+          <!-- <output name="selected_year" id="selected_date">2014</output> -->
+      </form>
+
+      <div id="dd3-bar">
+        <svg />
+      </div>
+    </section>
 
     <section id="covid_mobility">
 			<h3>Daily Cases change and Daily Mobility Change in California</h3>
@@ -103,5 +120,6 @@
     <!-- <script src="vegaDemo.js"></script> -->
     <script src="econIndicts.js"></script>
 		<script src="covid_mobility.js"></script>
+    <script src="dd3Bar.js"></script>
 	</body>
 </html>
