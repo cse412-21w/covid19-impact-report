@@ -74,6 +74,19 @@
       vizElement.parentNode.insertBefore(scriptElement, vizElement);                
       </script>
     </section>
+    
+    <section id = "vegaDemo">
+      <h3>Embed a Vega-Lite Visualization:</h3>
+      <div id="view"></div>
+    </section>
+
+    <section id = "econIndicts">
+      <h3>Embed a D3 Visualization:</h3>
+      <button  id="firstB">Exports</button>
+      <button  id="secondB">Personal Consumption</button>
+      <button  id="thirdB">Producer Price Index</button>
+      <div id="econ-indct"></div>
+    </section>
 
     <section id="covid_mobility">
 			<h3>Daily Cases change and Daily Mobility Change in California</h3>
@@ -81,15 +94,14 @@
 		</section>
 
 		<div class="footer">
-			<a href="https://courses.cs.washington.edu/courses/cse412/21wi/"
-				>CSE 412 Data Visualization</a
-			>
+			<a href="https://courses.cs.washington.edu/courses/cse412/21wi/">CSE 412 Data Visualization</a>
 			<a href="http://www.washington.edu">University of Washington</a>
 		</div>
 		<!-- it is recommended to put js files before </body> -->
 		<!-- or check load event fot addEventListener() if you want to put js in the <head> -->
 		<!-- <script src="d3Demo.js"></script> -->
-    <!-- <script src="vegaDemo.js"></script> -->
+    <script src="vegaDemo.js"></script>
+    <script src="econIndicts.js"></script>
 		<script src="covid_mobility.js"></script>
 	</body>
 </html>
