@@ -1,0 +1,69 @@
+h1, h2, h3 {
+  font-family: 'Montserrat';
+  text-align: center;
+}
+
+a {
+  color: blueviolet;
+  text-decoration: none;
+}
+
+a:hover {
+  color: darkmagenta;
+}
+
+.p1 {
+  background: url("../images/unsplash-covid19.jpg");
+  background-size: cover;
+}
+
+.p1 h1, .p1 h3 {
+  color: whitesmoke;
+  text-align: right;
+  margin-right: 5%;
+}
+
+.p1 h1 {
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+
+.p2 {
+  background-color: #dddddd;
+}
+
+span {
+  background: black;
+}
+
+.fp-slidesNav.fp-bottom {
+  margin-left: 1em !important;
+}
+
+.s1 {
+  background: url("../images/mkm1.jpg");
+  background-size: cover;
+}
+
+.s2 {
+  background: url("../images/mkm2.jpg");
+  background-size: cover;
+}
+
+.s2 h1 {
+  text-align: left;
+  margin-left: 2em;
+  font-size: 4rem;
+}
+
+.s3 {
+  background: url("../images/mkm3.jpg");
+  background-size: cover;
+}
+
+.s3 h1 {
+  text-align: right;
+  margin-right: 2em;
+  font-size: 4em;
+}
+/*# sourceMappingURL=main.css.map */

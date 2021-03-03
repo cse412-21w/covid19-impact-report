@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cse412-fp-covid19-impact-report</title>
+
+    <!-- For fullpage linking & css -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.js" integrity="sha512-HqbDsHIJoZ36Csd7NMupWFxC7e7aX2qm213sX+hirN+yEx/eUNlZrTWPs1dUQDEW4fMVkerv1PfMohR1WdFFJQ==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.css" />
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- For Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
+</head>
+<body>
+
+    <div id="fullPage">
+        <div class="section title-page p1">
+
+            <div class="right-align-block">
+                <h1>COVID-19 Impacts Report</h1>
+
+                <h3>The contagious disease caused by
+                    <a href="https://en.wikipedia.org/wiki/Severe_acute_respiratory_syndrome_coronavirus_2" target="_blank">SARS-CoV-2</a>
+                </h3>
+            </div>
+
+        </div>
+
+        <div class="section p2">
+            <div class="slide fp-viewing-p2-0">
+                <h1>slide 1</h1>
+            </div>
+            
+            <div class="slide fp-viewing-p2-1">
+                <h1>slide 2</h1>
+            </div>
+
+            <div class="slide fp-viewing-p2-2">
+                <h1>slide 3</h1>
+            </div>
+
+        </div>
+
+
+
+        <div class="section s1">
+            <h1>チェンソーマン<a href="#section3">clicky</a></h1>
+        </div>
+
+        <div class="section s2">            
+            <div class="slide">
+                <h1>Chainsaw Man</h1>
+            </div>
+
+            <div class="slide">
+                <h1>チェンソーマン</h1>
+            </div>
+        </div>
+
+        <div class="section s3">
+            <h1>欢乐喜锯人</h1>
+        </div>
+
+    </div>
+
+    <script>
+
+        new fullpage('#fullPage', {
+            autoScrolling: true,
+            navigation: true,
+            anchors: ['Home', 'page2', 'page3', 'page4', 'page5'],
+            navigationTooltips: ['Home', 'Second', 'Third', 'Forth', 'Fifth'],
+            scrollingSpeed: 1000,
+
+            controlArrows: false,
+            slidesNavigation: true,
+        })
+
+    </script>
+
+</body>
+</html>
