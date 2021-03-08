@@ -14,6 +14,7 @@
         <script src="https://cdn.jsdelivr.net/npm/vega-lite-api"></script>
         <script src="https://cdn.jsdelivr.net/npm/vega-tooltip"></script>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400;1,900&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
     </head>
 
     <body>
@@ -81,8 +82,13 @@
         <h3>Embed a D3 Visualization:</h3>
         <button  id="firstB">Exports</button>
         <button  id="secondB">Personal Consumption</button>
-        <button  id="thirdB">Producer Price Index</button>
+        <button  id="thirdB">Imports of Services</button>
         <div id="econ-indct"></div>
+      </section>
+
+      <section id = "vacState">
+        <h3>Vaccination:</h3>
+        <div id="vac-state"></div>
       </section>
 
       <div class="footer">
@@ -94,6 +100,8 @@
       <!-- or check load event fot addEventListener() if you want to put js in the <head> -->
       <script src="vegaDemo.js"></script>
       <script src="econIndicts.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
+      <script src="vacState.js"></script>
     </body>
 
 </html>

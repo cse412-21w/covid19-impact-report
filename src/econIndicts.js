@@ -2,51 +2,102 @@
 var expo = [
   {
     month: 1,
-    value: 209062
+    value: 209.062
   },
   {
     month: 2,
-    value: 209444
+    value: 209.444
   },
   {
     month: 3,
-    value: 186423
+    value: 186.423
   },
   {
     month: 4,
-    value: 148894
+    value: 148.894
   },
   {
     month: 5,
-    value: 143794
+    value: 143.794
   },
   {
     month: 6,
-    value: 157420
+    value: 157.420
   },
   {
     month: 7,
-    value: 169864
+    value: 169.864
   },
   {
     month: 8,
-    value: 173657
+    value: 173.657
   },
   {
     month: 9,
-    value: 177838
+    value: 177.838
   },
   {
     month: 10,
-    value: 181794
+    value: 181.794
   },
   {
     month: 11,
-    value: 183751
+    value: 183.751
   },
   {
     month: 12,
-    value: 189959
+    value: 189.959
+  }
+];
+
+var impo = [
+  {
+    month: 1,
+    value: 48.257
+  },
+  {
+    month: 2,
+    value: 47.415
+  },
+  {
+    month: 3,
+    value: 38.211
+  },
+  {
+    month: 4,
+    value: 33.584
+  },
+  {
+    month: 5,
+    value: 33.491
+  },
+  {
+    month: 6,
+    value: 33.930
+  },
+  {
+    month: 7,
+    value: 35.12
+  },
+  {
+    month: 8,
+    value: 36.167
+  },
+  {
+    month: 9,
+    value: 36.971
+  },
+  {
+    month: 10,
+    value: 37.365
+  },
+  {
+    month: 11,
+    value: 38.351
+  },
+  {
+    month: 12,
+    value: 39.394
   }
 ];
 
@@ -101,60 +152,9 @@ var pce = [
   }
 ];
 
-var ppi = [
-  {
-    month: 1,
-    value: 199.3
-  },
-  {
-    month: 2,
-    value: 196.7
-  },
-  {
-    month: 3,
-    value: 193.1
-  },
-  {
-    month: 4,
-    value: 185.5
-  },
-  {
-    month: 5,
-    value: 188.6
-  },
-  {
-    month: 6,
-    value: 191.2
-  },
-  {
-    month: 7,
-    value: 193
-  },
-  {
-    month: 8,
-    value: 194.3
-  },
-  {
-    month: 9,
-    value: 195.5
-  },
-  {
-    month: 10,
-    value: 195.9
-  },
-  {
-    month: 11,
-    value: 198.2
-  },
-  {
-    month: 12,
-    value: 200.6
-  }
-];
-
 // set the dimensions and margins of the graph
-var margin = {top: 50, right: 35, bottom: 50, left: 50 },
-    width = 650 - (margin.left + margin.right),
+var margin = {top: 50, right: 35, bottom: 50, left: 70 },
+    width = 670 - (margin.left + margin.right),
     height = 520 - (margin.top + margin.bottom);
 
 // append the svg object to the body of the page
@@ -189,7 +189,7 @@ function update(data) {
     .call(xAxis);
 
   // create the Y axis
-  y.domain([d3.min(data, function(d) { return d.value  }), d3.max(data, function(d) { return d.value  }) ]);
+  y.domain([d3.min(data, function(d) { return d.value  })/1.1, d3.max(data, function(d) { return d.value  })*1.05 ]);
   svg.selectAll(".myYaxis")
     .transition()
     .duration(3000)
@@ -215,8 +215,22 @@ function update(data) {
       .attr("stroke-width", 2.5)
 }
 
+svg.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height - 6)
+    .text("Month");
+
+  svg.append("text")
+      .attr("text-anchor", "end")
+      .attr("transform", "rotate(-90)")
+      .attr("y", -margin.left+15)
+      .attr("x", -margin.top)
+      .text("Billions of Dollars")
+
 // At the beginning, I run the update function on the first dataset:
 update(expo)
 document.getElementById("secondB").onclick = function () { update(pce); };
-document.getElementById("thirdB").onclick = function () { update(ppi); };
 document.getElementById("firstB").onclick = function () { update(expo); };
+document.getElementById("thirdB").onclick = function () { update(impo); };
