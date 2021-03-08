@@ -30,12 +30,14 @@ var yAxis = d3.axisLeft(y);
 var xAxis = d3.axisBottom(x).tickFormat(formatStates);
   //.tickFormat(d3.timeFormat("%b"));   // %b: abbreviated Month format (Mon, Jun..)
 
-console.log(d3.max(covidData, d => parseInt(d.Confirmed)));
+var convidArray = [];
+
+console.log(d3.max(convidArray, d => +d["Confirmed"]));
 
 // once finish processing data, make a graph!
 d3.csv(covidData).then(function(data) {
   data.forEach(function(d){
-    //states.push(d);
+    convidArray.push(d);
     if (!states.includes(d.Province_State)) {
       states.push(d.Province_State);
     }

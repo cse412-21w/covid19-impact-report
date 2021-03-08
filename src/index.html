@@ -2,55 +2,26 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>CSE 412 Project Demo</title>
+        <title>CSE 412 Project </title>
         <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <!-- For using d3 -->
-        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script src="https://d3js.org/topojson.v2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.1/tinycolor.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400;1,900&display=swap" rel="stylesheet">
     </head>
 
     <body>
-      <section class="title">
-        <a href="/">CSE 412 Demo</a>
-      </section>
-      <section>
-        <h2>Final Project</h2>
-        <p>The final project will provide hands-on experience designing, implementing,
-          and deploying interactive visualizations. Your project should address a concrete
-          visualization challenge and should propose a novel, creative solution. The final
-          deliverable will take the form of a visual analysis tool or an explanatory narrative,
-          deployed as an interactive web page. More info on the
-          <a href='https://courses.cs.washington.edu/courses/cse412/21wi/fp.html'>course website</a>.
-        </p>
-      </section>
-      <section>
-        <p><strong>This page is used mainly to demo how to embed visualizations. All visualizations below are
-          not perfect and need more iteration critiques before really publishing on a webpage.
-        </strong></p>
+
+      <section id = "mapVis">
+        <h3>Confirmed cases of Covid-19 in all states</h3>
+        <div class="map"></div>
+        <div id="mySlider"></div>
       </section>
 
-
-      <section id = "d3Demo">
-        <h3>Embed a D3 Visualization:</h3>
-        <div id="d3-demo"></div>
-      </section>
-
-      <section id = "mapDemo">
-        <h3>A map:</h3>
-        <div id = "map"></div>
-      </section>
-
-      <div class="footer">
-        <a href="https://courses.cs.washington.edu/courses/cse412/21wi/">CSE 412 Data Visualization</a>
-        <a href="http://www.washington.edu">University of Washington</a>
-      </div>
-
-      <!-- it is recommended to put js files before </body> -->
-      <!-- or check load event fot addEventListener() if you want to put js in the <head> -->
-      <script src="d3Demo.js"></script>
       <script src="map.js"></script>
     </body>
-
 </html>
