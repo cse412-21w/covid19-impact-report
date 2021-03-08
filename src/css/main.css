@@ -12,6 +12,17 @@ a:hover {
   color: darkmagenta;
 }
 
+.content {
+  text-align: left;
+  padding-left: 100px;
+  padding-right: 100px;
+  font-weight: 400;
+  display: block;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+}
+
 .p1 {
   background: url("../images/unsplash-covid19.jpg");
   background-size: cover;
@@ -28,8 +39,37 @@ a:hover {
   margin-bottom: 0;
 }
 
-.p2 {
-  background-color: #dddddd;
+.p2 div {
+  margin-bottom: 60px;
+}
+
+.p3 p {
+  display: block;
+  -webkit-margin-before: 1em;
+          margin-block-start: 1em;
+  -webkit-margin-after: 1em;
+          margin-block-end: 1em;
+  -webkit-margin-start: 0px;
+          margin-inline-start: 0px;
+  -webkit-margin-end: 0px;
+          margin-inline-end: 0px;
+  font-size: 120%;
+}
+
+.p3 h1 {
+  display: block;
+  position: relative;
+  text-align: left;
+}
+
+.p12 .content {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.p12 p, .p12 h1, .p12 h2 {
+  text-align: left;
 }
 
 span {
