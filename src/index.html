@@ -9,6 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.js" integrity="sha512-HqbDsHIJoZ36Csd7NMupWFxC7e7aX2qm213sX+hirN+yEx/eUNlZrTWPs1dUQDEW4fMVkerv1PfMohR1WdFFJQ==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.css" />
     <link rel="stylesheet" href="css/main.css">
+    <script type="text/javascript" src="index.js"></script>
 
     <!-- For using d3 -->
     <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -27,7 +28,7 @@
 
     <div id="fullPage">
         <div class="section title-page p1">
-
+            <!-- Title Page -->
             <div class="right-align-block">
                 <h1>COVID-19 Impacts Report</h1>
 
@@ -38,18 +39,41 @@
 
         </div>
 
-        <div class="section p2">
-            <div class="slide fp-viewing-p2-0">
-                <h1>slide 1</h1>
+        <div class="section p2" id="section-page2">
+            <h2>Till Jan 1 2021</h2>
+            <div>
+                <h1>Total Cases Around the World</h1>
+                <h2 id="cases-num">0</h2>
             </div>
-            
-            <div class="slide fp-viewing-p2-1">
-                <h1>slide 2</h1>
+            <div>
+                <h1>Total Deaths Around the World</h1>
+                <h2 id="deaths-num">0</h2>
             </div>
+        </div>
+      
+        <div class="section p3">
+            <div class="content">
+                <h1>COVID-19 Spread the World</h1>
+                <p>Background paragraph </p>
+            </div>
+        </div>
 
-            <div class="slide fp-viewing-p2-2">
-                <h2>Consumer Price and Producor Price during COVID-19</h2>
-                <section id = "tableauDemo"> 
+        <div class="section p4">    
+            <h1>p4</h1>
+        </div>
+
+        <div class="section p5">
+            <h1>Impacts on Economies</h1>
+        </div>
+
+        <div class="section p6">
+            <h1>p6</h1>
+        </div>
+
+        <div class="section p7">
+            <h1>p7</h1>
+          <h2>Consumer Price and Producor Price during COVID-19</h2>
+                          <section id = "tableauDemo"> 
 
                   <div class='tableauPlaceholder' id='viz1614987409863' style='position: relative'>
                     <noscript>
@@ -84,32 +108,50 @@
                       vizElement.style.height='827px';
                       } else { 
                         vizElement.style.width='100%';
-                        vizElement.style.height='827px';}                     
+                        vizElement.style.height='827px';
+                      }                     
                         var scriptElement = document.createElement('script');                    
-                        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                        vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                  </script>
                 </section>
-            </div>
-
         </div>
 
-
-
-        <div class="section s1">
-            <h1>チェンソーマン<a href="#section3">clicky</a></h1>
+        <div class="section p8">
+            <h1>Impacts on People's Physical Movements</h1>
         </div>
 
-        <div class="section s2">            
-            <div class="slide">
-                <h1>Chainsaw Man</h1>
-            </div>
-
-            <div class="slide">
-                <h1>チェンソーマン</h1>
-            </div>
+        <div class="section p9">
+            <h1>p9</h1>
         </div>
 
-        <div class="section s3">
-            <h1>欢乐喜锯人</h1>
+        <div class="section p10">
+            <h1>p10</h1>
+        </div>
+
+        <div class="section p11">
+            <h1>p11</h1>
+        </div>
+
+        <div class="section p12">
+            <div class="content">
+                <h1>p12 Ending Page</h1>
+                <h2>Data Sources</h2>
+                <p>Covid-19 Data: 
+                    <a href="https://github.com/CSSEGISandData/COVID-19">
+                    Johns Hopkins University, Center for Systems Science & Engineering
+                    </a>
+                </p>
+                <p>Economic Data:
+
+                </p>
+                <h2>Group Members</h2>
+                <p>
+
+                </p>
+
+                <h2>About this Project</h2>
+            </div>
         </div>
 
     </div>
@@ -125,6 +167,24 @@
 
             controlArrows: false,
             slidesNavigation: true,
+        })
+
+    </script>
+
+    <script src="https://cdn.bootcss.com/countup.js/1.9.3/countUp.js"></script>
+    <script type="text/javascript">
+        var options = {
+            useEasing: true, 
+            useGrouping: true, 
+            separator: ',', 
+            decimal: '.', 
+        };
+        var countCases = new CountUp('cases-num', 0, 81963694, 0, 4, options);
+        var countDeaths = new CountUp('deaths-num', 0, 1808152, 0, 4, options);
+
+        document.getElementById("section-page2").addEventListener("mouseover", function() {
+            countCases.start();
+            countDeaths.start();
         })
 
     </script>
