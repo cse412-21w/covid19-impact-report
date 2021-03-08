@@ -82,10 +82,15 @@ p {
 	color: #ce3333;
 }
 
-.line {
+.confirm_line {
 	fill: none;
 	stroke: steelblue;
-	stroke-width: 2px;
+	stroke-width: 3px;
+}
+.driving_line {
+	fill: none;
+	stroke: red;
+	stroke-width: 3px;
 }
 
 .axisSteelBlue text {
@@ -94,4 +99,67 @@ p {
 
 .axisRed text {
 	fill: red;
+}
+
+/* Added for only DD3 Testing */
+svg#dd3bar-svg {
+	display: block;
+	width: 400%;
+	height: 100%;
+}
+
+div#dd3-bar {
+	width: 1000px;
+	height: 800px;
+	margin: auto;
+	background-color: #2f4a6d;
+	overflow-x: scroll; /* for scrolling */
+}
+
+.bar {
+	fill: #80cbc4;
+}
+
+line {
+	stroke: gray;
+}
+
+line#limit {
+	stroke: #fed966;
+	stroke-width: 3;
+	stroke-dasharray: 3 6;
+}
+
+.grid path {
+	stroke-width: 0;
+}
+
+.grid .tick line {
+	stroke: #9faaae;
+	stroke-opacity: 0.3;
+}
+
+text.divergence {
+	font-size: 14px;
+	fill: #fed966;
+}
+
+/* The following is optional */
+text.value {
+	font-size: 14px;
+}
+
+text.title {
+	font-size: 22px;
+	font-weight: 600;
+}
+
+text.label {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+text.source {
+	font-size: 10px;
+	color: #ce3333;
 }
