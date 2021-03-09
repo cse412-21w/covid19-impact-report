@@ -205,6 +205,12 @@
             countDeaths.start();
         })
 
+        document.getElementById("mapVis").addEventListener('load', (event) => {
+            console.log("MAP loading");
+            draw_map();
+            console.log("MAP loaded");
+        });
+
     </script>
 
     <!-- For drawing graphs -->

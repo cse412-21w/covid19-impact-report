@@ -193,10 +193,15 @@ var countDeaths = new CountUp('deaths-num', 0, 1808152, 0, 4, options);
 document.getElementById("section-page2").addEventListener("mouseover", function () {
   countCases.start();
   countDeaths.start();
+});
+document.getElementById("mapVis").addEventListener('load', function (event) {
+  console.log("MAP loading");
+  draw_map();
+  console.log("MAP loaded");
 });</script>
 
     <!-- For drawing graphs -->
-    <script type="module" src="https://cse412-21w.github.io/covid19-impact-report/map.fdd4b7c1.js"></script>
+    <script type="module" src="https://cse412-21w.github.io/covid19-impact-report/map.c0d2e8d0.js"></script>
 
 </body>
 </html>

@@ -211,7 +211,7 @@ legend.append("text")
 
 }
 
-window.addEventListener('load', (event) => {
-    console.log("Page loading");
-    draw_map();
-});
+// window.addEventListener('load', (event) => {
+//     console.log("Page loading");
+//     draw_map();
+// });

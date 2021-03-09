@@ -5216,11 +5216,9 @@ function draw_map() {
   legend.append("text").attr("x", 24).attr("y", 9).attr("dy", ".35em").text(function (d) {
     return "".concat(d.round(0));
   });
-}
-
-window.addEventListener('load', function (event) {
-  console.log("Page loading");
-  draw_map();
-});
+} // window.addEventListener('load', (event) => {
+//     console.log("Page loading");
+//     draw_map();
+// });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.fdd4b7c1.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.c0d2e8d0.js.map
