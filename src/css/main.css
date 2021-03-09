@@ -87,6 +87,10 @@ div.column {
   padding-left: 8%;
 }
 
+#covid_mobility {
+  width: 60%;
+}
+
 #vacState {
   width: 60%;
 }
