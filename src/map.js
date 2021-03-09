@@ -107,17 +107,11 @@ function draw_map() {
 
 }
 
-// document.getElementById("map-vis-section").addEventListener('load', function() {
+// document.getElementById("map-vis-section").addEventListener('mouseenter', function() {
 //     console.log("MAP loading");
 //     draw_map();
 //     console.log("MAP loaded");
 // });
-
-// window.onloadstart =  function() {
-//     console.log("MAP loading");
-//     draw_map();
-//     console.log("MAP loaded");
-// };
 
 $(document).ready(function() {
     console.log("MAP loading");
