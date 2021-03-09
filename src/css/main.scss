@@ -14,8 +14,8 @@ a:hover {
 
 .content {
     text-align: left;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 6%;
+    padding-right: 6%;
     font-weight: 400;
     display: block;
     box-sizing: border-box;
@@ -72,7 +72,7 @@ div.column {
 }
 
 // For Econ Charts
-#econIndicts {
+#econIndicts, #vacState {
     margin-left: 8%;
     width: 56%;
     h3 {
@@ -151,8 +151,8 @@ div.column {
     }
 }
 
-.p7, .p6 {
-    h2, p{
+.p6, .p8, .p10 {
+    h1, h2, h3, p{
         text-align: left;
     }
     h1 {
@@ -163,14 +163,14 @@ div.column {
     }
 }
 
-.p12 {
+.p11, .p12 {
     .content {
         position: absolute;
-        top: 40px;
-        left: 40px;
+        top: 4%;
+        left: 6%;
     }
     
-    p, h1, h2 {
+    h1, h2 {
         text-align: left;
     }
 }
@@ -182,36 +182,4 @@ span {  // For the navigation points on the right
 
 .fp-slidesNav.fp-bottom {
     margin-left: 1em !important;
-}
-
-
-
-
-// For testing pages used
-
-.s1 {
-    background: url('../images/mkm1.jpg');
-    background-size: cover;
-}
-
-.s2 {
-    background: url('../images/mkm2.jpg');
-    background-size: cover;
-
-    h1 {
-        text-align: left;
-        margin-left: 2em;
-        font-size: 4rem;
-    }
-}
-
-.s3 {
-    background: url('../images/mkm3.jpg');
-    background-size: cover;
-
-    h1 {
-        text-align: right;
-        margin-right: 2em;
-        font-size: 4em;
-    }
 }

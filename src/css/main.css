@@ -14,8 +14,8 @@ a:hover {
 
 .content {
   text-align: left;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 6%;
+  padding-right: 6%;
   font-weight: 400;
   display: block;
   -webkit-box-sizing: border-box;
@@ -73,12 +73,12 @@ div.column {
   max-width: 70%;
 }
 
-#econIndicts {
+#econIndicts, #vacState {
   margin-left: 8%;
   width: 56%;
 }
 
-#econIndicts h3 {
+#econIndicts h3, #vacState h3 {
   text-align: left;
   padding-left: 8%;
 }
@@ -137,25 +137,25 @@ div.column {
   margin-left: 6%;
 }
 
-.p7 h2, .p7 p, .p6 h2, .p6 p {
+.p6 h1, .p6 h2, .p6 h3, .p6 p, .p8 h1, .p8 h2, .p8 h3, .p8 p, .p10 h1, .p10 h2, .p10 h3, .p10 p {
   text-align: left;
 }
 
-.p7 h1, .p6 h1 {
+.p6 h1, .p8 h1, .p10 h1 {
   padding: 2px 6px;
 }
 
-.p7 div.column, .p6 div.column {
+.p6 div.column, .p8 div.column, .p10 div.column {
   padding-right: 6%;
 }
 
-.p12 .content {
+.p11 .content, .p12 .content {
   position: absolute;
-  top: 40px;
-  left: 40px;
+  top: 4%;
+  left: 6%;
 }
 
-.p12 p, .p12 h1, .p12 h2 {
+.p11 h1, .p11 h2, .p12 h1, .p12 h2 {
   text-align: left;
 }
 
@@ -165,32 +165,5 @@ span {
 
 .fp-slidesNav.fp-bottom {
   margin-left: 1em !important;
-}
-
-.s1 {
-  background: url("../images/mkm1.jpg");
-  background-size: cover;
-}
-
-.s2 {
-  background: url("../images/mkm2.jpg");
-  background-size: cover;
-}
-
-.s2 h1 {
-  text-align: left;
-  margin-left: 2em;
-  font-size: 4rem;
-}
-
-.s3 {
-  background: url("../images/mkm3.jpg");
-  background-size: cover;
-}
-
-.s3 h1 {
-  text-align: right;
-  margin-right: 2em;
-  font-size: 4em;
 }
 /*# sourceMappingURL=main.css.map */
