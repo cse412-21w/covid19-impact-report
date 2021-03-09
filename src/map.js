@@ -1,8 +1,5 @@
 import data from '../static/covid.json'
 
-function draw_map() {
-
-
 var covidData = data.filter(function(p){return p.Month == 2});
 
 const width = 900;
@@ -37,6 +34,13 @@ function range(start, count) {
           		        return index + start;
     });
 }
+
+
+
+
+
+function draw_map() {
+
 
 d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
     if (error) throw error;
