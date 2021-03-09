@@ -5218,7 +5218,7 @@ function draw_map() {
   });
 }
 
-document.getElementById("map-vis-section").addEventListener('load', function (event) {
+document.getElementById("map-vis-section").addEventListener('mouseover', function () {
   console.log("MAP loading"); // var covidData = data.filter(function(p){return p.Month == 2});
   // const width = 900;
   // const height = 600;
@@ -5251,4 +5251,4 @@ document.getElementById("map-vis-section").addEventListener('load', function (ev
   console.log("MAP loaded");
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.7911ecb4.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.3529450b.js.map
