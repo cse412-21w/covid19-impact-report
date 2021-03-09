@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"QGcX":[function(require,module,exports) {
+})({"../static/covid.json":[function(require,module,exports) {
 module.exports = [{
   "Month": 1,
   "Province_State": "Alabama",
@@ -5047,7 +5047,7 @@ module.exports = [{
   "Confirmed": 5821,
   "Deaths": 50
 }];
-},{}],"quTw":[function(require,module,exports) {
+},{}],"map.js":[function(require,module,exports) {
 "use strict";
 
 var _covid = _interopRequireDefault(require("../static/covid.json"));
@@ -5081,39 +5081,38 @@ function range(start, count) {
   });
 }
 
-function draw_map() {
-  console.log("DRAW MAP Func");
-  d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function (error, uState) {
-    if (error) throw error;
+d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function (error, uState) {
+  if (error) throw error;
 
-    _(uState.features).keyBy('properties.name').merge(_.keyBy(covidData, 'Province_State')).values().value();
+  _(uState.features).keyBy('properties.name').merge(_.keyBy(covidData, 'Province_State')).values().value();
 
-    svg.selectAll('path').data(uState.features).enter().append('path').attr("d", path).attr('class', 'state').style('fill', function (d, i) {
-      var uConfirmed = d.Confirmed; //console.log(uConfirmed);
+  svg.selectAll('path').data(uState.features).enter().append('path').attr("d", path).attr('class', 'state').style('fill', function (d, i) {
+    var uConfirmed = d.Confirmed; //console.log(uConfirmed);
 
-      return uConfirmed ? colorScale(uConfirmed) : "#ccc";
-    }).on('mousemove', function (d) {
-      tooltip.transition().duration(200).style("opacity", .9); //Any time the mouse moves, the tooltip should be at the same position
+    return uConfirmed ? colorScale(uConfirmed) : "#ccc";
+  }).on('mousemove', function (d) {
+    tooltip.transition().duration(200).style("opacity", .9); //Any time the mouse moves, the tooltip should be at the same position
 
-      tooltip.style("left", d3.event.pageX + "px").style("top", d3.event.pageY + "px") //The text inside should be State: rate%
-      .text(function () {
-        return "".concat(d.Province_State, ": ").concat(d.Confirmed.round(0));
-      });
+    tooltip.style("left", d3.event.pageX + "px").style("top", d3.event.pageY + "px") //The text inside should be State: rate%
+    .text(function () {
+      return "".concat(d.Province_State, ": ").concat(d.Confirmed.round(0));
     });
-    /*
-    // A function that update the chart when slider is moved
-    function updateMap(yearOfChosen) {
-    // recompute density estimation
-    console.log(yearOfChosen)
-        // Listen to the slider
-    d3.select("#mySlider").on("change", function(d){
-    selectedValue = this.value
-    updateMap(selectedValue)
-    })*/
   });
   /*
-  makeSlider();
-    function makeSlider() {
+  // A function that update the chart when slider is moved
+  function updateMap(yearOfChosen) {
+    // recompute density estimation
+    console.log(yearOfChosen)
+      // Listen to the slider
+  d3.select("#mySlider").on("change", function(d){
+    selectedValue = this.value
+    updateMap(selectedValue)
+  })*/
+});
+/*
+makeSlider();
+
+function makeSlider() {
   var margin = {right: 15, left: 15},
       containerWidth = 900,
       containerHeight = 40,
@@ -5121,18 +5120,22 @@ function draw_map() {
       sliderHeight = containerHeight,
       startDate = "2020-04",
       endDate = "2021-02";
-    var svgSlider = d3.select("#mySlider")
-              .append("svg")
-              .attr("height", containerHeight)
-              .attr("width", containerWidth);
-    var x = d3.scaleLinear()
+
+  var svgSlider = d3.select("#mySlider")
+            .append("svg")
+            .attr("height", containerHeight)
+            .attr("width", containerWidth);
+
+  var x = d3.scaleLinear()
       .domain([0,1])
       .range([0, sliderWidth])
       .clamp(true);
-    var slider = svgSlider.append("g")
+
+  var slider = svgSlider.append("g")
       .attr("class", "slider")
       .attr("transform", "translate(" + margin.left + "," + sliderHeight / 2 + ")");
-    // Slider body
+
+  // Slider body
   slider.append("slider")
       .attr("class", "track")
       .attr("x1", x.range()[0])
@@ -5144,7 +5147,8 @@ function draw_map() {
       .call(d3.drag()
           .on("start.interrupt", function() { slider.interrupt(); })
           .on("start drag", function() { handleDrag(x.invert(d3.event.x)); }));
-    // Ticks
+
+  // Ticks
   slider.insert("g", ".track-overlay")
       .attr("class", "ticks")
       .attr("transform", "translate(0," + 18 + ")")
@@ -5154,67 +5158,266 @@ function draw_map() {
       .attr("x", x)
       .attr("text-anchor", "middle")
       .text(function(d) { return d; });
-    // Handle
+
+  // Handle
   var handle = slider.insert("circle", ".track-overlay")
       .attr("class", "handle")
       .attr("r", 9);
-    slider.transition()
+
+  slider.transition()
       .duration(750);
-  */
-  // Must be nested function because of d3.drag().on("start drag", ...) code,
-  // drag function has to be defined after slider's handle is created,
-  // but handle has to be created last to be drawn on top of slider
+*/
+// Must be nested function because of d3.drag().on("start drag", ...) code,
+// drag function has to be defined after slider's handle is created,
+// but handle has to be created last to be drawn on top of slider
 
-  /*function handleDrag(eventX) {
-      handle.attr("cx", x(eventX));
-        // gather data only for the selected year
-      var selectedDate = eventX;
-        console.log(selectedDate);
-        var selectedDateDataArray = [];
-      var currDate = selectedDate;
-        covidData.forEach(function(entry) {
-      if (entry.Month == parseInt(selectedDate.substring(5,7))) {
-          console.log(entry);
-          selectedDateDataArray.push(entry);
-      }
-      });
+/*function handleDrag(eventX) {
+  handle.attr("cx", x(eventX));
+    // gather data only for the selected year
+  var selectedDate = eventX;
+    console.log(selectedDate);
+    var selectedDateDataArray = [];
+  var currDate = selectedDate;
+    covidData.forEach(function(entry) {
+    if (entry.Month == parseInt(selectedDate.substring(5,7))) {
+      console.log(entry);
+      selectedDateDataArray.push(entry);
     }
-    // Manually call to instantiate map upon load
-  handleDrag(x.invert(0));
+  });
   }
-  */
-  //create a new SVG in the body
+  // Manually call to instantiate map upon load
+handleDrag(x.invert(0));
+}
+*/
+//create a new SVG in the body
 
-  var legend = d3.select("body").append('svg') //add it with the '.legend' class
-  .attr('class', 'legend') //it should be 14px wide
-  .attr('width', 180) //and 148px high
-  .attr('height', 180) //then either select all the 'g's inside the svg
-  //or create placeholders
-  .selectAll('g') //Fill the data into our placeholders in reverse order
-  //This arranges our legend in descending order.
-  //The 'data' here is the items we entered in the 'domain',
-  //in this case [min, max]
-  //We use 'slice()' to create a shallow copy of the array
-  //Since we don't want to modify the original one
-  .data(colorScale.domain().slice().reverse()) //Every node in teh data should have a 'g' appended
-  .enter().append('g') //the 'g' should have this attribute
-  .attr("transform", function (d, i) {
-    return "translate(0," + i * 20 + ")";
-  }); //Inside every 'legend', insert a rect
+var legend = d3.select("body").append('svg') //add it with the '.legend' class
+.attr('class', 'legend') //it should be 14px wide
+.attr('width', 180) //and 148px high
+.attr('height', 180) //then either select all the 'g's inside the svg
+//or create placeholders
+.selectAll('g') //Fill the data into our placeholders in reverse order
+//This arranges our legend in descending order.
+//The 'data' here is the items we entered in the 'domain',
+//in this case [min, max]
+//We use 'slice()' to create a shallow copy of the array
+//Since we don't want to modify the original one
+.data(colorScale.domain().slice().reverse()) //Every node in teh data should have a 'g' appended
+.enter().append('g') //the 'g' should have this attribute
+.attr("transform", function (d, i) {
+  return "translate(0," + i * 20 + ")";
+}); //Inside every 'legend', insert a rect
 
-  legend.append("rect") //that's 18px wide
-  .attr("width", 18) //and 18px high
-  .attr("height", 18) //then fill it will the color assigned by the scale
-  .style("fill", colorScale);
-  legend.append("text").attr("x", 24).attr("y", 9).attr("dy", ".35em").text(function (d) {
-    return "".concat(d.round(0));
+legend.append("rect") //that's 18px wide
+.attr("width", 18) //and 18px high
+.attr("height", 18) //then fill it will the color assigned by the scale
+.style("fill", colorScale);
+legend.append("text").attr("x", 24).attr("y", 9).attr("dy", ".35em").text(function (d) {
+  return "".concat(d.round(0));
+});
+},{"../static/covid.json":"../static/covid.json"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var global = arguments[3];
+var OVERLAY_ID = '__parcel__error__overlay__';
+var OldModule = module.bundle.Module;
+
+function Module(moduleName) {
+  OldModule.call(this, moduleName);
+  this.hot = {
+    data: module.bundle.hotData,
+    _acceptCallbacks: [],
+    _disposeCallbacks: [],
+    accept: function (fn) {
+      this._acceptCallbacks.push(fn || function () {});
+    },
+    dispose: function (fn) {
+      this._disposeCallbacks.push(fn);
+    }
+  };
+  module.bundle.hotData = null;
+}
+
+module.bundle.Module = Module;
+var checkedAssets, assetsToAccept;
+var parent = module.bundle.parent;
+
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
+  var hostname = "" || location.hostname;
+  var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57996" + '/');
+
+  ws.onmessage = function (event) {
+    checkedAssets = {};
+    assetsToAccept = [];
+    var data = JSON.parse(event.data);
+
+    if (data.type === 'update') {
+      var handled = false;
+      data.assets.forEach(function (asset) {
+        if (!asset.isNew) {
+          var didAccept = hmrAcceptCheck(global.parcelRequire, asset.id);
+
+          if (didAccept) {
+            handled = true;
+          }
+        }
+      }); // Enable HMR for CSS by default.
+
+      handled = handled || data.assets.every(function (asset) {
+        return asset.type === 'css' && asset.generated.js;
+      });
+
+      if (handled) {
+        console.clear();
+        data.assets.forEach(function (asset) {
+          hmrApply(global.parcelRequire, asset);
+        });
+        assetsToAccept.forEach(function (v) {
+          hmrAcceptRun(v[0], v[1]);
+        });
+      } else if (location.reload) {
+        // `location` global exists in a web worker context but lacks `.reload()` function.
+        location.reload();
+      }
+    }
+
+    if (data.type === 'reload') {
+      ws.close();
+
+      ws.onclose = function () {
+        location.reload();
+      };
+    }
+
+    if (data.type === 'error-resolved') {
+      console.log('[parcel] ✨ Error resolved');
+      removeErrorOverlay();
+    }
+
+    if (data.type === 'error') {
+      console.error('[parcel] 🚨  ' + data.error.message + '\n' + data.error.stack);
+      removeErrorOverlay();
+      var overlay = createErrorOverlay(data);
+      document.body.appendChild(overlay);
+    }
+  };
+}
+
+function removeErrorOverlay() {
+  var overlay = document.getElementById(OVERLAY_ID);
+
+  if (overlay) {
+    overlay.remove();
+  }
+}
+
+function createErrorOverlay(data) {
+  var overlay = document.createElement('div');
+  overlay.id = OVERLAY_ID; // html encode message and stack trace
+
+  var message = document.createElement('div');
+  var stackTrace = document.createElement('pre');
+  message.innerText = data.error.message;
+  stackTrace.innerText = data.error.stack;
+  overlay.innerHTML = '<div style="background: black; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; opacity: 0.85; font-family: Menlo, Consolas, monospace; z-index: 9999;">' + '<span style="background: red; padding: 2px 4px; border-radius: 2px;">ERROR</span>' + '<span style="top: 2px; margin-left: 5px; position: relative;">🚨</span>' + '<div style="font-size: 18px; font-weight: bold; margin-top: 20px;">' + message.innerHTML + '</div>' + '<pre>' + stackTrace.innerHTML + '</pre>' + '</div>';
+  return overlay;
+}
+
+function getParents(bundle, id) {
+  var modules = bundle.modules;
+
+  if (!modules) {
+    return [];
+  }
+
+  var parents = [];
+  var k, d, dep;
+
+  for (k in modules) {
+    for (d in modules[k][1]) {
+      dep = modules[k][1][d];
+
+      if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) {
+        parents.push(k);
+      }
+    }
+  }
+
+  if (bundle.parent) {
+    parents = parents.concat(getParents(bundle.parent, id));
+  }
+
+  return parents;
+}
+
+function hmrApply(bundle, asset) {
+  var modules = bundle.modules;
+
+  if (!modules) {
+    return;
+  }
+
+  if (modules[asset.id] || !bundle.parent) {
+    var fn = new Function('require', 'module', 'exports', asset.generated.js);
+    asset.isNew = !modules[asset.id];
+    modules[asset.id] = [fn, asset.deps];
+  } else if (bundle.parent) {
+    hmrApply(bundle.parent, asset);
+  }
+}
+
+function hmrAcceptCheck(bundle, id) {
+  var modules = bundle.modules;
+
+  if (!modules) {
+    return;
+  }
+
+  if (!modules[id] && bundle.parent) {
+    return hmrAcceptCheck(bundle.parent, id);
+  }
+
+  if (checkedAssets[id]) {
+    return;
+  }
+
+  checkedAssets[id] = true;
+  var cached = bundle.cache[id];
+  assetsToAccept.push([bundle, id]);
+
+  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+    return true;
+  }
+
+  return getParents(global.parcelRequire, id).some(function (id) {
+    return hmrAcceptCheck(global.parcelRequire, id);
   });
 }
 
-document.getElementById("map-vis-section").addEventListener('click', function () {
-  console.log("MAP loading");
-  draw_map();
-  console.log("MAP loaded");
-});
-},{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.613a8082.js.map
+function hmrAcceptRun(bundle, id) {
+  var cached = bundle.cache[id];
+  bundle.hotData = {};
+
+  if (cached) {
+    cached.hot.data = bundle.hotData;
+  }
+
+  if (cached && cached.hot && cached.hot._disposeCallbacks.length) {
+    cached.hot._disposeCallbacks.forEach(function (cb) {
+      cb(bundle.hotData);
+    });
+  }
+
+  delete bundle.cache[id];
+  bundle(id);
+  cached = bundle.cache[id];
+
+  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+    cached.hot._acceptCallbacks.forEach(function (cb) {
+      cb();
+    });
+
+    return true;
+  }
+}
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","map.js"], null)
+//# sourceMappingURL=/map.27237bf4.js.map

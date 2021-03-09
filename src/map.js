@@ -4,7 +4,7 @@ var covidData = data.filter(function(p){return p.Month == 2});
 
 const width = 900;
 const height = 600;
-const svg = d3.select("div").append("svg")
+const svg = d3.select("#us-map").append("svg")
     .attr("width", width)
     .attr("height", height);
 
