@@ -4,17 +4,17 @@ var covidData = data.filter(function(p){return p.Month == 2});
 
 const width = 900;
 const height = 600;
-const svg = d3.select("#us-map").append("svg")
+const svg = d3v4.select("#us-map").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-const projection = d3.geoAlbersUsa()
+const projection = d3v4.geoAlbersUsa()
     .translate([width / 2, height / 2]) // translate to center of screen
     .scale([1000]); // scale things down so see entire US
 
-const path = d3.geoPath().projection(projection);
+const path = d3v4.geoPath().projection(projection);
 
-const colorScale = d3.scaleLinear()
+const colorScale = d3v4.scaleLinear()
     .domain([0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000])
     //.domain([0,166666.7,333333.3,500000,666666.7,833333.5,1000000])
     .range(["#ffffff", "#fcffa1", "#fbf544", "#fbb844", "#ff4d00", "#ff0000", "#c20404", "#941010"]);
@@ -24,7 +24,7 @@ Number.prototype.round = function (decimals) {
     return Number((Math.round(this + "e" + decimals) + "e-" + decimals));
 };
 
-const tooltip = d3.select(".map").append("div")
+const tooltip = d3v4.select(".map").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
@@ -38,7 +38,7 @@ function range(start, count) {
 function draw_map() {
     console.log("DRAW MAP Func");
 
-    d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
+    d3v4.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d3v42f99/us-states.json", function(error, uState) {
         if (error) throw error;
         _(uState.features)
             .keyBy('properties.name')
@@ -62,15 +62,15 @@ function draw_map() {
                         .duration(200)
                         .style("opacity", .9);
                 //Any time the mouse moves, the tooltip should be at the same position
-                tooltip.style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY) + "px")
+                tooltip.style("left", (d3v4.event.pageX) + "px")
+                        .style("top", (d3v4.event.pageY) + "px")
                         //The text inside should be State: rate%
                         .text(()=> `${d.Province_State}: ${(d.Confirmed).round(0)}`)
             })
     });
 
     //create a new SVG in the body
-    var legend = d3.select("body").append('svg')
+    var legend = d3v4.select("body").append('svg')
     //add it with the '.legend' class
         .attr('class', 'legend')
         //it should be 14px wide

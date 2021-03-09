@@ -5060,12 +5060,12 @@ var covidData = _covid.default.filter(function (p) {
 
 var width = 900;
 var height = 600;
-var svg = d3.select("#us-map").append("svg").attr("width", width).attr("height", height);
-var projection = d3.geoAlbersUsa().translate([width / 2, height / 2]) // translate to center of screen
+var svg = d3v4.select("#us-map").append("svg").attr("width", width).attr("height", height);
+var projection = d3v4.geoAlbersUsa().translate([width / 2, height / 2]) // translate to center of screen
 .scale([1000]); // scale things down so see entire US
 
-var path = d3.geoPath().projection(projection);
-var colorScale = d3.scaleLinear().domain([0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000]) //.domain([0,166666.7,333333.3,500000,666666.7,833333.5,1000000])
+var path = d3v4.geoPath().projection(projection);
+var colorScale = d3v4.scaleLinear().domain([0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000]) //.domain([0,166666.7,333333.3,500000,666666.7,833333.5,1000000])
 .range(["#ffffff", "#fcffa1", "#fbf544", "#fbb844", "#ff4d00", "#ff0000", "#c20404", "#941010"]);
 console.log(colorScale.domain().slice());
 
@@ -5073,7 +5073,7 @@ Number.prototype.round = function (decimals) {
   return Number(Math.round(this + "e" + decimals) + "e-" + decimals);
 };
 
-var tooltip = d3.select(".map").append("div").attr("class", "tooltip").style("opacity", 0);
+var tooltip = d3v4.select(".map").append("div").attr("class", "tooltip").style("opacity", 0);
 
 function range(start, count) {
   return Array.apply(0, Array(count + 1)).map(function (element, index) {
@@ -5083,7 +5083,7 @@ function range(start, count) {
 
 function draw_map() {
   console.log("DRAW MAP Func");
-  d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function (error, uState) {
+  d3v4.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d3v42f99/us-states.json", function (error, uState) {
     if (error) throw error;
 
     _(uState.features).keyBy('properties.name').merge(_.keyBy(covidData, 'Province_State')).values().value();
@@ -5095,14 +5095,14 @@ function draw_map() {
     }).on('mousemove', function (d) {
       tooltip.transition().duration(200).style("opacity", .9); //Any time the mouse moves, the tooltip should be at the same position
 
-      tooltip.style("left", d3.event.pageX + "px").style("top", d3.event.pageY + "px") //The text inside should be State: rate%
+      tooltip.style("left", d3v4.event.pageX + "px").style("top", d3v4.event.pageY + "px") //The text inside should be State: rate%
       .text(function () {
         return "".concat(d.Province_State, ": ").concat(d.Confirmed.round(0));
       });
     });
   }); //create a new SVG in the body
 
-  var legend = d3.select("body").append('svg') //add it with the '.legend' class
+  var legend = d3v4.select("body").append('svg') //add it with the '.legend' class
   .attr('class', 'legend') //it should be 14px wide
   .attr('width', 180) //and 148px high
   .attr('height', 180) //then either select all the 'g's inside the svg
@@ -5139,4 +5139,4 @@ $(document).ready(function () {
   console.log("MAP loaded");
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.ac7b4aea.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.f74feac1.js.map
