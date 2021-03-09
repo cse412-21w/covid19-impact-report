@@ -159,7 +159,7 @@ div.column {
   left: 6%;
 }
 
-.p11 h1, .p11 h2, .p12 h1, .p12 h2 {
+.p11 h1, .p11 h2, .p11 p, .p12 h1, .p12 h2, .p12 p {
   text-align: left;
 }
 
@@ -171,5 +171,9 @@ span {
   margin-left: 1em !important;
 }
 
+.fp-tooltip {
+  color: black !important;
+}
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.286132c0.css.map */
+
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.2db4cbcd.css.map */
