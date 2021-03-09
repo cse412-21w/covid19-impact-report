@@ -207,7 +207,7 @@ function draw_map() {
 
 }
 
-document.getElementById("map-vis-section").addEventListener('click', function() {
+document.getElementById("map-vis-section").addEventListener('load', function() {
     console.log("MAP loading");
     draw_map();
     console.log("MAP loaded");

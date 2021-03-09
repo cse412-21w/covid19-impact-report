@@ -5211,10 +5211,10 @@ function draw_map() {
   });
 }
 
-document.getElementById("map-vis-section").addEventListener('click', function () {
+document.getElementById("map-vis-section").addEventListener('load', function () {
   console.log("MAP loading");
   draw_map();
   console.log("MAP loaded");
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.876cda2d.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.d7fd4eaf.js.map
