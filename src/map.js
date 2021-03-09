@@ -113,8 +113,8 @@ function draw_map() {
 //     console.log("MAP loaded");
 // });
 
-document.addEventListener('DOMContentLoaded', function() {
+window.onloadstart =  function() {
     console.log("MAP loading");
     draw_map();
     console.log("MAP loaded");
-});
+};

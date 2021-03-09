@@ -5133,10 +5133,10 @@ function draw_map() {
 // });
 
 
-document.addEventListener('DOMContentLoaded', function () {
+window.onloadstart = function () {
   console.log("MAP loading");
   draw_map();
   console.log("MAP loaded");
-});
+};
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.1ddb2daf.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.764d8849.js.map
