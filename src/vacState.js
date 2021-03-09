@@ -7,21 +7,21 @@ var margin = {top: 150, right: 35, bottom: 100, left: 70 },
     outerRadius = Math.min(width, height) / 2;   // the outerRadius goes from the middle of the SVG area to the border
 
 // append the svg object
-var svg = d3.select("#vac-state")
+var svg = d3v6.select("#vac-state")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + (width / 2 + margin.left) + "," + (height / 2 + margin.top) + ")");
 
-d3.csv(vacData).then(function(data) {
+d3v6.csv(vacData).then(function(data) {
 
   // Scales
-  var x = d3.scaleBand()
+  var x = d3v6.scaleBand()
       .range([0, 2 * Math.PI])    // X axis goes from 0 to 2pi
       .align(0)                  // This does nothing
       .domain(data.map(function(d) { return d.location; })); // The domain of the X axis is the list of states.
-  var y = d3.scaleRadial()
+  var y = d3v6.scaleRadial()
       .range([innerRadius, outerRadius])
       .domain([0, 14.04]); // Domain of Y is from 0 to the max seen in the data
 
@@ -32,7 +32,7 @@ d3.csv(vacData).then(function(data) {
     .enter()
     .append("path")
       .attr("fill", "#69b3a2")
-      .attr("d", d3.arc()
+      .attr("d", d3v6.arc()
           .innerRadius(innerRadius)
           .outerRadius(function(d) { return y(d['people_fully_vaccinated_per_hundred']); })
           .startAngle(function(d) { return x(d.location); })
