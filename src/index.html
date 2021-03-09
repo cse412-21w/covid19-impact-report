@@ -9,11 +9,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.js" integrity="sha512-HqbDsHIJoZ36Csd7NMupWFxC7e7aX2qm213sX+hirN+yEx/eUNlZrTWPs1dUQDEW4fMVkerv1PfMohR1WdFFJQ==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.css" />
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="style.css">
     <!-- <script type="text/javascript" src="index.js"></script> -->
 
     <!-- For using d3 -->
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.1/tinycolor.js"></script>
+
     <!-- For using vega-lite -->
     <script src="https://cdn.jsdelivr.net/npm/vega"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite"></script>
@@ -23,6 +28,9 @@
     <!-- For Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
+
+    <!-- For drawing graphs -->
+    <script type='text/javascript' src="map.js"></script>
 </head>
 <body>
 
@@ -50,7 +58,7 @@
                 <h2 id="deaths-num">0</h2>
             </div>
         </div>
-      
+
         <div class="section p3">
             <div class="content">
                 <h1>COVID-19 Spread the World</h1>
@@ -58,8 +66,13 @@
             </div>
         </div>
 
-        <div class="section p4">    
+        <div class="section p4">
             <h1>p4</h1>
+            <section id = "mapVis">
+              <h3>Confirmed cases of Covid-19 in all states</h3>
+              <div class="map"></div>
+              <div id="mySlider"></div>
+            </section>
         </div>
 
         <div class="section p5">
@@ -72,7 +85,7 @@
 
         <div class="section p7">
             <h1>Consumer Price and Producor Price during COVID-19(p7)</h1>
-            <section id = "tableauDashboard-container"> 
+            <section id = "tableauDashboard-container">
 
                 <div class='tableauPlaceholder' id='viz1614987409863' style='position: relative'>
                     <noscript>
@@ -81,13 +94,13 @@
                         </a>
                     </noscript>
                     <object class='tableauViz'  style='display:none;'>
-                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
-                        <param name='embed_code_version' value='3' /> 
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
                         <param name='site_root' value='' />
                         <param name='name' value='ConsumerandProducerPriceduringCOVID-19&#47;Dashboard2' />
                         <param name='tabs' value='no' />
                         <param name='toolbar' value='yes' />
-                        <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;ConsumerandProducerPriceduringCOVID-19&#47;Dashboard2&#47;1.png' /> 
+                        <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;ConsumerandProducerPriceduringCOVID-19&#47;Dashboard2&#47;1.png' />
                         <param name='animate_transition' value='yes' />
                         <param name='display_static_image' value='yes' />
                         <param name='display_spinner' value='yes' />
@@ -96,16 +109,16 @@
                         <param name='language' value='en' />
                         <param name='filter' value='publish=yes' />
                     </object>
-                </div>                
-                <script type='text/javascript'>                    
-                    var divElement = document.getElementById('viz1614987409863');                    
-                    var vizElement = divElement.getElementsByTagName('object')[0];                    
+                </div>
+                <script type='text/javascript'>
+                    var divElement = document.getElementById('viz1614987409863');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
                     vizElement.style.width='100%';
                     vizElement.style.height='100%';
-                
-                    var scriptElement = document.createElement('script');                    
-                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
-                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
                 </script>
             </section>
             <div class="right-float-block">
@@ -141,7 +154,7 @@
             <div class="content">
                 <h1>p12 Ending Page</h1>
                 <h2>Data Sources</h2>
-                <p>Covid-19 Data: 
+                <p>Covid-19 Data:
                     <a href="https://github.com/CSSEGISandData/COVID-19">
                     Johns Hopkins University, Center for Systems Science & Engineering
                     </a>
@@ -178,10 +191,10 @@
     <script src="https://cdn.bootcss.com/countup.js/1.9.3/countUp.js"></script>
     <script type="text/javascript">
         var options = {
-            useEasing: true, 
-            useGrouping: true, 
-            separator: ',', 
-            decimal: '.', 
+            useEasing: true,
+            useGrouping: true,
+            separator: ',',
+            decimal: '.',
         };
         var countCases = new CountUp('cases-num', 0, 81963694, 0, 4, options);
         var countDeaths = new CountUp('deaths-num', 0, 1808152, 0, 4, options);
