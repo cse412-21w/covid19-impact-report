@@ -1,164 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cse412-fp-covid19-impact-report</title>
 
-  <head>
-		<meta charset="utf-8">
-		<title>CSE 412 covid19-impact-report</title>
-		<link rel="stylesheet" href="https://cse412-21w.github.io/covid19-impact-report/style.f0eebec3.css">
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<!-- For using d3 -->
-		<script src="https://d3js.org/d3.v6.min.js"></script>
-		<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-		<!-- For using vega-lite -->
-		<script src="https://cdn.jsdelivr.net/npm/vega"></script>
-		<script src="https://cdn.jsdelivr.net/npm/vega-lite"></script>
-		<script src="https://cdn.jsdelivr.net/npm/vega-lite-api"></script>
-		<script src="https://cdn.jsdelivr.net/npm/vega-tooltip"></script>
-		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400;1,900&display=swap" rel="stylesheet">
-	</head>
+    <!-- For fullpage linking & css -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.js" integrity="sha512-HqbDsHIJoZ36Csd7NMupWFxC7e7aX2qm213sX+hirN+yEx/eUNlZrTWPs1dUQDEW4fMVkerv1PfMohR1WdFFJQ==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.css">
+    <link rel="stylesheet" href="https://cse412-21w.github.io/project-demo/main.98df4e75.css">
+    <link rel="stylesheet" href="https://cse412-21w.github.io/project-demo/style.057fd221.css">
+    <!-- <script type="text/javascript" src="index.js"></script> -->
 
-  <body>
-    <section class="title">
-      <a href="/">CSE 412 Covid19 Impact Report</a>
-    </section>
-    <section>
-      <h2>Final Project: Initial Prototype</h2>
-      <p>
-        As Covid-19 vaccines seem to raise hope to the world,
-        the health crisis has made huge impacts on people’s lives and
-        would still be a black cloud hanging over our heads for at least
-        several months, or even years. We are interested in how the cases of
-        coronavirus fluctuated and how the conditions in different geolocations
-        changed in these months. Additionally, how the cases of coronavirus
-        can be correlated with some economic factors, such as unemployment
-        rate and price? Tracing back into those history data might provide us
-        insights about the influence of this crisis.
-      </p>
-      <p>
-	       We are going to do exploratory data analysis on the datasets
-         related to cases of Covid-19 and economy (or any other fields
-         impacted). By using maps/symbol maps, we will create visualizations
-         to show the cases in different states, and by making it an interactive
-         data visualization, we will display the changing over time.
-         Furthermore, we will research and link relatable variables impacted
-         with specific columns of the conditions of coronavirus, and try our
-         best to build intuitive stories with reasonable design elements,
-         such as positions, shapes, sizes, and colors.
-      </p>
+    <!-- For using d3 -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.1/tinycolor.js"></script>
 
-      <p>
-        <strong>
-        Our project is intended to show the impact of COVID-19 from various aspects.
-        It will start from an overview of cases ongoing in each state,
-        then analyzing the impact of the COVID-19 in general.
-        We will focus on the data of the disease (confirmed, recovered, etc)
-        and economy (unemployment, price index, etc).
-        </strong>
-      </p>
-      <a href="https://courses.cs.washington.edu/courses/cse412/21wi/fp.html">course website</a>.
-    </section>
+    <!-- For using vega-lite -->
+    <script src="https://cdn.jsdelivr.net/npm/vega"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite-api"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-tooltip"></script>
 
-    <section id="DD3Bar">
-      <h3>Cases Confirmed per State:</h3>
+    <!-- For Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
 
-      <p>* The default visualization is for 1/1/2021</p>
-      <!-- The slider/scrubber/form -->
-      <form>
-          <label for="date">Please select a date: </label>
-          <input type="date" id="dateUpdated" min="2020-04-12" max="2021-02-20" name="Confirmed # on ">
-          <!-- <input type="submit" id="select_date"> -->
-          <!-- <output name="selected_year" id="selected_date">2014</output> -->
-      </form>
+</head>
+<body>
 
-      <div id="dd3-bar">
-        <svg id="dd3bar-svg"></svg>
-      </div>
-    </section>
+    <div id="fullPage">
+        <div class="section title-page p1">
+            <!-- Title Page -->
+            <div class="right-align-block">
+                <h1>COVID-19 Impacts Report</h1>
 
-    <section id="covid_mobility">
-      <h3>Daily Cases Change & Daily Mobility Change in California</h3>
-      <div id="d3-demo"></div>
-    </section>
+                <h3>The contagious disease caused by
+                    <a href="https://en.wikipedia.org/wiki/Severe_acute_respiratory_syndrome_coronavirus_2" target="_blank">SARS-CoV-2</a>
+                </h3>
+            </div>
 
+        </div>
 
-    <section id="tableauDemo">
-      <h3>Fluctuation of Consumer Price Index during Pandemic:</h3>
-      <div class="tableauPlaceholder" id="viz1614151053200" style="position: relative">
-        <noscript>
-          <a href="#">
-            <img alt=" " src="https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ec&#47;EconomyAnalysisduringCOVID-19&#47;ConsumerPriceIndex&#47;1_rss.png" style="border: none">
-          </a>
-        </noscript>
-        <object class="tableauViz" style="display:none;">
-          <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F">
-          <param name="embed_code_version" value="3">
-          <param name="site_root" value="">
-          <param name="name" value="EconomyAnalysisduringCOVID-19&#47;ConsumerPriceIndex">
-          <param name="tabs" value="no">
-          <param name="toolbar" value="yes">
-          <param name="static_image" value="https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ec&#47;EconomyAnalysisduringCOVID-19&#47;ConsumerPriceIndex&#47;1.png">
-          <param name="animate_transition" value="yes">
-          <param name="display_static_image" value="yes">
-          <param name="display_spinner" value="yes">
-          <param name="display_overlay" value="yes">
-          <param name="display_count" value="yes">
-          <param name="language" value="en">
-        </object>
-      </div>
-      <script>var divElement = document.getElementById('viz1614151053200');
+        <div class="section p2" id="section-page2">
+            <h2>Till Jan 1 2021</h2>
+            <div>
+                <h1>Total Cases Around the World</h1>
+                <h2 id="cases-num">0</h2>
+            </div>
+            <div>
+                <h1>Total Deaths Around the World</h1>
+                <h2 id="deaths-num">0</h2>
+            </div>
+        </div>
+
+        <div class="section p3">
+            <div class="content">
+                <h1>COVID-19 Spread the World</h1>
+                <p>Background paragraph </p>
+            </div>
+        </div>
+
+        <div class="section p4">
+            <h1>p4</h1>
+            <section id="mapVis">
+              <h3>Confirmed cases of Covid-19 in all states</h3>
+              <div class="map"></div>
+              <div id="mySlider"></div>
+            </section>
+        </div>
+
+        <div class="section p5">
+            <h1>Impacts on Economies</h1>
+        </div>
+
+        <div class="section p6">
+            <h1>p6</h1>
+        </div>
+
+        <div class="section p7">
+            <h1>Consumer Price and Producor Price during COVID-19(p7)</h1>
+            <section id="tableauDashboard-container">
+
+                <div class="tableauPlaceholder" id="viz1614987409863" style="position: relative">
+                    <noscript>
+                        <a href="#">
+                        <img alt=" " src="https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;ConsumerandProducerPriceduringCOVID-19&#47;Dashboard2&#47;1_rss.png" style="border: none">
+                        </a>
+                    </noscript>
+                    <object class="tableauViz" style="display:none;">
+                        <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F">
+                        <param name="embed_code_version" value="3">
+                        <param name="site_root" value="">
+                        <param name="name" value="ConsumerandProducerPriceduringCOVID-19&#47;Dashboard2">
+                        <param name="tabs" value="no">
+                        <param name="toolbar" value="yes">
+                        <param name="static_image" value="https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Co&#47;ConsumerandProducerPriceduringCOVID-19&#47;Dashboard2&#47;1.png">
+                        <param name="animate_transition" value="yes">
+                        <param name="display_static_image" value="yes">
+                        <param name="display_spinner" value="yes">
+                        <param name="display_overlay" value="yes">
+                        <param name="display_count" value="yes">
+                        <param name="language" value="en">
+                        <param name="filter" value="publish=yes">
+                    </object>
+                </div>
+                <script>var divElement = document.getElementById('viz1614987409863');
 var vizElement = divElement.getElementsByTagName('object')[0];
 vizElement.style.width = '100%';
-vizElement.style.height = divElement.offsetWidth * 0.75 + 'px';
+vizElement.style.height = '100%';
 var scriptElement = document.createElement('script');
 scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
 vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
-    </section>
-    <section>
-      <p>
-        The bar graph which is shown below describes the immediate
-        impact of COVID-19 Cases on one of the economic indicators:
-        the Consumer Price Index. In the graph, note that there is a
-        drastic decrease of the index, represented by the bar has a negative
-        value highlighted in red color. This happened just after when the
-        COVID-19 became a serious case in the United States so that we can
-        conclude that the pandemic indeed has an impact on this economic indicator.
-      </p>
-    </section>
+            </section>
+            <div class="right-float-block">
+                <h2>Some subtitle here</h2>
+                <p>
+                    TODO: Instructions of how to read this visualization: Which does each element mean?
+                    (data points, time periods, etc). How to interact with it? What things to notice/ pay attention to?
+                </p>
+                <p>Also make a summary about our discovery or intuition. What correlation or tendency exists?
+                    Express your own idea.
+                </p>
+            </div>
 
-    <section id="econIndicts">
-      <h3>U.S. Economy Performing in 2020:</h3>
-      <button id="firstB">Exports</button>
-      <button id="secondB">Personal Consumption</button>
-      <button id="thirdB">Producer Price Index</button>
-      <div id="econ-indct"></div>
-    </section>
-    <section>
-      <p>
-        The above plot displays the trend of three key economic indicators
-        from Jan 2020 to Dec 2020. At the beginning of 2020, both exports
-        and personal consumption remained stable until February. Then,
-        they both plunged and hit the lowest point between April and May.
-        Exports and personal consumption are two main components of the
-        overall output. And the drastic shrinkage in output level could be
-        explained by the simultaneous negative demand and supply shocks due
-        to the upsurge in Covid-19 cases. Despite the rise in both indicators
-        after May, both of them did not recover to the original level as
-        in January.
-      </p>
-    </section>
+        </div>
 
+        <div class="section p8">
+            <h1>Impacts on People's Physical Movements</h1>
+        </div>
 
+        <div class="section p9">
+            <h1>p9</h1>
+        </div>
 
-		<div class="footer">
-			<a href="https://courses.cs.washington.edu/courses/cse412/21wi/">CSE 412 Data Visualization</a>
-			<a href="http://www.washington.edu">University of Washington</a>
-		</div>
-		<!-- it is recommended to put js files before </body> -->
-		<!-- or check load event fot addEventListener() if you want to put js in the <head> -->
-		<!-- <script src="d3Demo.js"></script> -->
-    <!-- <script src="vegaDemo.js"></script> -->
-    <script src="https://cse412-21w.github.io/covid19-impact-report/econIndicts.ee7f8e5f.js"></script>
-		<script src="https://cse412-21w.github.io/covid19-impact-report/covid_mobility.52a752d0.js"></script>
-    <script src="https://cse412-21w.github.io/covid19-impact-report/dd3Bar.86efe4ff.js"></script>
-	</body>
+        <div class="section p10">
+            <h1>p10</h1>
+        </div>
+
+        <div class="section p11">
+            <h1>p11</h1>
+        </div>
+
+        <div class="section p12">
+            <div class="content">
+                <h1>p12 Ending Page</h1>
+                <h2>Data Sources</h2>
+                <p>Covid-19 Data:
+                    <a href="https://github.com/CSSEGISandData/COVID-19">
+                    Johns Hopkins University, Center for Systems Science & Engineering
+                    </a>
+                </p>
+                <p>Economic Data:
+
+                </p>
+                <h2>Group Members</h2>
+                <p>
+
+                </p>
+
+                <h2>About this Project</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <script>new fullpage('#fullPage', {
+  autoScrolling: true,
+  navigation: true,
+  anchors: ['Home', 'page2', 'page3', 'page4', 'page5'],
+  navigationTooltips: ['Home', 'Second', 'Third', 'Forth', 'Fifth'],
+  scrollingSpeed: 1000,
+  controlArrows: false,
+  slidesNavigation: true
+});</script>
+
+    <script src="https://cdn.bootcss.com/countup.js/1.9.3/countUp.js"></script>
+    <script>var options = {
+  useEasing: true,
+  useGrouping: true,
+  separator: ',',
+  decimal: '.'
+};
+var countCases = new CountUp('cases-num', 0, 81963694, 0, 4, options);
+var countDeaths = new CountUp('deaths-num', 0, 1808152, 0, 4, options);
+document.getElementById("section-page2").addEventListener("mouseover", function () {
+  countCases.start();
+  countDeaths.start();
+});</script>
+
+    <!-- For drawing graphs -->
+    <script type="module" src="https://cse412-21w.github.io/project-demo/map.387790ea.js"></script>
+
+</body>
 </html>

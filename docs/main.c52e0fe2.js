@@ -117,102 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../static/covid19_us.csv":[function(require,module,exports) {
-module.exports = "/covid19_us.ab9d5eb3.csv";
-},{}],"../static/sunshine.csv":[function(require,module,exports) {
-module.exports = "/sunshine.5e299277.csv";
-},{}],"dd3Test.js":[function(require,module,exports) {
-"use strict";
+})({"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-var _covid19_us = _interopRequireDefault(require("../static/covid19_us.csv"));
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
 
-var _sunshine = _interopRequireDefault(require("../static/sunshine.csv"));
+  return bundleURL;
+}
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
 
-// import covid 19 US data
-"use strict"; // var us = d3.json("https://unpkg.com/us-atlas@1/us/10m.json")
-// var path = d3.geoPath();
-//
-// var width = 960;
-// var height = 600;
-//
-// var margin = { top: 50, right: 35, bottom: 50, left: 50 },
-// w = 960 - (margin.left + margin.right),
-// h = 600 - (margin.top + margin.bottom);
-// var legendSpace = 130;
-//
-// function drawDD3() {
-//   // Create SVG
-//   // let svg = d3.select(DOM.svg(width, height));
-//   map_svg = d3.select('#dd3')
-//          .append('svg')
-//           .attr("id", "dd3-chart")
-//           .attr("width", width)
-//           .attr("height", height);
-//           // .attr("width", w + margin.left + margin.right + legendSpace)
-//           // .attr("height", h + margin.top + margin.bottom)
-//
-//   g = map_svg.append("g");
-//
-//   // Bind TopoJSON data
-//   g.selectAll("path")
-//       .data(topojson.feature(us, us.objects.counties).features) // Bind TopoJSON data elements
-//     // pass through what objects you want to use -- in this case we are doing county lines
-//       .enter().append("path")
-//       .attr("d", path)
-//       .style("fill", "white")
-//       .style("stroke", "black");
-//   // return svg.node();
-// }
-//
-// // d3.csv(sunshineData).then(function(data) {
-// //   drawDD3();
-// // });
-// // svg.node();
-// drawDD3();
-//Width and height of map
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
 
+  return '/';
+}
 
-var width = 960;
-var height = 500; // D3 Projection
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
 
-var projection = d3.geoAlbersUsa().translate([width / 2, height / 2]) // translate to center of screen
-.scale([1000]); // scale things down so see entire US
-// Define path generator
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
 
-var path = d3.geoPath() // path generator that will convert GeoJSON to SVG paths
-.projection(projection); // tell path generator to use albersUsa projection
-// Define linear scale for output
+function updateLink(link) {
+  var newLink = link.cloneNode();
 
-var color = d3.scaleLinear().range(["rgb(213,222,217)", "rgb(69,173,168)", "rgb(84,36,55)", "rgb(217,91,67)"]); //Create SVG element and append map to the SVG
+  newLink.onload = function () {
+    link.remove();
+  };
 
-var svg = d3.select('#dd3').append("svg").attr("width", width).attr("height", height); // Append Div for tooltip to SVG
-// var div = d3.select("#dd3")
-// 		    .append("div")
-//     		.attr("class", "tooltip")
-//     		.style("opacity", 0);
-// Load in my states data!
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
 
-d3.csv(_covid19_us.default, function (covid_data) {
-  color.domain([0, 1, 2, 3]); // setting the range of the input data
-  // Load GeoJSON data and merge with states data
+var cssTimeout = null;
 
-  d3.json("us-states.json", function (json) {
-    svg.selectAll("path").data(json.features).enter().append("path").attr("d", path).style("stroke", "#fff").style("stroke-width", "1"); // .style("fill", function(d) {
-    // 	// Get data value
-    // 	// var value = d.properties.visited;
-    // 	if (value) {
-    // 		//If value exists…
-    // 		return color(value);
-    // 	} else {
-    // 		//If value is undefined…
-    // 		return "rgb(213,222,217)";
-    // 	}
-    // });
-  });
-});
-},{"../static/covid19_us.csv":"../static/covid19_us.csv","../static/sunshine.csv":"../static/sunshine.csv"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"css/main.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"./..\\images\\unsplash-covid19.jpg":[["unsplash-covid19.ecf670ba.jpg","images/unsplash-covid19.jpg"],"images/unsplash-covid19.jpg"],"./..\\images\\mkm1.jpg":[["mkm1.28df296d.jpg","images/mkm1.jpg"],"images/mkm1.jpg"],"./..\\images\\mkm2.jpg":[["mkm2.b67fea44.jpg","images/mkm2.jpg"],"images/mkm2.jpg"],"./..\\images\\mkm3.jpg":[["mkm3.8f989e81.jpg","images/mkm3.jpg"],"images/mkm3.jpg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -240,7 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53428" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58889" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -416,5 +393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","dd3Test.js"], null)
-//# sourceMappingURL=/dd3Test.9c24cb99.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/main.c52e0fe2.js.map

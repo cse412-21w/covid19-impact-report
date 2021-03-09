@@ -1,0 +1,140 @@
+h1, h2, h3, p {
+  font-family: 'Montserrat';
+  text-align: center;
+}
+
+a {
+  color: blueviolet;
+  text-decoration: none;
+}
+
+a:hover {
+  color: darkmagenta;
+}
+
+.content {
+  text-align: left;
+  padding-left: 100px;
+  padding-right: 100px;
+  font-weight: 400;
+  display: block;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+}
+
+.right-float-block {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  float: right;
+  width: 30%;
+  padding-top: 2%;
+  padding-left: 1%;
+  padding-right: 5%;
+}
+
+#tableauDashboard-container {
+  height: 80%;
+  min-width: 66%;
+  margin-right: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  float: left;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.p1 {
+  background: url("https://cse412-21w.github.io/project-demo/unsplash-covid19.4d277c9b.jpg");
+  background-size: cover;
+}
+
+.p1 h1, .p1 h3 {
+  color: whitesmoke;
+  text-align: right;
+  margin-right: 5%;
+}
+
+.p1 h1 {
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+
+.p2 div {
+  margin-bottom: 60px;
+}
+
+.p3 p {
+  display: block;
+  -webkit-margin-before: 1em;
+          margin-block-start: 1em;
+  -webkit-margin-after: 1em;
+          margin-block-end: 1em;
+  -webkit-margin-start: 0px;
+          margin-inline-start: 0px;
+  -webkit-margin-end: 0px;
+          margin-inline-end: 0px;
+  font-size: 120%;
+}
+
+.p3 h1 {
+  display: block;
+  position: relative;
+  text-align: left;
+}
+
+.p7 .right-float-block, .p7 h2, .p7 p {
+  text-align: left;
+}
+
+.p7 h1 {
+  padding: 2px 6px;
+}
+
+.p12 .content {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.p12 p, .p12 h1, .p12 h2 {
+  text-align: left;
+}
+
+span {
+  background: black;
+}
+
+.fp-slidesNav.fp-bottom {
+  margin-left: 1em !important;
+}
+
+.s1 {
+  background: url("https://cse412-21w.github.io/project-demo/mkm1.da04f4db.jpg");
+  background-size: cover;
+}
+
+.s2 {
+  background: url("https://cse412-21w.github.io/project-demo/mkm2.34db0cb5.jpg");
+  background-size: cover;
+}
+
+.s2 h1 {
+  text-align: left;
+  margin-left: 2em;
+  font-size: 4rem;
+}
+
+.s3 {
+  background: url("https://cse412-21w.github.io/project-demo/mkm3.076fcb4c.jpg");
+  background-size: cover;
+}
+
+.s3 h1 {
+  text-align: right;
+  margin-right: 2em;
+  font-size: 4em;
+}
+
+
+/*# sourceMappingURL=https://cse412-21w.github.io/project-demo/main.98df4e75.css.map */
