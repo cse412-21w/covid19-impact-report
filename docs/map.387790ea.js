@@ -5216,4 +5216,4 @@ legend.append("text").attr("x", 24).attr("y", 9).attr("dy", ".35em").text(functi
   return "".concat(d.round(0));
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/project-demo/map.387790ea.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.387790ea.js.map
