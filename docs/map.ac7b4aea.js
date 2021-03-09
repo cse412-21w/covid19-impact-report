@@ -5126,16 +5126,11 @@ function draw_map() {
   legend.append("text").attr("x", 24).attr("y", 9).attr("dy", ".35em").text(function (d) {
     return "".concat(d.round(0));
   });
-} // document.getElementById("map-vis-section").addEventListener('load', function() {
+} // document.getElementById("map-vis-section").addEventListener('mouseenter', function() {
 //     console.log("MAP loading");
 //     draw_map();
 //     console.log("MAP loaded");
 // });
-// window.onloadstart =  function() {
-//     console.log("MAP loading");
-//     draw_map();
-//     console.log("MAP loaded");
-// };
 
 
 $(document).ready(function () {
@@ -5144,4 +5139,4 @@ $(document).ready(function () {
   console.log("MAP loaded");
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.c17e2ddc.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.ac7b4aea.js.map
