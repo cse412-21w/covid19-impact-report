@@ -172,7 +172,7 @@ legend.append("text")
 
 }
 
-window.addEventListener('load', (event) => {
+document.getElementById("mapVis").addEventListener('load', (event) => {
     console.log("MAP loading");
 
     var covidData = data.filter(function(p){return p.Month == 2});

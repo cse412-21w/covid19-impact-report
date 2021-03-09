@@ -5191,7 +5191,7 @@ function draw_map() {
   });
 }
 
-window.addEventListener('load', function (event) {
+document.getElementById("mapVis").addEventListener('load', function (event) {
   console.log("MAP loading");
 
   var covidData = _covid.default.filter(function (p) {
@@ -5225,4 +5225,4 @@ window.addEventListener('load', function (event) {
   console.log("MAP loaded");
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.15a006f7.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.b079b6e9.js.map
