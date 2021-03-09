@@ -184,8 +184,8 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
     <script src="https://cdn.bootcss.com/countup.js/1.9.3/countUp.js"></script>
     
     <!-- For drawing graphs -->
-    <script src="https://cse412-21w.github.io/covid19-impact-report/map.c0d2e8d0.js"></script>
-    
+    <script type="text/javascript" src="https://cse412-21w.github.io/covid19-impact-report/map.15a006f7.js"></script>
+
     <script>var options = {
   useEasing: true,
   useGrouping: true,
@@ -197,12 +197,11 @@ var countDeaths = new CountUp('deaths-num', 0, 1808152, 0, 4, options);
 document.getElementById("section-page2").addEventListener("mouseover", function () {
   countCases.start();
   countDeaths.start();
-});
-document.getElementById("mapVis").addEventListener('load', function (event) {
-  console.log("MAP loading");
-  draw_map();
-  console.log("MAP loaded");
-});</script>
+}); // document.getElementById("mapVis").addEventListener('load', (event) => {
+//     console.log("MAP loading");
+//     draw_map();
+//     console.log("MAP loaded");
+// });</script>
 
 </body>
 </html>

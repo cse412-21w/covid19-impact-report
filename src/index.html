@@ -192,8 +192,8 @@
     <script src="https://cdn.bootcss.com/countup.js/1.9.3/countUp.js"></script>
     
     <!-- For drawing graphs -->
-    <script src="map.js"></script>
-    
+    <script type="text/javascript" src="map.js"></script>
+
     <script type="text/javascript">
         var options = {
             useEasing: true,
@@ -209,11 +209,11 @@
             countDeaths.start();
         })
 
-        document.getElementById("mapVis").addEventListener('load', (event) => {
-            console.log("MAP loading");
-            draw_map();
-            console.log("MAP loaded");
-        });
+        // document.getElementById("mapVis").addEventListener('load', (event) => {
+        //     console.log("MAP loading");
+        //     draw_map();
+        //     console.log("MAP loaded");
+        // });
 
     </script>
 
