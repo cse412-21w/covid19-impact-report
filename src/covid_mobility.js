@@ -34,6 +34,8 @@ d3v6.csv(covidData).then(function (d) {
 	});
 	drawMenu();
 	dataFilter = filterData("Alabama");
+	console.log("d3.csv covidData .then processing");
+
 	line_svg = initializeCanvas(dataFilter);
 });
 d3v6.select("#selectButton").on("change", function (d) {
@@ -137,6 +139,7 @@ function transition(path) {
 		});
 }
 function initializeCanvas(dataFilter) {
+	console.log("initializeCancas processing");
 	x.domain(
 		d3v6.extent(dataFilter, function (d) {
 			return d.date;

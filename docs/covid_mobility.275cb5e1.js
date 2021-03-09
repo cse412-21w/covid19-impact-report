@@ -117,9 +117,9 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"TDWJ":[function(require,module,exports) {
-module.exports = "https://cse412-21w.github.io/covid19-impact-report/covid_mobility.4f253b68.csv";
-},{}],"LGDt":[function(require,module,exports) {
+})({"../static/covid_mobility.csv":[function(require,module,exports) {
+module.exports = "/covid_mobility.70df1dd8.csv";
+},{}],"covid_mobility.js":[function(require,module,exports) {
 "use strict";
 
 var _covid_mobility = _interopRequireDefault(require("../static/covid_mobility.csv"));
@@ -145,15 +145,15 @@ var line_svg = null;
 var confirm_line = null;
 var driving_line = null;
 var dataFilter = null;
-var x = d3v6.scaleTime().range([0, width]);
-var y0 = d3v6.scaleLinear().range([height, 0]);
-var y1 = d3v6.scaleLinear().range([height, 0]);
-var xAxis = d3v6.axisBottom(x);
-var yAxisLeft = d3v6.axisLeft(y0);
-var yAxisRight = d3v6.axisRight(y1);
-var parseTime = d3v6.timeParse("%Y-%m-%d"); // Get the data
+var x = d3.scaleTime().range([0, width]);
+var y0 = d3.scaleLinear().range([height, 0]);
+var y1 = d3.scaleLinear().range([height, 0]);
+var xAxis = d3.axisBottom(x);
+var yAxisLeft = d3.axisLeft(y0);
+var yAxisRight = d3.axisRight(y1);
+var parseTime = d3.timeParse("%Y-%m-%d"); // Get the data
 
-d3v6.csv(_covid_mobility.default).then(function (d) {
+d3.csv(_covid_mobility.default).then(function (d) {
   d.forEach(function (row) {
     stateSet.add(row.state);
     data.push({
@@ -167,9 +167,9 @@ d3v6.csv(_covid_mobility.default).then(function (d) {
   dataFilter = filterData("Alabama");
   line_svg = initializeCanvas(dataFilter);
 });
-d3v6.select("#selectButton").on("change", function (d) {
+d3.select("#selectButton").on("change", function (d) {
   // recover the option that has been chosen
-  var selectedOption = d3v6.select(this).property("value"); // run the updateChart function with this selected option
+  var selectedOption = d3.select(this).property("value"); // run the updateChart function with this selected option
 
   update(selectedOption);
 });
@@ -189,7 +189,7 @@ function update(selectedGroup) {
 } // Add the brushing
 
 
-var brush = d3v6.brushX() // Add the brush feature using the d3v6.brush function
+var brush = d3.brushX() // Add the brush feature using the d3.brush function
 .extent([[0, 0], [width, height]]) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
 .on("end", updateChart); // A function that set idleTimeOut to null
 
@@ -207,7 +207,7 @@ function updateChart(event) {
   if (!extent) {
     if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
 
-    x.domain(d3v6.extent(dataFilter, function (d) {
+    x.domain(d3.extent(dataFilter, function (d) {
       return d.date;
     }));
   } else {
@@ -224,7 +224,7 @@ function updateChart(event) {
 
 
 function drawMenu() {
-  d3v6.select("#selectButton").selectAll("myOptions").data(stateSet).enter().append("option").text(function (d) {
+  d3.select("#selectButton").selectAll("myOptions").data(stateSet).enter().append("option").text(function (d) {
     return d;
   }) // text showed in the menu
   .attr("value", function (d) {
@@ -235,7 +235,7 @@ function drawMenu() {
 
 function tweenDash() {
   var l = this.getTotalLength(),
-      i = d3v6.interpolateString("0," + l, l + "," + l);
+      i = d3.interpolateString("0," + l, l + "," + l);
   return function (t) {
     return i(t);
   };
@@ -245,30 +245,30 @@ function transition(path) {
   var _this = this;
 
   path.transition().duration(5000).attrTween("stroke-dasharray", tweenDash).on("end", function () {
-    d3v6.select(_this).call(transition);
+    d3.select(_this).call(transition);
   });
 }
 
 function initializeCanvas(dataFilter) {
-  x.domain(d3v6.extent(dataFilter, function (d) {
+  x.domain(d3.extent(dataFilter, function (d) {
     return d.date;
   }));
-  y0.domain([0, d3v6.max(dataFilter, function (d) {
+  y0.domain([0, d3.max(dataFilter, function (d) {
     return Math.max(d.Confirmed);
   })]);
   y1.domain([-200, 200]);
-  confirm_line = d3v6.line().x(function (d) {
+  confirm_line = d3.line().x(function (d) {
     return x(d.date);
   }).y(function (d) {
     return y0(d.Confirmed);
   }); // this is the mobility percentage
 
-  driving_line = d3v6.line().x(function (d) {
+  driving_line = d3.line().x(function (d) {
     return x(d.date);
   }).y(function (d) {
     return y1(d.driving);
   });
-  line_svg = d3v6.select("#d3v6-demo").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left / 2 + "," + margin.top + ")");
+  line_svg = d3.select("#d3-demo").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left / 2 + "," + margin.top + ")");
   line_svg.append("path").datum(dataFilter) // Add the confirm line path.
   .attr("class", "confirm_line").attr("d", confirm_line); // .call(transition);
 
@@ -289,7 +289,7 @@ function initializeCanvas(dataFilter) {
   line_svg.append("g").attr("clip-path", "url(#clip)");
   line_svg.append("g").attr("class", "brush").call(brush);
   line_svg.on("dblclick", function () {
-    x.domain(d3v6.extent(dataFilter, function (d) {
+    x.domain(d3.extent(dataFilter, function (d) {
       return d.date;
     }));
     line_svg.select("g.xAxis").transition().duration(1000).call(xAxis);
@@ -300,13 +300,13 @@ function initializeCanvas(dataFilter) {
 }
 
 function drawGraph(dataFilter, state) {
-  x.domain(d3v6.extent(dataFilter, function (d) {
+  x.domain(d3.extent(dataFilter, function (d) {
     return d.date;
   }));
-  y0.domain([0, d3v6.max(dataFilter, function (d) {
+  y0.domain([0, d3.max(dataFilter, function (d) {
     return Math.max(d.Confirmed);
   })]);
-  var maxPercent = d3v6.max(dataFilter, function (d) {
+  var maxPercent = d3.max(dataFilter, function (d) {
     var ma = Math.abs(Math.max(d.driving));
     var mi = Math.abs(Math.min(d.driving));
     var m = Math.max(ma, mi);
@@ -318,9 +318,9 @@ function drawGraph(dataFilter, state) {
     }
   });
   y1.domain([-maxPercent, maxPercent]);
-  d3v6.select(".confirm_line").datum(dataFilter) // Add the confirmline2 path.
+  d3.select(".confirm_line").datum(dataFilter) // Add the confirmline2 path.
   .transition().duration(1000).attr("d", confirm_line);
-  d3v6.select(".driving_line").datum(dataFilter) // Add the confirmline2 path.
+  d3.select(".driving_line").datum(dataFilter) // Add the confirmline2 path.
   .transition().duration(1000).attr("d", driving_line);
   line_svg.select("text.title").text("Weekly Case Vs Weekly Mobility (".concat(state, ")"));
   line_svg.select("g.axisSteelBlue").transition().duration(1000).call(yAxisLeft);
@@ -328,5 +328,209 @@ function drawGraph(dataFilter, state) {
   line_svg.select("g.xAxis") // Add the X Axis
   .transition().duration(1000).call(xAxis);
 }
-},{"../static/covid_mobility.csv":"TDWJ"}]},{},["LGDt"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/covid_mobility.ac8cabaf.js.map
+},{"../static/covid_mobility.csv":"../static/covid_mobility.csv"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var global = arguments[3];
+var OVERLAY_ID = '__parcel__error__overlay__';
+var OldModule = module.bundle.Module;
+
+function Module(moduleName) {
+  OldModule.call(this, moduleName);
+  this.hot = {
+    data: module.bundle.hotData,
+    _acceptCallbacks: [],
+    _disposeCallbacks: [],
+    accept: function (fn) {
+      this._acceptCallbacks.push(fn || function () {});
+    },
+    dispose: function (fn) {
+      this._disposeCallbacks.push(fn);
+    }
+  };
+  module.bundle.hotData = null;
+}
+
+module.bundle.Module = Module;
+var checkedAssets, assetsToAccept;
+var parent = module.bundle.parent;
+
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
+  var hostname = "" || location.hostname;
+  var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58164" + '/');
+
+  ws.onmessage = function (event) {
+    checkedAssets = {};
+    assetsToAccept = [];
+    var data = JSON.parse(event.data);
+
+    if (data.type === 'update') {
+      var handled = false;
+      data.assets.forEach(function (asset) {
+        if (!asset.isNew) {
+          var didAccept = hmrAcceptCheck(global.parcelRequire, asset.id);
+
+          if (didAccept) {
+            handled = true;
+          }
+        }
+      }); // Enable HMR for CSS by default.
+
+      handled = handled || data.assets.every(function (asset) {
+        return asset.type === 'css' && asset.generated.js;
+      });
+
+      if (handled) {
+        console.clear();
+        data.assets.forEach(function (asset) {
+          hmrApply(global.parcelRequire, asset);
+        });
+        assetsToAccept.forEach(function (v) {
+          hmrAcceptRun(v[0], v[1]);
+        });
+      } else if (location.reload) {
+        // `location` global exists in a web worker context but lacks `.reload()` function.
+        location.reload();
+      }
+    }
+
+    if (data.type === 'reload') {
+      ws.close();
+
+      ws.onclose = function () {
+        location.reload();
+      };
+    }
+
+    if (data.type === 'error-resolved') {
+      console.log('[parcel] ✨ Error resolved');
+      removeErrorOverlay();
+    }
+
+    if (data.type === 'error') {
+      console.error('[parcel] 🚨  ' + data.error.message + '\n' + data.error.stack);
+      removeErrorOverlay();
+      var overlay = createErrorOverlay(data);
+      document.body.appendChild(overlay);
+    }
+  };
+}
+
+function removeErrorOverlay() {
+  var overlay = document.getElementById(OVERLAY_ID);
+
+  if (overlay) {
+    overlay.remove();
+  }
+}
+
+function createErrorOverlay(data) {
+  var overlay = document.createElement('div');
+  overlay.id = OVERLAY_ID; // html encode message and stack trace
+
+  var message = document.createElement('div');
+  var stackTrace = document.createElement('pre');
+  message.innerText = data.error.message;
+  stackTrace.innerText = data.error.stack;
+  overlay.innerHTML = '<div style="background: black; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; opacity: 0.85; font-family: Menlo, Consolas, monospace; z-index: 9999;">' + '<span style="background: red; padding: 2px 4px; border-radius: 2px;">ERROR</span>' + '<span style="top: 2px; margin-left: 5px; position: relative;">🚨</span>' + '<div style="font-size: 18px; font-weight: bold; margin-top: 20px;">' + message.innerHTML + '</div>' + '<pre>' + stackTrace.innerHTML + '</pre>' + '</div>';
+  return overlay;
+}
+
+function getParents(bundle, id) {
+  var modules = bundle.modules;
+
+  if (!modules) {
+    return [];
+  }
+
+  var parents = [];
+  var k, d, dep;
+
+  for (k in modules) {
+    for (d in modules[k][1]) {
+      dep = modules[k][1][d];
+
+      if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) {
+        parents.push(k);
+      }
+    }
+  }
+
+  if (bundle.parent) {
+    parents = parents.concat(getParents(bundle.parent, id));
+  }
+
+  return parents;
+}
+
+function hmrApply(bundle, asset) {
+  var modules = bundle.modules;
+
+  if (!modules) {
+    return;
+  }
+
+  if (modules[asset.id] || !bundle.parent) {
+    var fn = new Function('require', 'module', 'exports', asset.generated.js);
+    asset.isNew = !modules[asset.id];
+    modules[asset.id] = [fn, asset.deps];
+  } else if (bundle.parent) {
+    hmrApply(bundle.parent, asset);
+  }
+}
+
+function hmrAcceptCheck(bundle, id) {
+  var modules = bundle.modules;
+
+  if (!modules) {
+    return;
+  }
+
+  if (!modules[id] && bundle.parent) {
+    return hmrAcceptCheck(bundle.parent, id);
+  }
+
+  if (checkedAssets[id]) {
+    return;
+  }
+
+  checkedAssets[id] = true;
+  var cached = bundle.cache[id];
+  assetsToAccept.push([bundle, id]);
+
+  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+    return true;
+  }
+
+  return getParents(global.parcelRequire, id).some(function (id) {
+    return hmrAcceptCheck(global.parcelRequire, id);
+  });
+}
+
+function hmrAcceptRun(bundle, id) {
+  var cached = bundle.cache[id];
+  bundle.hotData = {};
+
+  if (cached) {
+    cached.hot.data = bundle.hotData;
+  }
+
+  if (cached && cached.hot && cached.hot._disposeCallbacks.length) {
+    cached.hot._disposeCallbacks.forEach(function (cb) {
+      cb(bundle.hotData);
+    });
+  }
+
+  delete bundle.cache[id];
+  bundle(id);
+  cached = bundle.cache[id];
+
+  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+    cached.hot._acceptCallbacks.forEach(function (cb) {
+      cb();
+    });
+
+    return true;
+  }
+}
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","covid_mobility.js"], null)
+//# sourceMappingURL=/covid_mobility.275cb5e1.js.map
