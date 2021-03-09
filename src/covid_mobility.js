@@ -1,5 +1,5 @@
 import covidData from "../static/covid_mobility.csv";
-("use strict"); // the code should be executed in "strict mode".
+// ("use strict"); // the code should be executed in "strict mode".
 // With strict mode, you can not, for example, use undeclared variables
 
 // preparation for our svg
