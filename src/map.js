@@ -36,7 +36,7 @@ function range(start, count) {
 }
 
 function draw_map() {
-
+    console.log("DRAW MAP Func");
 
     d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
         if (error) throw error;
