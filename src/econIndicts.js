@@ -152,10 +152,13 @@ var pce = [
   }
 ];
 
+var element = document.getElementById('econIndicts');
+var positionInfo = element.getBoundingClientRect();
+
 // set the dimensions and margins of the graph
 var margin = {top: 50, right: 35, bottom: 50, left: 70 },
-    width = 670 - (margin.left + margin.right),
-    height = 520 - (margin.top + margin.bottom);
+    width = positionInfo.width * 0.88 - (margin.left + margin.right),
+    height = width * 0.8 - (margin.top + margin.bottom);
 
 // append the svg object to the body of the page
 var svg = d3.select("#econ-indct")

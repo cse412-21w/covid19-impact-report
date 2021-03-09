@@ -58,7 +58,12 @@
         <div class="section p3">
             <div class="content">
                 <h1>COVID-19 Spread the World</h1>
-                <p>Background paragraph </p>
+                <p>
+                    Background paragraph 
+                </p>
+                <p>
+                    Background paragraph 
+                </p>
             </div>
         </div>
 
@@ -85,22 +90,45 @@
         </div>
 
         <div class="section p6">
-            <h1>p6</h1>
-            <section id = "econIndicts">
+            <section id = "econIndicts" class="column">
               <h3>Embed a D3 Visualization:</h3>
-              <button  id="firstB">Exports</button>
-              <button  id="secondB">Personal Consumption</button>
-              <button  id="thirdB">Imports of Services</button>
+              <div id="btn-group">
+                <button class="g-switch-btn" id="firstB">Exports</button>
+                <button class="g-switch-btn" id="secondB">Personal Consumption</button>
+                <button class="g-switch-btn" id="thirdB">Imports of Services</button>
+              </div>
               <div id="econ-indct"></div>
             </section>
+
+            <div class="column">
+                <h2>Some subtitle here</h2>
+                <p>
+                    TODO: Instructions of how to read this visualization: Which does each element mean?
+                    (data points, time periods, etc). How to interact with it? What things to notice/ pay attention to?
+                </p>
+                <p>Also make a summary about our discovery or intuition. What correlation or tendency exists?
+                    Express your own idea.
+                </p>
+            </div>
         </div>
 
         <div class="section">
           <h1>Added page after p6</h1>
-          <section id = "vacState">
+          <section id = "vacState" class="column">
             <h3>Vaccination:</h3>
             <div id="vac-state"></div>
           </section>
+
+          <div class="column">
+            <h2>Some subtitle here</h2>
+            <p>
+                TODO: Instructions of how to read this visualization: Which does each element mean?
+                (data points, time periods, etc). How to interact with it? What things to notice/ pay attention to?
+            </p>
+            <p>Also make a summary about our discovery or intuition. What correlation or tendency exists?
+                Express your own idea.
+            </p>
+        </div>
         </div>
 
         <div class="section p7">
@@ -221,10 +249,10 @@
             separator: ',',
             decimal: '.',
         };
-        var countCases = new CountUp('cases-num', 0, 81963694, 0, 4, options);
-        var countDeaths = new CountUp('deaths-num', 0, 1808152, 0, 4, options);
+        var countCases = new CountUp('cases-num', 0, 81963694, 0, 2.5, options);
+        var countDeaths = new CountUp('deaths-num', 0, 1808152, 0, 3, options);
 
-        document.getElementById("section-page2").addEventListener("mouseover", function() {
+        document.getElementById("section-page2").addEventListener("mouseenter", function() {
             countCases.start();
             countDeaths.start();
         })

@@ -10,8 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.css">
-    <link rel="stylesheet" href="https://cse412-21w.github.io/covid19-impact-report/main.fd83329c.css">
-    <link rel="stylesheet" href="https://cse412-21w.github.io/covid19-impact-report/style.5e421d5b.css">
+    <link rel="stylesheet" href="https://cse412-21w.github.io/covid19-impact-report/main.dbd5e5a4.css">
+    <link rel="stylesheet" href="https://cse412-21w.github.io/covid19-impact-report/style.82772b64.css">
     <!-- <script type="text/javascript" src="index.js"></script> -->
 
 
@@ -58,7 +58,12 @@
         <div class="section p3">
             <div class="content">
                 <h1>COVID-19 Spread the World</h1>
-                <p>Background paragraph </p>
+                <p>
+                    Background paragraph 
+                </p>
+                <p>
+                    Background paragraph 
+                </p>
             </div>
         </div>
 
@@ -85,22 +90,45 @@
         </div>
 
         <div class="section p6">
-            <h1>p6</h1>
-            <section id="econIndicts">
+            <section id="econIndicts" class="column">
               <h3>Embed a D3 Visualization:</h3>
-              <button id="firstB">Exports</button>
-              <button id="secondB">Personal Consumption</button>
-              <button id="thirdB">Imports of Services</button>
+              <div id="btn-group">
+                <button class="g-switch-btn" id="firstB">Exports</button>
+                <button class="g-switch-btn" id="secondB">Personal Consumption</button>
+                <button class="g-switch-btn" id="thirdB">Imports of Services</button>
+              </div>
               <div id="econ-indct"></div>
             </section>
+
+            <div class="column">
+                <h2>Some subtitle here</h2>
+                <p>
+                    TODO: Instructions of how to read this visualization: Which does each element mean?
+                    (data points, time periods, etc). How to interact with it? What things to notice/ pay attention to?
+                </p>
+                <p>Also make a summary about our discovery or intuition. What correlation or tendency exists?
+                    Express your own idea.
+                </p>
+            </div>
         </div>
 
         <div class="section">
           <h1>Added page after p6</h1>
-          <section id="vacState">
+          <section id="vacState" class="column">
             <h3>Vaccination:</h3>
             <div id="vac-state"></div>
           </section>
+
+          <div class="column">
+            <h2>Some subtitle here</h2>
+            <p>
+                TODO: Instructions of how to read this visualization: Which does each element mean?
+                (data points, time periods, etc). How to interact with it? What things to notice/ pay attention to?
+            </p>
+            <p>Also make a summary about our discovery or intuition. What correlation or tendency exists?
+                Express your own idea.
+            </p>
+        </div>
         </div>
 
         <div class="section p7">
@@ -212,9 +240,9 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
   separator: ',',
   decimal: '.'
 };
-var countCases = new CountUp('cases-num', 0, 81963694, 0, 4, options);
-var countDeaths = new CountUp('deaths-num', 0, 1808152, 0, 4, options);
-document.getElementById("section-page2").addEventListener("mouseover", function () {
+var countCases = new CountUp('cases-num', 0, 81963694, 0, 2.5, options);
+var countDeaths = new CountUp('deaths-num', 0, 1808152, 0, 3, options);
+document.getElementById("section-page2").addEventListener("mouseenter", function () {
   countCases.start();
   countDeaths.start();
 }); // document.getElementById("mapVis").addEventListener('load', (event) => {
@@ -249,7 +277,7 @@ window.d3 = null;</script>
     <!-- For drawing graphs -->
     <script type="text/javascript" src="https://cse412-21w.github.io/covid19-impact-report/map.105f14c1.js"></script>
 
-    <script src="https://cse412-21w.github.io/covid19-impact-report/econIndicts.612cb49d.js"></script>
+    <script src="https://cse412-21w.github.io/covid19-impact-report/econIndicts.7bb0c54b.js"></script>
     <script src="https://cse412-21w.github.io/covid19-impact-report/vacState.e6e9ac46.js"></script>
     <script src="https://cse412-21w.github.io/covid19-impact-report/covid_mobility.d9f2c994.js"></script>
 

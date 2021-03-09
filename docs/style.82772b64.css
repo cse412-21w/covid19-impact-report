@@ -22,7 +22,7 @@ div.tooltip {
 }
 
 /* Added for only DD3 Testing */
-.bar {
+/* .bar {
 	fill: #80cbc4;
 }
 
@@ -34,16 +34,16 @@ line#limit {
 	stroke: #fed966;
 	stroke-width: 3;
 	stroke-dasharray: 3 6;
-}
+} */
 
-.grid path {
+/* .grid path {
 	stroke-width: 0;
 }
 
 .grid .tick line {
 	stroke: #9faaae;
 	stroke-opacity: 0.3;
-}
+} */
 
 text.divergence {
 	font-size: 14px;
@@ -61,6 +61,8 @@ text.divergence {
 	fill: none;
 	stroke: red;
 	stroke-width: 3px;
+}
+
 .title,
 .title h1,
 .title a {
@@ -93,4 +95,4 @@ text.source {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/style.5e421d5b.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/style.82772b64.css.map */

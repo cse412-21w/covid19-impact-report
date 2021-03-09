@@ -31,14 +31,34 @@ div.column {
     width: 30%;
     padding-top: 2%;
     padding-left: 1%;
-    padding-right: 5%;
+    padding-right: 2%;
 }
+
+.g-switch-btn {
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #000000;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#000000;
+    text-align:center;
+    transition: all 0.2s;
+}
+.g-switch-btn:hover {
+    background-color:#FFFFFF;
+}
+
 
 // For Tableau Embedding
 #tableauDashboard-container {
     height: 80%;
 
     min-width: 66%;
+    max-width: 70%;
     margin-right: 0;
     box-sizing: border-box;
     float: left;
@@ -49,6 +69,25 @@ div.column {
 // For US Map Vis
 #mapVis {
     max-width: 70%;
+}
+
+// For Econ Charts
+#econIndicts {
+    margin-left: 8%;
+    width: 56%;
+    h3 {
+        text-align: left;
+        padding-left: 8%;
+    }
+}
+
+#btn-group {
+    padding-left: 8%;
+}
+
+// For Vaccination
+#vacState {
+    width: 60%;
 }
 
 
@@ -88,6 +127,8 @@ div.column {
 .p3 {
     p {
         display: block;
+        text-align: left;
+        // text-indent: 2em;
         margin-block-start: 1em;
         margin-block-end: 1em;
         margin-inline-start: 0px;
@@ -96,25 +137,29 @@ div.column {
     }
 
     h1 {
-        display: block;
-        position: relative;
         text-align: left;
     }
 }
 
 .p4 {
-    h1 {
+    h1, h2, p {
         text-align: left;
+    }
+
+    h1 {
         margin-left: 6%;
     }
 }
 
-.p7 {
+.p7, .p6 {
     h2, p{
         text-align: left;
     }
     h1 {
         padding: 2px 6px;
+    }
+    div.column {
+        padding-right: 6%;
     }
 }
 

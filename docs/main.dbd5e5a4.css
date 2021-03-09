@@ -33,12 +33,34 @@ div.column {
   width: 30%;
   padding-top: 2%;
   padding-left: 1%;
-  padding-right: 5%;
+  padding-right: 2%;
+}
+
+.g-switch-btn {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #000000;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto',sans-serif;
+  font-weight: 300;
+  color: #000000;
+  text-align: center;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.g-switch-btn:hover {
+  background-color: #FFFFFF;
 }
 
 #tableauDashboard-container {
   height: 80%;
   min-width: 66%;
+  max-width: 70%;
   margin-right: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -49,6 +71,24 @@ div.column {
 
 #mapVis {
   max-width: 70%;
+}
+
+#econIndicts {
+  margin-left: 8%;
+  width: 56%;
+}
+
+#econIndicts h3 {
+  text-align: left;
+  padding-left: 8%;
+}
+
+#btn-group {
+  padding-left: 8%;
+}
+
+#vacState {
+  width: 60%;
 }
 
 .p1 {
@@ -73,6 +113,7 @@ div.column {
 
 .p3 p {
   display: block;
+  text-align: left;
   -webkit-margin-before: 1em;
           margin-block-start: 1em;
   -webkit-margin-after: 1em;
@@ -85,22 +126,27 @@ div.column {
 }
 
 .p3 h1 {
-  display: block;
-  position: relative;
+  text-align: left;
+}
+
+.p4 h1, .p4 h2, .p4 p {
   text-align: left;
 }
 
 .p4 h1 {
-  text-align: left;
   margin-left: 6%;
 }
 
-.p7 h2, .p7 p {
+.p7 h2, .p7 p, .p6 h2, .p6 p {
   text-align: left;
 }
 
-.p7 h1 {
+.p7 h1, .p6 h1 {
   padding: 2px 6px;
+}
+
+.p7 div.column, .p6 div.column {
+  padding-right: 6%;
 }
 
 .p12 .content {
@@ -149,4 +195,4 @@ span {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.fd83329c.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.dbd5e5a4.css.map */
