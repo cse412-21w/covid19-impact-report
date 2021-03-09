@@ -83,6 +83,13 @@ a:hover {
   text-align: left;
 }
 
+.p4 div.column {
+  width: 30%;
+  padding-top: 2%;
+  padding-left: 1%;
+  padding-right: 5%;
+}
+
 .p7 h2, .p7 p {
   text-align: left;
 }
@@ -144,4 +151,4 @@ span {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.b8fb7778.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.a5388d63.css.map */
