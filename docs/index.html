@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.css">
-    <link rel="stylesheet" href="https://cse412-21w.github.io/covid19-impact-report/main.dbd5e5a4.css">
+    <link rel="stylesheet" href="https://cse412-21w.github.io/covid19-impact-report/main.286132c0.css">
     <link rel="stylesheet" href="https://cse412-21w.github.io/covid19-impact-report/style.82772b64.css">
     <!-- <script type="text/javascript" src="index.js"></script> -->
 
@@ -112,27 +112,8 @@
             </div>
         </div>
 
-        <div class="section">
-          <h1>Added page after p6</h1>
-          <section id="vacState" class="column">
-            <h3>Vaccination:</h3>
-            <div id="vac-state"></div>
-          </section>
-
-          <div class="column">
-            <h2>Some subtitle here</h2>
-            <p>
-                TODO: Instructions of how to read this visualization: Which does each element mean?
-                (data points, time periods, etc). How to interact with it? What things to notice/ pay attention to?
-            </p>
-            <p>Also make a summary about our discovery or intuition. What correlation or tendency exists?
-                Express your own idea.
-            </p>
-        </div>
-        </div>
-
         <div class="section p7">
-            <h1>Consumer Price and Producor Price during COVID-19(p7)</h1>
+            <h1>Consumer Price and Producor Price during COVID-19(p8)</h1>
             <section id="tableauDashboard-container" class="column">
 
                 <div class="tableauPlaceholder" id="viz1614987409863" style="position: relative">
@@ -184,19 +165,37 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
         </div>
 
         <div class="section p9">
-            <h1>p9</h1>
             <section id="covid_mobility">
-                <h3>Daily Cases change and Daily Mobility Change in California</h3>
+                <h1>Daily Cases change and Daily Mobility Change in California</h1>
                 <div id="d3-demo"></div>
             </section>
         </div>
 
         <div class="section p10">
-            <h1>p10</h1>
+            <section id="vacState" class="column">
+              <h1>P7 Vaccination Status</h1>
+              <div id="vac-state"></div>
+            </section>
+  
+            <div class="column">
+                <h2>Some subtitle here</h2>
+                <p>
+                  TODO: Instructions of how to read this visualization: Which does each element mean?
+                  (data points, time periods, etc). How to interact with it? What things to notice/ pay attention to?
+                </p>
+                <p>Also make a summary about our discovery or intuition. What correlation or tendency exists?
+                    Express your own idea.
+                </p>
+            </div>
         </div>
 
         <div class="section p11">
-            <h1>p11</h1>
+            <div class="content">
+                <h1>p11</h1>
+                <p>
+                    Paragraph, Summary
+                </p>
+            </div>
         </div>
 
         <div class="section p12">
@@ -225,8 +224,8 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
     <script>var myFullpage = new fullpage('#fullPage', {
   autoScrolling: true,
   navigation: true,
-  anchors: ['Home', 'page2', 'page3', 'page4', 'page5'],
-  navigationTooltips: ['Home', 'Second', 'Third', 'Forth', 'Fifth'],
+  anchors: ['Home', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12'],
+  navigationTooltips: ['Title Page', 'Cases & Deaths', 'Background', 'US Map', 'Heading', 'Economic Facts', 'Tableau Vis', 'Heading', 'Mobility', 'Vaccination', 'Summary', 'About'],
   scrollingSpeed: 1000,
   controlArrows: false,
   slidesNavigation: true
