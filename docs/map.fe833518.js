@@ -5102,89 +5102,81 @@ function draw_map() {
     /*
     // A function that update the chart when slider is moved
     function updateMap(yearOfChosen) {
-      // recompute density estimation
-      console.log(yearOfChosen)
+    // recompute density estimation
+    console.log(yearOfChosen)
         // Listen to the slider
     d3.select("#mySlider").on("change", function(d){
-      selectedValue = this.value
-      updateMap(selectedValue)
+    selectedValue = this.value
+    updateMap(selectedValue)
     })*/
   });
   /*
   makeSlider();
-  
-  function makeSlider() {
-    var margin = {right: 15, left: 15},
-        containerWidth = 900,
-        containerHeight = 40,
-        sliderWidth = containerWidth - margin.left - margin.right,
-        sliderHeight = containerHeight,
-        startDate = "2020-04",
-        endDate = "2021-02";
-  
+    function makeSlider() {
+  var margin = {right: 15, left: 15},
+      containerWidth = 900,
+      containerHeight = 40,
+      sliderWidth = containerWidth - margin.left - margin.right,
+      sliderHeight = containerHeight,
+      startDate = "2020-04",
+      endDate = "2021-02";
     var svgSlider = d3.select("#mySlider")
               .append("svg")
               .attr("height", containerHeight)
               .attr("width", containerWidth);
-  
     var x = d3.scaleLinear()
-        .domain([0,1])
-        .range([0, sliderWidth])
-        .clamp(true);
-  
+      .domain([0,1])
+      .range([0, sliderWidth])
+      .clamp(true);
     var slider = svgSlider.append("g")
-        .attr("class", "slider")
-        .attr("transform", "translate(" + margin.left + "," + sliderHeight / 2 + ")");
-  
+      .attr("class", "slider")
+      .attr("transform", "translate(" + margin.left + "," + sliderHeight / 2 + ")");
     // Slider body
-    slider.append("slider")
-        .attr("class", "track")
-        .attr("x1", x.range()[0])
-        .attr("x2", x.range()[1])
-        .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-        .attr("class", "track-inset")
-        .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-        .attr("class", "track-overlay")
-        .call(d3.drag()
-            .on("start.interrupt", function() { slider.interrupt(); })
-            .on("start drag", function() { handleDrag(x.invert(d3.event.x)); }));
-  
+  slider.append("slider")
+      .attr("class", "track")
+      .attr("x1", x.range()[0])
+      .attr("x2", x.range()[1])
+      .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+      .attr("class", "track-inset")
+      .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+      .attr("class", "track-overlay")
+      .call(d3.drag()
+          .on("start.interrupt", function() { slider.interrupt(); })
+          .on("start drag", function() { handleDrag(x.invert(d3.event.x)); }));
     // Ticks
-    slider.insert("g", ".track-overlay")
-        .attr("class", "ticks")
-        .attr("transform", "translate(0," + 18 + ")")
-        .selectAll("text")
-        .data(x.ticks(10))
-        .enter().append("text")
-        .attr("x", x)
-        .attr("text-anchor", "middle")
-        .text(function(d) { return d; });
-  
+  slider.insert("g", ".track-overlay")
+      .attr("class", "ticks")
+      .attr("transform", "translate(0," + 18 + ")")
+      .selectAll("text")
+      .data(x.ticks(10))
+      .enter().append("text")
+      .attr("x", x)
+      .attr("text-anchor", "middle")
+      .text(function(d) { return d; });
     // Handle
-    var handle = slider.insert("circle", ".track-overlay")
-        .attr("class", "handle")
-        .attr("r", 9);
-  
+  var handle = slider.insert("circle", ".track-overlay")
+      .attr("class", "handle")
+      .attr("r", 9);
     slider.transition()
-        .duration(750);
+      .duration(750);
   */
   // Must be nested function because of d3.drag().on("start drag", ...) code,
   // drag function has to be defined after slider's handle is created,
   // but handle has to be created last to be drawn on top of slider
 
   /*function handleDrag(eventX) {
-    handle.attr("cx", x(eventX));
-      // gather data only for the selected year
-    var selectedDate = eventX;
-      console.log(selectedDate);
-      var selectedDateDataArray = [];
-    var currDate = selectedDate;
-      covidData.forEach(function(entry) {
+      handle.attr("cx", x(eventX));
+        // gather data only for the selected year
+      var selectedDate = eventX;
+        console.log(selectedDate);
+        var selectedDateDataArray = [];
+      var currDate = selectedDate;
+        covidData.forEach(function(entry) {
       if (entry.Month == parseInt(selectedDate.substring(5,7))) {
-        console.log(entry);
-        selectedDateDataArray.push(entry);
+          console.log(entry);
+          selectedDateDataArray.push(entry);
       }
-    });
+      });
     }
     // Manually call to instantiate map upon load
   handleDrag(x.invert(0));
@@ -5219,36 +5211,9 @@ function draw_map() {
 }
 
 document.getElementById("map-vis-section").addEventListener('click', function () {
-  console.log("MAP loading"); // var covidData = data.filter(function(p){return p.Month == 2});
-  // const width = 900;
-  // const height = 600;
-  // const svg = d3.select("div").append("svg")
-  //     .attr("width", width)
-  //     .attr("height", height);
-  // const projection = d3.geoAlbersUsa()
-  //     .translate([width / 2, height / 2]) // translate to center of screen
-  //     .scale([1000]); // scale things down so see entire US
-  // const path = d3.geoPath().projection(projection);
-  // const colorScale = d3.scaleLinear()
-  //     .domain([0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000])
-  //     //.domain([0,166666.7,333333.3,500000,666666.7,833333.5,1000000])
-  //     .range(["#ffffff", "#fcffa1", "#fbf544", "#fbb844", "#ff4d00", "#ff0000", "#c20404", "#941010"]);
-  // console.log(colorScale.domain().slice());
-  // Number.prototype.round = function (decimals) {
-  //     return Number((Math.round(this + "e" + decimals) + "e-" + decimals));
-  // };
-  // const tooltip = d3.select(".map").append("div")
-  //     .attr("class", "tooltip")
-  //     .style("opacity", 0);
-  // function range(start, count) {
-  //     return Array.apply(0, Array(count + 1))
-  //                     .map(function (element, index) {
-  //                         return index + start;
-  //     });
-  // }
-
+  console.log("MAP loading");
   draw_map();
   console.log("MAP loaded");
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.7f30bd06.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.fe833518.js.map
