@@ -1,0 +1,96 @@
+.state:hover {
+  fill-opacity: .5;
+  cursor: pointer;
+}
+
+.state {
+  stroke-width: 0.5;
+  stroke: #000000;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  min-height: 28px;
+  padding: 8px 12px;
+  font: 12px sans-serif;
+  background: lightgray;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+/* Added for only DD3 Testing */
+.bar {
+	fill: #80cbc4;
+}
+
+line {
+	stroke: gray;
+}
+
+line#limit {
+	stroke: #fed966;
+	stroke-width: 3;
+	stroke-dasharray: 3 6;
+}
+
+.grid path {
+	stroke-width: 0;
+}
+
+.grid .tick line {
+	stroke: #9faaae;
+	stroke-opacity: 0.3;
+}
+
+text.divergence {
+	font-size: 14px;
+	fill: #fed966;
+}
+
+
+/* For covid_mobility Page*/
+.confirm_line {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 3px;
+}
+.driving_line {
+	fill: none;
+	stroke: red;
+	stroke-width: 3px;
+.title,
+.title h1,
+.title a {
+  color: #492a7c;
+  font-size: 24pt;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+
+
+/* The following is optional */
+text.value {
+	font-size: 14px;
+}
+
+text.title {
+	font-size: 22px;
+	font-weight: 600;
+}
+
+text.label {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+text.source {
+	font-size: 10px;
+	color: #ce3333;
+}
+
+
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/style.5e421d5b.css.map */
