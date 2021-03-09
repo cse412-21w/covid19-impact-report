@@ -113,8 +113,14 @@ function draw_map() {
 //     console.log("MAP loaded");
 // });
 
-window.onloadstart =  function() {
+// window.onloadstart =  function() {
+//     console.log("MAP loading");
+//     draw_map();
+//     console.log("MAP loaded");
+// };
+
+$(document).ready(function() {
     console.log("MAP loading");
     draw_map();
     console.log("MAP loaded");
-};
+});

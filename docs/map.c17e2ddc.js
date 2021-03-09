@@ -5131,12 +5131,17 @@ function draw_map() {
 //     draw_map();
 //     console.log("MAP loaded");
 // });
+// window.onloadstart =  function() {
+//     console.log("MAP loading");
+//     draw_map();
+//     console.log("MAP loaded");
+// };
 
 
-window.onloadstart = function () {
+$(document).ready(function () {
   console.log("MAP loading");
   draw_map();
   console.log("MAP loaded");
-};
+});
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.764d8849.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.c17e2ddc.js.map
