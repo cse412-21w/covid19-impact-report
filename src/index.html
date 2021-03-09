@@ -21,6 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-lite-api"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-tooltip"></script>
 
+
     <!-- For Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
@@ -85,6 +86,21 @@
 
         <div class="section p6">
             <h1>p6</h1>
+            <section id = "econIndicts">
+              <h3>Embed a D3 Visualization:</h3>
+              <button  id="firstB">Exports</button>
+              <button  id="secondB">Personal Consumption</button>
+              <button  id="thirdB">Imports of Services</button>
+              <div id="econ-indct"></div>
+            </section>
+        </div>
+
+        <div class="section">
+          <h1>Added page after p6</h1>
+          <section id = "vacState">
+            <h3>Vaccination:</h3>
+            <div id="vac-state"></div>
+          </section>
         </div>
 
         <div class="section p7">
@@ -218,8 +234,8 @@
     </script>
 
 
-    <script src="https://d3js.org/d3.v4.min.js"></script>  
-    <script src="https://d3js.org/topojson.v2.min.js"></script> 
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script>
         d3v4 = d3;
@@ -227,6 +243,7 @@
     </script>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3-scale-radial.js"></script>
     <script>
         d3v6 = d3;
         window.d3 = null;
@@ -243,6 +260,9 @@
 
     <!-- For drawing graphs -->
     <script type="text/javascript" src="map.js"></script>
+
+    <script src="econIndicts.js"></script>
+    <script src="vacState.js"></script>
 
 </body>
 </html>
