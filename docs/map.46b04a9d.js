@@ -5055,6 +5055,33 @@ var _covid = _interopRequireDefault(require("../static/covid.json"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function draw_map() {
+  var covidData = _covid.default.filter(function (p) {
+    return p.Month == 2;
+  });
+
+  var width = 900;
+  var height = 600;
+  var svg = d3.select("div").append("svg").attr("width", width).attr("height", height);
+  var projection = d3.geoAlbersUsa().translate([width / 2, height / 2]) // translate to center of screen
+  .scale([1000]); // scale things down so see entire US
+
+  var path = d3.geoPath().projection(projection);
+  var colorScale = d3.scaleLinear().domain([0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000]) //.domain([0,166666.7,333333.3,500000,666666.7,833333.5,1000000])
+  .range(["#ffffff", "#fcffa1", "#fbf544", "#fbb844", "#ff4d00", "#ff0000", "#c20404", "#941010"]);
+  console.log(colorScale.domain().slice());
+
+  Number.prototype.round = function (decimals) {
+    return Number(Math.round(this + "e" + decimals) + "e-" + decimals);
+  };
+
+  var tooltip = d3.select(".map").append("div").attr("class", "tooltip").style("opacity", 0);
+
+  function range(start, count) {
+    return Array.apply(0, Array(count + 1)).map(function (element, index) {
+      return index + start;
+    });
+  }
+
   d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function (error, uState) {
     if (error) throw error;
 
@@ -5192,37 +5219,36 @@ function draw_map() {
 }
 
 document.getElementById("mapVis").addEventListener('load', function (event) {
-  console.log("MAP loading");
-
-  var covidData = _covid.default.filter(function (p) {
-    return p.Month == 2;
-  });
-
-  var width = 900;
-  var height = 600;
-  var svg = d3.select("div").append("svg").attr("width", width).attr("height", height);
-  var projection = d3.geoAlbersUsa().translate([width / 2, height / 2]) // translate to center of screen
-  .scale([1000]); // scale things down so see entire US
-
-  var path = d3.geoPath().projection(projection);
-  var colorScale = d3.scaleLinear().domain([0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000]) //.domain([0,166666.7,333333.3,500000,666666.7,833333.5,1000000])
-  .range(["#ffffff", "#fcffa1", "#fbf544", "#fbb844", "#ff4d00", "#ff0000", "#c20404", "#941010"]);
-  console.log(colorScale.domain().slice());
-
-  Number.prototype.round = function (decimals) {
-    return Number(Math.round(this + "e" + decimals) + "e-" + decimals);
-  };
-
-  var tooltip = d3.select(".map").append("div").attr("class", "tooltip").style("opacity", 0);
-
-  function range(start, count) {
-    return Array.apply(0, Array(count + 1)).map(function (element, index) {
-      return index + start;
-    });
-  }
+  console.log("MAP loading"); // var covidData = data.filter(function(p){return p.Month == 2});
+  // const width = 900;
+  // const height = 600;
+  // const svg = d3.select("div").append("svg")
+  //     .attr("width", width)
+  //     .attr("height", height);
+  // const projection = d3.geoAlbersUsa()
+  //     .translate([width / 2, height / 2]) // translate to center of screen
+  //     .scale([1000]); // scale things down so see entire US
+  // const path = d3.geoPath().projection(projection);
+  // const colorScale = d3.scaleLinear()
+  //     .domain([0, 500000, 1000000, 1500000, 2000000, 2500000, 3000000, 3500000])
+  //     //.domain([0,166666.7,333333.3,500000,666666.7,833333.5,1000000])
+  //     .range(["#ffffff", "#fcffa1", "#fbf544", "#fbb844", "#ff4d00", "#ff0000", "#c20404", "#941010"]);
+  // console.log(colorScale.domain().slice());
+  // Number.prototype.round = function (decimals) {
+  //     return Number((Math.round(this + "e" + decimals) + "e-" + decimals));
+  // };
+  // const tooltip = d3.select(".map").append("div")
+  //     .attr("class", "tooltip")
+  //     .style("opacity", 0);
+  // function range(start, count) {
+  //     return Array.apply(0, Array(count + 1))
+  //                     .map(function (element, index) {
+  //                         return index + start;
+  //     });
+  // }
 
   draw_map();
   console.log("MAP loaded");
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.b079b6e9.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.46b04a9d.js.map
