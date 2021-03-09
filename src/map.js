@@ -82,13 +82,6 @@ d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73c
 });
 
 
-}
-
-window.addEventListener('load', (event) => {
-    console.log("Page loading");
-    draw_map();
-});
-
 /*
 makeSlider();
 
@@ -211,3 +204,10 @@ legend.append("text")
     .attr("y", 9)
     .attr("dy", ".35em")
     .text(function(d) { return `${(d).round(0)}`});
+
+}
+
+window.addEventListener('load', (event) => {
+    console.log("Page loading");
+    draw_map();
+});
