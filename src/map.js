@@ -67,107 +67,7 @@ function draw_map() {
                         //The text inside should be State: rate%
                         .text(()=> `${d.Province_State}: ${(d.Confirmed).round(0)}`)
             })
-        /*
-        // A function that update the chart when slider is moved
-        function updateMap(yearOfChosen) {
-        // recompute density estimation
-        console.log(yearOfChosen)
-
-
-        // Listen to the slider
-        d3.select("#mySlider").on("change", function(d){
-        selectedValue = this.value
-        updateMap(selectedValue)
-        })*/
     });
-
-
-    /*
-    makeSlider();
-
-    function makeSlider() {
-    var margin = {right: 15, left: 15},
-        containerWidth = 900,
-        containerHeight = 40,
-        sliderWidth = containerWidth - margin.left - margin.right,
-        sliderHeight = containerHeight,
-        startDate = "2020-04",
-        endDate = "2021-02";
-
-    var svgSlider = d3.select("#mySlider")
-                .append("svg")
-                .attr("height", containerHeight)
-                .attr("width", containerWidth);
-
-    var x = d3.scaleLinear()
-        .domain([0,1])
-        .range([0, sliderWidth])
-        .clamp(true);
-
-    var slider = svgSlider.append("g")
-        .attr("class", "slider")
-        .attr("transform", "translate(" + margin.left + "," + sliderHeight / 2 + ")");
-
-    // Slider body
-    slider.append("slider")
-        .attr("class", "track")
-        .attr("x1", x.range()[0])
-        .attr("x2", x.range()[1])
-        .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-        .attr("class", "track-inset")
-        .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-        .attr("class", "track-overlay")
-        .call(d3.drag()
-            .on("start.interrupt", function() { slider.interrupt(); })
-            .on("start drag", function() { handleDrag(x.invert(d3.event.x)); }));
-
-    // Ticks
-    slider.insert("g", ".track-overlay")
-        .attr("class", "ticks")
-        .attr("transform", "translate(0," + 18 + ")")
-        .selectAll("text")
-        .data(x.ticks(10))
-        .enter().append("text")
-        .attr("x", x)
-        .attr("text-anchor", "middle")
-        .text(function(d) { return d; });
-
-    // Handle
-    var handle = slider.insert("circle", ".track-overlay")
-        .attr("class", "handle")
-        .attr("r", 9);
-
-    slider.transition()
-        .duration(750);
-    */
-    // Must be nested function because of d3.drag().on("start drag", ...) code,
-    // drag function has to be defined after slider's handle is created,
-    // but handle has to be created last to be drawn on top of slider
-    /*function handleDrag(eventX) {
-        handle.attr("cx", x(eventX));
-
-        // gather data only for the selected year
-        var selectedDate = eventX;
-
-        console.log(selectedDate);
-
-        var selectedDateDataArray = [];
-        var currDate = selectedDate;
-
-        covidData.forEach(function(entry) {
-        if (entry.Month == parseInt(selectedDate.substring(5,7))) {
-            console.log(entry);
-            selectedDateDataArray.push(entry);
-        }
-        });
-
-    }
-
-    // Manually call to instantiate map upon load
-    handleDrag(x.invert(0));
-    }
-    */
-
 
     //create a new SVG in the body
     var legend = d3.select("body").append('svg')
@@ -207,7 +107,13 @@ function draw_map() {
 
 }
 
-document.getElementById("map-vis-section").addEventListener('load', function() {
+// document.getElementById("map-vis-section").addEventListener('load', function() {
+//     console.log("MAP loading");
+//     draw_map();
+//     console.log("MAP loaded");
+// });
+
+document.addEventListener('DOMContentLoaded', function() {
     console.log("MAP loading");
     draw_map();
     console.log("MAP loaded");
