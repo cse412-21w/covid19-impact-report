@@ -5083,7 +5083,8 @@ function range(start, count) {
 
 function draw_map() {
   console.log("DRAW MAP Func");
-  d3v4.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d3v42f99/us-states.json", function (error, uState) {
+  var json_url = "https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json";
+  d3v4.json(json_url, function (error, uState) {
     if (error) throw error;
 
     _(uState.features).keyBy('properties.name').merge(_.keyBy(covidData, 'Province_State')).values().value();
@@ -5139,4 +5140,4 @@ $(document).ready(function () {
   console.log("MAP loaded");
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.f74feac1.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.105f14c1.js.map
