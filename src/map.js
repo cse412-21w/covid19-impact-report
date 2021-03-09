@@ -207,7 +207,7 @@ legend.append("text")
 
 }
 
-document.getElementById("map-vis-section").addEventListener('mouseover', function() {
+document.getElementById("map-vis-section").addEventListener('click', function() {
     console.log("MAP loading");
 
     // var covidData = data.filter(function(p){return p.Month == 2});
