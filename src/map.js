@@ -1,5 +1,8 @@
 import data from '../static/covid.json'
 
+function draw_map() {
+
+
 var covidData = data.filter(function(p){return p.Month == 2});
 
 const width = 900;
@@ -76,6 +79,14 @@ d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73c
       selectedValue = this.value
       updateMap(selectedValue)
     })*/
+});
+
+
+}
+
+window.addEventListener('load', (event) => {
+    console.log("Page loading");
+    draw_map();
 });
 
 /*
