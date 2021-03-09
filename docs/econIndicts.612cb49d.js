@@ -239,26 +239,26 @@ var margin = {
     width = 670 - (margin.left + margin.right),
     height = 520 - (margin.top + margin.bottom); // append the svg object to the body of the page
 
-var svg = d3v6.select("#econ-indct").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // Initialise a X axis:
+var svg = d3.select("#econ-indct").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // Initialise a X axis:
 
-var x = d3v6.scaleLinear().range([0, width]);
-var xAxis = d3v6.axisBottom().scale(x);
+var x = d3.scaleLinear().range([0, width]);
+var xAxis = d3.axisBottom().scale(x);
 svg.append("g").attr("transform", "translate(0," + height + ")").attr("class", "myXaxis"); // Initialize an Y axis
 
-var y = d3v6.scaleLinear().range([height, 0]);
-var yAxis = d3v6.axisLeft().scale(y);
+var y = d3.scaleLinear().range([height, 0]);
+var yAxis = d3.axisLeft().scale(y);
 svg.append("g").attr("class", "myYaxis"); // Create a function that takes a dataset as input and update the plot:
 
 function update(data) {
   // Create the X axis:
-  x.domain([1, d3v6.max(data, function (d) {
+  x.domain([1, d3.max(data, function (d) {
     return d.month;
   })]);
   svg.selectAll(".myXaxis").transition().duration(3000).call(xAxis); // create the Y axis
 
-  y.domain([d3v6.min(data, function (d) {
+  y.domain([d3.min(data, function (d) {
     return d.value;
-  }) / 1.1, d3v6.max(data, function (d) {
+  }) / 1.1, d3.max(data, function (d) {
     return d.value;
   }) * 1.05]);
   svg.selectAll(".myYaxis").transition().duration(3000).call(yAxis); // Create a update selection: bind to the new data
@@ -267,7 +267,7 @@ function update(data) {
     return d.month;
   }); // Updata the line
 
-  u.enter().append("path").attr("class", "lineTest").merge(u).transition().duration(3000).attr("d", d3v6.line().x(function (d) {
+  u.enter().append("path").attr("class", "lineTest").merge(u).transition().duration(3000).attr("d", d3.line().x(function (d) {
     return x(d.month);
   }).y(function (d) {
     return y(d.value);
@@ -291,4 +291,4 @@ document.getElementById("thirdB").onclick = function () {
   update(impo);
 };
 },{}]},{},["CUH9"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/econIndicts.0ac72d0e.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/econIndicts.612cb49d.js.map

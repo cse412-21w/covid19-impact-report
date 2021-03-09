@@ -13,16 +13,16 @@ var confirm_line = null;
 var driving_line = null;
 
 var dataFilter = null;
-var x = d3v6.scaleTime().range([0, width]);
-var y0 = d3v6.scaleLinear().range([height, 0]);
-var y1 = d3v6.scaleLinear().range([height, 0]);
+var x = d3.scaleTime().range([0, width]);
+var y0 = d3.scaleLinear().range([height, 0]);
+var y1 = d3.scaleLinear().range([height, 0]);
 
-var xAxis = d3v6.axisBottom(x);
-var yAxisLeft = d3v6.axisLeft(y0);
-var yAxisRight = d3v6.axisRight(y1);
-var parseTime = d3v6.timeParse("%Y-%m-%d");
+var xAxis = d3.axisBottom(x);
+var yAxisLeft = d3.axisLeft(y0);
+var yAxisRight = d3.axisRight(y1);
+var parseTime = d3.timeParse("%Y-%m-%d");
 // Get the data
-d3v6.csv(covidData).then(function (d) {
+d3.csv(covidData).then(function (d) {
 	d.forEach(function (row) {
 		stateSet.add(row.state);
 		data.push({
@@ -38,9 +38,9 @@ d3v6.csv(covidData).then(function (d) {
 
 	line_svg = initializeCanvas(dataFilter);
 });
-d3v6.select("#selectButton").on("change", function (d) {
+d3.select("#selectButton").on("change", function (d) {
 	// recover the option that has been chosen
-	var selectedOption = d3v6.select(this).property("value");
+	var selectedOption = d3.select(this).property("value");
 	// run the updateChart function with this selected option
 	update(selectedOption);
 });
@@ -59,8 +59,8 @@ function update(selectedGroup) {
 }
 
 // Add the brushing
-var brush = d3v6
-	.brushX() // Add the brush feature using the d3v6.brush function
+var brush = d3
+	.brushX() // Add the brush feature using the d3.brush function
 	.extent([
 		[0, 0],
 		[width, height],
@@ -82,7 +82,7 @@ function updateChart(event) {
 	if (!extent) {
 		if (!idleTimeout) return (idleTimeout = setTimeout(idled, 350)); // This allows to wait a little bit
 		x.domain(
-			d3v6.extent(dataFilter, function (d) {
+			d3.extent(dataFilter, function (d) {
 				return d.date;
 			})
 		);
@@ -109,7 +109,7 @@ function updateChart(event) {
 // If user double click, reinitialize the chart
 
 function drawMenu() {
-	d3v6.select("#selectButton")
+	d3.select("#selectButton")
 		.selectAll("myOptions")
 		.data(stateSet)
 		.enter()
@@ -124,7 +124,7 @@ function drawMenu() {
 // Scale the range of the data
 function tweenDash() {
 	const l = this.getTotalLength(),
-		i = d3v6.interpolateString("0," + l, l + "," + l);
+		i = d3.interpolateString("0," + l, l + "," + l);
 	return function (t) {
 		return i(t);
 	};
@@ -135,24 +135,24 @@ function transition(path) {
 		.duration(5000)
 		.attrTween("stroke-dasharray", tweenDash)
 		.on("end", () => {
-			d3v6.select(this).call(transition);
+			d3.select(this).call(transition);
 		});
 }
 function initializeCanvas(dataFilter) {
 	console.log("initializeCancas processing");
 	x.domain(
-		d3v6.extent(dataFilter, function (d) {
+		d3.extent(dataFilter, function (d) {
 			return d.date;
 		})
 	);
 	y0.domain([
 		0,
-		d3v6.max(dataFilter, function (d) {
+		d3.max(dataFilter, function (d) {
 			return Math.max(d.Confirmed);
 		}),
 	]);
 	y1.domain([-200, 200]);
-	confirm_line = d3v6
+	confirm_line = d3
 		.line()
 		.x(function (d) {
 			return x(d.date);
@@ -162,7 +162,7 @@ function initializeCanvas(dataFilter) {
 		});
 
 	// this is the mobility percentage
-	driving_line = d3v6
+	driving_line = d3
 		.line()
 		.x(function (d) {
 			return x(d.date);
@@ -171,8 +171,8 @@ function initializeCanvas(dataFilter) {
 			return y1(d.driving);
 		});
 
-	line_svg = d3v6
-		.select("#d3v6-demo")
+	line_svg = d3
+		.select("#d3-demo")
 		.append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
@@ -258,7 +258,7 @@ function initializeCanvas(dataFilter) {
 
 	line_svg.on("dblclick", function () {
 		x.domain(
-			d3v6.extent(dataFilter, function (d) {
+			d3.extent(dataFilter, function (d) {
 				return d.date;
 			})
 		);
@@ -279,17 +279,17 @@ function initializeCanvas(dataFilter) {
 
 function drawGraph(dataFilter, state) {
 	x.domain(
-		d3v6.extent(dataFilter, function (d) {
+		d3.extent(dataFilter, function (d) {
 			return d.date;
 		})
 	);
 	y0.domain([
 		0,
-		d3v6.max(dataFilter, function (d) {
+		d3.max(dataFilter, function (d) {
 			return Math.max(d.Confirmed);
 		}),
 	]);
-	const maxPercent = d3v6.max(dataFilter, function (d) {
+	const maxPercent = d3.max(dataFilter, function (d) {
 		const ma = Math.abs(Math.max(d.driving));
 		const mi = Math.abs(Math.min(d.driving));
 		const m = Math.max(ma, mi);
@@ -301,13 +301,13 @@ function drawGraph(dataFilter, state) {
 	});
 	y1.domain([-maxPercent, maxPercent]);
 
-	d3v6.select(".confirm_line")
+	d3.select(".confirm_line")
 		.datum(dataFilter) // Add the confirmline2 path.
 		.transition()
 		.duration(1000)
 		.attr("d", confirm_line);
 
-	d3v6.select(".driving_line")
+	d3.select(".driving_line")
 		.datum(dataFilter) // Add the confirmline2 path.
 		.transition()
 		.duration(1000)

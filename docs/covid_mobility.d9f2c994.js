@@ -143,15 +143,15 @@ var line_svg = null;
 var confirm_line = null;
 var driving_line = null;
 var dataFilter = null;
-var x = d3v6.scaleTime().range([0, width]);
-var y0 = d3v6.scaleLinear().range([height, 0]);
-var y1 = d3v6.scaleLinear().range([height, 0]);
-var xAxis = d3v6.axisBottom(x);
-var yAxisLeft = d3v6.axisLeft(y0);
-var yAxisRight = d3v6.axisRight(y1);
-var parseTime = d3v6.timeParse("%Y-%m-%d"); // Get the data
+var x = d3.scaleTime().range([0, width]);
+var y0 = d3.scaleLinear().range([height, 0]);
+var y1 = d3.scaleLinear().range([height, 0]);
+var xAxis = d3.axisBottom(x);
+var yAxisLeft = d3.axisLeft(y0);
+var yAxisRight = d3.axisRight(y1);
+var parseTime = d3.timeParse("%Y-%m-%d"); // Get the data
 
-d3v6.csv(_covid_mobility.default).then(function (d) {
+d3.csv(_covid_mobility.default).then(function (d) {
   d.forEach(function (row) {
     stateSet.add(row.state);
     data.push({
@@ -166,9 +166,9 @@ d3v6.csv(_covid_mobility.default).then(function (d) {
   console.log("d3.csv covidData .then processing");
   line_svg = initializeCanvas(dataFilter);
 });
-d3v6.select("#selectButton").on("change", function (d) {
+d3.select("#selectButton").on("change", function (d) {
   // recover the option that has been chosen
-  var selectedOption = d3v6.select(this).property("value"); // run the updateChart function with this selected option
+  var selectedOption = d3.select(this).property("value"); // run the updateChart function with this selected option
 
   update(selectedOption);
 });
@@ -188,7 +188,7 @@ function update(selectedGroup) {
 } // Add the brushing
 
 
-var brush = d3v6.brushX() // Add the brush feature using the d3v6.brush function
+var brush = d3.brushX() // Add the brush feature using the d3.brush function
 .extent([[0, 0], [width, height]]) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
 .on("end", updateChart); // A function that set idleTimeOut to null
 
@@ -206,7 +206,7 @@ function updateChart(event) {
   if (!extent) {
     if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
 
-    x.domain(d3v6.extent(dataFilter, function (d) {
+    x.domain(d3.extent(dataFilter, function (d) {
       return d.date;
     }));
   } else {
@@ -223,7 +223,7 @@ function updateChart(event) {
 
 
 function drawMenu() {
-  d3v6.select("#selectButton").selectAll("myOptions").data(stateSet).enter().append("option").text(function (d) {
+  d3.select("#selectButton").selectAll("myOptions").data(stateSet).enter().append("option").text(function (d) {
     return d;
   }) // text showed in the menu
   .attr("value", function (d) {
@@ -234,7 +234,7 @@ function drawMenu() {
 
 function tweenDash() {
   var l = this.getTotalLength(),
-      i = d3v6.interpolateString("0," + l, l + "," + l);
+      i = d3.interpolateString("0," + l, l + "," + l);
   return function (t) {
     return i(t);
   };
@@ -244,31 +244,31 @@ function transition(path) {
   var _this = this;
 
   path.transition().duration(5000).attrTween("stroke-dasharray", tweenDash).on("end", function () {
-    d3v6.select(_this).call(transition);
+    d3.select(_this).call(transition);
   });
 }
 
 function initializeCanvas(dataFilter) {
   console.log("initializeCancas processing");
-  x.domain(d3v6.extent(dataFilter, function (d) {
+  x.domain(d3.extent(dataFilter, function (d) {
     return d.date;
   }));
-  y0.domain([0, d3v6.max(dataFilter, function (d) {
+  y0.domain([0, d3.max(dataFilter, function (d) {
     return Math.max(d.Confirmed);
   })]);
   y1.domain([-200, 200]);
-  confirm_line = d3v6.line().x(function (d) {
+  confirm_line = d3.line().x(function (d) {
     return x(d.date);
   }).y(function (d) {
     return y0(d.Confirmed);
   }); // this is the mobility percentage
 
-  driving_line = d3v6.line().x(function (d) {
+  driving_line = d3.line().x(function (d) {
     return x(d.date);
   }).y(function (d) {
     return y1(d.driving);
   });
-  line_svg = d3v6.select("#d3v6-demo").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left / 2 + "," + margin.top + ")");
+  line_svg = d3.select("#d3-demo").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left / 2 + "," + margin.top + ")");
   line_svg.append("path").datum(dataFilter) // Add the confirm line path.
   .attr("class", "confirm_line").attr("d", confirm_line); // .call(transition);
 
@@ -289,7 +289,7 @@ function initializeCanvas(dataFilter) {
   line_svg.append("g").attr("clip-path", "url(#clip)");
   line_svg.append("g").attr("class", "brush").call(brush);
   line_svg.on("dblclick", function () {
-    x.domain(d3v6.extent(dataFilter, function (d) {
+    x.domain(d3.extent(dataFilter, function (d) {
       return d.date;
     }));
     line_svg.select("g.xAxis").transition().duration(1000).call(xAxis);
@@ -300,13 +300,13 @@ function initializeCanvas(dataFilter) {
 }
 
 function drawGraph(dataFilter, state) {
-  x.domain(d3v6.extent(dataFilter, function (d) {
+  x.domain(d3.extent(dataFilter, function (d) {
     return d.date;
   }));
-  y0.domain([0, d3v6.max(dataFilter, function (d) {
+  y0.domain([0, d3.max(dataFilter, function (d) {
     return Math.max(d.Confirmed);
   })]);
-  var maxPercent = d3v6.max(dataFilter, function (d) {
+  var maxPercent = d3.max(dataFilter, function (d) {
     var ma = Math.abs(Math.max(d.driving));
     var mi = Math.abs(Math.min(d.driving));
     var m = Math.max(ma, mi);
@@ -318,9 +318,9 @@ function drawGraph(dataFilter, state) {
     }
   });
   y1.domain([-maxPercent, maxPercent]);
-  d3v6.select(".confirm_line").datum(dataFilter) // Add the confirmline2 path.
+  d3.select(".confirm_line").datum(dataFilter) // Add the confirmline2 path.
   .transition().duration(1000).attr("d", confirm_line);
-  d3v6.select(".driving_line").datum(dataFilter) // Add the confirmline2 path.
+  d3.select(".driving_line").datum(dataFilter) // Add the confirmline2 path.
   .transition().duration(1000).attr("d", driving_line);
   line_svg.select("text.title").text("Weekly Case Vs Weekly Mobility (".concat(state, ")"));
   line_svg.select("g.axisSteelBlue").transition().duration(1000).call(yAxisLeft);
@@ -329,4 +329,4 @@ function drawGraph(dataFilter, state) {
   .transition().duration(1000).call(xAxis);
 }
 },{"../static/covid_mobility.csv":"TDWJ"}]},{},["LGDt"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/covid_mobility.34e3d4d6.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/covid_mobility.d9f2c994.js.map
