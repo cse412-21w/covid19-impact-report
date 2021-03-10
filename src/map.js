@@ -2,8 +2,14 @@ import data from '../static/covid.json'
 
 var covidData = data.filter(function(p){return p.Month == 2});
 
-const width = 900;
-const height = 600;
+// dynamically adjust width and height
+var element = document.getElementById('mapVis');
+var positionInfo = element.getBoundingClientRect();
+
+// const width = 900;
+// const height = 600;
+const width = positionInfo.width;
+const height = width * 0.68;
 const svg = d3v4.select("#us-map").append("svg")
     .attr("width", width)
     .attr("height", height);
