@@ -12,6 +12,14 @@ a:hover {
     color: darkmagenta;
 }
 
+g text {
+    font-family: 'Montserrat';
+}
+
+label, select, option {
+    font-family: 'Montserrat';
+}
+
 .content {
     text-align: left;
     padding-left: 6%;
@@ -48,9 +56,11 @@ div.column {
     text-align:center;
     transition: all 0.2s;
 }
+
 .g-switch-btn:hover {
     background-color:#FFFFFF;
 }
+
 
 
 // For Tableau Embedding
@@ -95,8 +105,6 @@ div.column {
 #vacState {
     width: 60%;
 }
-
-
 
 
 
