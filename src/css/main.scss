@@ -3,19 +3,23 @@ h1, h2, h3, p {
     text-align: center;
 }
 
-div.column ul {
-    list-style-type: none;
-}
+// div.column ul {
+//     list-style-type: none;
+// }
 
-div.column ul li {
-    background: #ebebeb;
-    font-family: 'Montserrat';
-    padding: 5px;
-}
+// div.column ul li {
+//     background: #ebebeb;
+//     font-family: 'Montserrat';
+//     padding: 5px;
+// }
 
-ul, div.column ul li {
-    margin-left: 0;
-    padding-left: 0;
+// ul, div.column ul li {
+//     margin-left: 0;
+//     padding-left: 0;
+// }
+
+div.column span {
+    font-size: 0.5em;
 }
 
 a {
@@ -103,10 +107,10 @@ div.column {
         position: relative;
         height: 80%;
     }
-    #cases-map-legend {
-        position: absolute;
-        bottom: 5%;
-    }
+    // #cases-map-legend {
+    //     position: absolute;
+    //     bottom: 0;
+    // }
 }
 
 // For Econ Charts
@@ -236,9 +240,9 @@ div.column {
 }
 
 
-span {  // For the navigation points on the right
-    background: black;  //!important otherwise covered
-}
+// span {  // For the navigation points on the right
+//     background: black;  //!important otherwise covered
+// }
 
 .fp-slidesNav.fp-bottom {
     margin-left: 1em !important;

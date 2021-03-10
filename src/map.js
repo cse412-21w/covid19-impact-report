@@ -82,9 +82,9 @@ function draw_map() {
     //add it with the '.legend' class
         .attr('class', 'legend')
         //it should be 14px wide
-        .attr('width', 180)
+        .attr('width', 140)
         //and 148px high
-        .attr('height', 180)
+        .attr('height', 140)
         //then either select all the 'g's inside the svg
         //or create placeholders
         .selectAll('g')

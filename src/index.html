@@ -81,20 +81,19 @@
               <div id="mySlider"></div>
             </section>
             <div class="column">
-                <h1>Confirmed Cases of COVID-19 in All States</h1>
-                <h2>Till 2021, Feb.</h2>
+                <h1>Confirmed Cases of COVID-19 in All States <br /><span class="small-fonts">till Feb, 2021</span></h1>
                 <p>
-                    The color of each state indicates the number of confirmed cases in the 
-                    states according to the legend. Typically, the darker the color is, 
-                    the more confirmed cases in this state. If you hover the mouse over a state, 
-                    a tooltip will appear and tell you the name of the state you are pointing to 
-                    and the exact number of confirmed cases there. 
+                    The color of each state indicates the number of confirmed cases in each state.
+                    Typically, the darker the color is, the more confirmed cases in this state. 
+                    If you hover the mouse over a state, a tooltip will appear and tell you the name of 
+                    the state you are pointing to and the exact number of confirmed cases there. 
                 </p>
-                <ul>
-                    <li>The map shows that the spread of Covid-19 is not evenly distributed among the states.</li>
-                    <li>The great amount of confirmed cases are concentrated in California, Texas, Florida and New York. This is possibly caused by the great amount of population, intense density of population and high volume of mobility in these four states.</li>
-                    <li>The three states with the most confirmed cases (California, Texas, Florida) are all southern states. This might be correlated with local temperature and residuals’ behaviors.</li>
-                </ul>
+                <p>
+                    The map shows that the greatest amount of confirmed cases are concentrated in California, 
+                    Texas, and Florida. This is possibly caused by the intense density of population and 
+                    high volume of mobility in these three states. Also, these three states are all southern states. 
+                    This might be correlated with local temperature and residuals’ behaviors. 
+                </p>
                 <div id="cases-map-legend"></div>
             </div>
         </div>
@@ -294,13 +293,6 @@
             countCases.start();
             countDeaths.start();
         })
-
-        // document.getElementById("mapVis").addEventListener('load', (event) => {
-        //     console.log("MAP loading");
-        //     draw_map();
-        //     console.log("MAP loaded");
-        // });
-
     </script>
 
 
