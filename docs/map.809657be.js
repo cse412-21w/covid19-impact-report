@@ -5110,8 +5110,8 @@ function draw_map() {
 
   var legend = d3v4.select("#cases-map-legend").append('svg') //add it with the '.legend' class
   .attr('class', 'legend') //it should be 14px wide
-  .attr('width', 140) //and 148px high
-  .attr('height', 140) //then either select all the 'g's inside the svg
+  .attr('width', 160) //and 148px high
+  .attr('height', 160) //then either select all the 'g's inside the svg
   //or create placeholders
   .selectAll('g') //Fill the data into our placeholders in reverse order
   //This arranges our legend in descending order.
@@ -5145,4 +5145,4 @@ $(document).ready(function () {
   console.log("MAP loaded");
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.f514ce39.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.809657be.js.map
