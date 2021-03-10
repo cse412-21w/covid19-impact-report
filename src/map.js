@@ -72,7 +72,7 @@ function draw_map() {
     });
 
     //create a new SVG in the body
-    var legend = d3v4.select("body").append('svg')
+    var legend = d3v4.select("#cases-map-legend").append('svg')
     //add it with the '.legend' class
         .attr('class', 'legend')
         //it should be 14px wide

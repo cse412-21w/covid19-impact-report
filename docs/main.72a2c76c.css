@@ -12,6 +12,14 @@ a:hover {
   color: darkmagenta;
 }
 
+g text {
+  font-family: 'Montserrat';
+}
+
+label, select, option {
+  font-family: 'Montserrat';
+}
+
 .content {
   text-align: left;
   padding-left: 6%;
@@ -176,4 +184,4 @@ span {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.66bb8fb0.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.72a2c76c.css.map */
