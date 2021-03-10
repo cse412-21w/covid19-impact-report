@@ -163,6 +163,10 @@ div.column {
   text-align: left;
 }
 
+.p4 div.column {
+  padding-top: 0;
+}
+
 .p6 h2, .p6 h3, .p6 p, .p7 h2, .p7 h3, .p7 p, .p10 h2, .p10 h3, .p10 p {
   text-align: left;
 }
