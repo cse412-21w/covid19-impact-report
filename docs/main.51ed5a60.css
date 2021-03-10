@@ -3,19 +3,8 @@ h1, h2, h3, p {
   text-align: center;
 }
 
-div.column ul {
-  list-style-type: none;
-}
-
-div.column ul li {
-  background: #ebebeb;
-  font-family: 'Montserrat';
-  padding: 5px;
-}
-
-ul, div.column ul li {
-  margin-left: 0;
-  padding-left: 0;
+div.column span {
+  font-size: 0.5em;
 }
 
 a {
@@ -101,11 +90,6 @@ div.column {
 #map-vis-section div.column {
   position: relative;
   height: 80%;
-}
-
-#map-vis-section #cases-map-legend {
-  position: absolute;
-  bottom: 5%;
 }
 
 #econIndicts, #vacState {
@@ -213,10 +197,6 @@ div.column {
   text-align: left;
 }
 
-span {
-  background: black;
-}
-
 .fp-slidesNav.fp-bottom {
   margin-left: 1em !important;
 }
@@ -226,4 +206,4 @@ span {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.9da76128.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.51ed5a60.css.map */
