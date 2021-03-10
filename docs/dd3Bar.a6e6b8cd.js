@@ -117,218 +117,254 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../static/covid_mobility.csv":[function(require,module,exports) {
-module.exports = "/covid_mobility.70df1dd8.csv";
-},{}],"covid_mobility.js":[function(require,module,exports) {
-"use strict";
-
-var _covid_mobility = _interopRequireDefault(require("../static/covid_mobility.csv"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-"use strict"; // the code should be executed in "strict mode".
-// With strict mode, you can not, for example, use undeclared variables
-// preparation for our svg
-
-
-var margin = {
-  top: 50,
-  right: 35,
-  bottom: 50,
-  left: 150
-},
-    width = window.innerWidth - (margin.left + margin.right),
-    height = window.innerHeight / 2 - (margin.top + margin.bottom);
-var data = [];
-var stateSet = new Set();
-var line_svg = null;
-var confirm_line = null;
-var driving_line = null;
-var dataFilter = null;
-var x = d3.scaleTime().range([0, width]);
-var y0 = d3.scaleLinear().range([height, 0]);
-var y1 = d3.scaleLinear().range([height, 0]);
-var xAxis = d3.axisBottom(x);
-var yAxisLeft = d3.axisLeft(y0);
-var yAxisRight = d3.axisRight(y1);
-var parseTime = d3.timeParse("%Y-%m-%d"); // Get the data
-
-d3.csv(_covid_mobility.default).then(function (d) {
-  d.forEach(function (row) {
-    stateSet.add(row.state);
-    data.push({
-      date: parseTime(row.date),
-      Confirmed: row.daily_cases,
-      driving: row.percentage,
-      state: row.state
-    });
-  });
-  drawMenu();
-  dataFilter = filterData("Alabama");
-  line_svg = initializeCanvas(dataFilter);
-});
-d3.select("#selectButton").on("change", function (d) {
-  // recover the option that has been chosen
-  var selectedOption = d3.select(this).property("value"); // run the updateChart function with this selected option
-
-  update(selectedOption);
-});
-
-function filterData(state) {
-  var dataFilter = data.filter(function (row) {
-    return row["state"] == state;
-  });
-  return dataFilter;
-}
-
-function update(selectedGroup) {
-  // Create new data with the selection?
-  // Give these new data to update line
-  dataFilter = filterData(selectedGroup);
-  drawGraph(dataFilter, selectedGroup);
-} // Add the brushing
-
-
-var brush = d3.brushX() // Add the brush feature using the d3.brush function
-.extent([[0, 0], [width, height]]) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-.on("end", updateChart); // A function that set idleTimeOut to null
-
-var idleTimeout;
-
-function idled() {
-  idleTimeout = null;
-} // A function that update the chart for given boundaries
-
-
-function updateChart(event) {
-  // What are the selected boundaries?
-  var extent = event.selection; // If no selection, back to initial coordinate. Otherwise, update X axis domain
-
-  if (!extent) {
-    if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
-
-    x.domain(d3.extent(dataFilter, function (d) {
-      return d.date;
-    }));
-  } else {
-    x.domain([x.invert(extent[0]), x.invert(extent[1])]); // line_svg.select(".brush").call(brush.move, null); // This remove the grey brush area as soon as the selection has been done
-
-    line_svg.call(brush).call(brush.move, null);
-  } // Update axis and line position
-
-
-  line_svg.select("g.xAxis").transition().duration(1000).call(xAxis);
-  line_svg.select(".confirm_line").transition().duration(1000).attr("d", confirm_line);
-  line_svg.select(".driving_line").transition().duration(1000).attr("d", driving_line);
-} // If user double click, reinitialize the chart
-
-
-function drawMenu() {
-  d3.select("#selectButton").selectAll("myOptions").data(stateSet).enter().append("option").text(function (d) {
-    return d;
-  }) // text showed in the menu
-  .attr("value", function (d) {
-    return d;
-  });
-} // Scale the range of the data
-
-
-function tweenDash() {
-  var l = this.getTotalLength(),
-      i = d3.interpolateString("0," + l, l + "," + l);
-  return function (t) {
-    return i(t);
-  };
-}
-
-function transition(path) {
-  var _this = this;
-
-  path.transition().duration(5000).attrTween("stroke-dasharray", tweenDash).on("end", function () {
-    d3.select(_this).call(transition);
-  });
-}
-
-function initializeCanvas(dataFilter) {
-  x.domain(d3.extent(dataFilter, function (d) {
-    return d.date;
-  }));
-  y0.domain([0, d3.max(dataFilter, function (d) {
-    return Math.max(d.Confirmed);
-  })]);
-  y1.domain([-200, 200]);
-  confirm_line = d3.line().x(function (d) {
-    return x(d.date);
-  }).y(function (d) {
-    return y0(d.Confirmed);
-  }); // this is the mobility percentage
-
-  driving_line = d3.line().x(function (d) {
-    return x(d.date);
-  }).y(function (d) {
-    return y1(d.driving);
-  });
-  line_svg = d3.select("#d3-demo").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left / 2 + "," + margin.top + ")");
-  line_svg.append("path").datum(dataFilter) // Add the confirm line path.
-  .attr("class", "confirm_line").attr("d", confirm_line); // .call(transition);
-
-  line_svg.append("path").datum(dataFilter) // Add the confirmline2 path.
-  .attr("class", "driving_line").attr("d", driving_line); // .call(transition);
-  // add line brush
-
-  line_svg.append("g").attr("class", "brush").call(brush);
-  line_svg.append("g") // Add the X Axis
-  .attr("class", "xAxis").attr("transform", "translate(0," + height + ")").call(xAxis);
-  line_svg.append("g").attr("class", "axisSteelBlue").call(yAxisLeft);
-  line_svg.append("g").attr("class", "axisRed").attr("transform", "translate(" + width + " ,0)").call(yAxisRight);
-  line_svg.append("text").attr("text-anchor", "end").attr("x", width / 2).attr("y", height + 30).attr("class", "date").style("text-anchor", "middle").text("Date");
-  line_svg.append("text").attr("text-anchor", "end").attr("x", width / 2).attr("y", -10).attr("class", "title").style("text-anchor", "middle").text("Weekly Case Vs Weekly Mobility (Alabama)");
-  line_svg.append("text").attr("transform", "rotate(-90)").attr("y", 80 - margin.left).attr("x", 0 - height / 2).attr("dy", "1em").style("text-anchor", "middle").text("Weekly Cases");
-  line_svg.append("text").attr("transform", "rotate(-90)").attr("y", 30 + width).attr("x", 0 - height / 2).attr("dy", "1em").style("text-anchor", "middle").text("Weekly Mobility Percentage Change");
-  line_svg.append("defs").append("line_svg:clipPath").attr("id", "clip").append("line_svg:rect").attr("width", width).attr("height", height).attr("x", 0).attr("y", 0);
-  line_svg.append("g").attr("clip-path", "url(#clip)");
-  line_svg.append("g").attr("class", "brush").call(brush);
-  line_svg.on("dblclick", function () {
-    x.domain(d3.extent(dataFilter, function (d) {
-      return d.date;
-    }));
-    line_svg.select("g.xAxis").transition().duration(1000).call(xAxis);
-    line_svg.select(".confirm_line").transition().duration(1000).attr("d", confirm_line);
-    line_svg.select(".driving_line").transition().duration(1000).attr("d", driving_line);
-  });
-  return line_svg;
-}
-
-function drawGraph(dataFilter, state) {
-  x.domain(d3.extent(dataFilter, function (d) {
-    return d.date;
-  }));
-  y0.domain([0, d3.max(dataFilter, function (d) {
-    return Math.max(d.Confirmed);
-  })]);
-  var maxPercent = d3.max(dataFilter, function (d) {
-    var ma = Math.abs(Math.max(d.driving));
-    var mi = Math.abs(Math.min(d.driving));
-    var m = Math.max(ma, mi);
-
-    if (m % 100 > 50) {
-      return m - m % 100 + 100;
-    } else {
-      return m - m % 100 + 50;
-    }
-  });
-  y1.domain([-maxPercent, maxPercent]);
-  d3.select(".confirm_line").datum(dataFilter) // Add the confirmline2 path.
-  .transition().duration(1000).attr("d", confirm_line);
-  d3.select(".driving_line").datum(dataFilter) // Add the confirmline2 path.
-  .transition().duration(1000).attr("d", driving_line);
-  line_svg.select("text.title").text("Weekly Case Vs Weekly Mobility (".concat(state, ")"));
-  line_svg.select("g.axisSteelBlue").transition().duration(1000).call(yAxisLeft);
-  line_svg.select("g.axisRed").transition().duration(1000).call(yAxisRight);
-  line_svg.select("g.xAxis") // Add the X Axis
-  .transition().duration(1000).call(xAxis);
-}
-},{"../static/covid_mobility.csv":"../static/covid_mobility.csv"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+})({"dd3Bar.js":[function(require,module,exports) {
+// import covidData from "../static/covid19_us.csv"; // import covid 19 US data
+// ("use strict");
+// var covidArray = [];
+// var csv112Array = [];
+// const abbrStates = {
+// 	Alabama: "AL",
+// 	Alaska: "AK",
+// 	Arizona: "AZ",
+// 	Arkansas: "AR",
+// 	California: "CA",
+// 	Colorado: "CO",
+// 	Connecticut: "CT",
+// 	Delaware: "DE",
+// 	"Diamond Princess": "DPShip", // the ship
+// 	"District of Columbia": "DC",
+// 	Florida: "FL",
+// 	Georgia: "GA",
+// 	"Grand Princess": "GPShip", // the other ship
+// 	Guam: "GU",
+// 	Hawaii: "HI",
+// 	Idaho: "ID",
+// 	Illinois: "IL",
+// 	Indiana: "IN",
+// 	Iowa: "IA",
+// 	Kansas: "KS",
+// 	Kentucky: "KY",
+// 	Louisiana: "LA",
+// 	Maine: "ME",
+// 	Maryland: "MD",
+// 	Massachusetts: "MA",
+// 	Michigan: "MI",
+// 	Minnesota: "MN",
+// 	Mississippi: "MS",
+// 	Missouri: "MO",
+// 	Montana: "MT",
+// 	Nebraska: "NE",
+// 	Nevada: "NV",
+// 	"New Hampshire": "NH",
+// 	"New Jersey": "NJ",
+// 	"New Mexico": "NM",
+// 	"New York": "NY",
+// 	"North Carolina": "NC",
+// 	"North Dakota": "ND",
+// 	Ohio: "OH",
+// 	Oklahoma: "OK",
+// 	Oregon: "OR",
+// 	Pennsylvania: "PA",
+// 	"Puerto Rico": "PR",
+// 	"Rhode Island": "RI",
+// 	"South Carolina": "SC",
+// 	"South Dakota": "SD",
+// 	Tennessee: "TN",
+// 	Texas: "TX",
+// 	Utah: "UT",
+// 	Vermont: "VT",
+// 	Virginia: "VA",
+// 	Washington: "WA",
+// 	"West Virginia": "WV",
+// 	Wisconsin: "WI",
+// 	Wyoming: "WY",
+// 	"Northern Mariana Islands": "MP",
+// };
+// const margin = 80;
+// const width = 4000 - 2 * margin;
+// const height = 800 - 2 * margin;
+// const svg = d3.select("#dd3bar-svg").attr("id", "dd3bar-svg");
+// const svgContainer = d3.select("#dd3-bar");
+// // const chart = svg.append('g')
+// //   .attr('transform', `translate(${margin}, ${margin})`);
+// d3.csv(covidData).then(function (data) {
+// 	data.forEach(function (d) {
+// 		covidArray.push(d);
+// 	});
+// 	data.forEach(function (d) {
+// 		if (d["Source.Name"] == "01-12-2021.csv") csv112Array.push(d);
+// 	});
+// 	// For later revising (slider)
+// 	// var dateValues = Array.from(d3.rollup(covidArray, ([d]) => d.Confirmed, d => d['Source.Name'], d => d.Province_State))
+// 	//                 .map(([filename, data]) => [filename, data])
+// 	// .map(([date, data]) => [parseDateCSV(date), data])
+// 	// .sort(([a], [b]) => d3.ascending(a, b))
+// 	// console.log(dateValues);
+// 	// console.log(csv112Array);  // all the states for a single day
+// 	// console.log(covidArray[0]);  // covidArray is an array of objects now
+// 	//
+// 	// // console.log(d3.max(csv112Array, function(d) {return +d.Confirmed}));
+// 	// console.log("The # of rows of the covid US data: " + covidArray.length);
+// 	// console.log("Example row: ");
+// 	// // method to find the max value of a column
+// 	// console.log(d3.max(covidArray, d => +d["Confirmed"]));
+// 	// // const tParser = d3.timeParse("%d/%m/%Y %H:%M");
+// 	// // console.log(tParser(covidArray[0].Last_Update));
+// 	draw("01-01-2021.csv");
+// });
+// // svg
+// //   .append('text')
+// //   .attr('class', 'label')
+// //   .attr('x', -(height / 2) - margin)
+// //   .attr('y', margin / 4)
+// //   .attr('transform', 'rotate(-90)')
+// //   .attr('text-anchor', 'middle')
+// //   .text('# of people confirmed')
+// //
+// // svg.append('text')
+// //   .attr('class', 'label')
+// //   .attr('x', width / 10 + margin)
+// //   .attr('y', height + margin * 1.7)
+// //   .attr('text-anchor', 'middle')
+// //   .text('States')
+// const parseDateCSV = d3.utcParse("%m/%d/%Y %M:%M");
+// const parseDate = d3.utcParse("%Y-%m-%d");
+// const formatDate = d3.utcFormat("%m-%d-%Y");
+// function draw(filename) {
+// 	const chart = svg
+// 		.append("g")
+// 		.attr("transform", `translate(${margin}, ${margin})`);
+// 	// console.log(rowMap[1].values());
+// 	var currentArray = [];
+// 	covidArray.forEach(function (d) {
+// 		if (d["Source.Name"] == filename) currentArray.push(d);
+// 	});
+// 	// console.log(currentArray);
+// 	var xScale = d3
+// 		.scaleBand()
+// 		.range([0, width])
+// 		.domain(currentArray.map((d) => abbrStates[d.Province_State]));
+// 	var makeXLines = () => d3.axisBottom().scale(xScale);
+// 	var yScale = d3
+// 		.scaleLinear()
+// 		.range([height, 0])
+// 		.domain([
+// 			0,
+// 			d3.max(currentArray, function (d) {
+// 				return +d.Confirmed;
+// 			}),
+// 		]);
+// 	var makeYLines = () => d3.axisLeft().scale(yScale);
+// 	chart
+// 		.append("g")
+// 		.attr("transform", `translate(0, ${height})`)
+// 		.call(d3.axisBottom(xScale));
+// 	chart.append("g").call(d3.axisLeft(yScale));
+// 	chart
+// 		.append("g")
+// 		// .attr('class', 'grid')
+// 		.call(makeYLines().tickSize(-width, 0, 0).tickFormat(""));
+// 	const barGroups = chart.selectAll().data(currentArray).enter().append("g");
+// 	barGroups
+// 		.append("rect")
+// 		.attr("class", "bar")
+// 		.attr("x", (g) => xScale(abbrStates[g.Province_State]))
+// 		.attr("y", (g) => yScale(g.Confirmed))
+// 		.attr("height", (g) => height - yScale(g.Confirmed))
+// 		.attr("width", xScale.bandwidth())
+// 		.on("mouseenter", function (mouseEvent, d) {
+// 			// mouseEnter event
+// 			// console.log(d);
+// 			d3.selectAll(".value").attr("opacity", 0);
+// 			d3.select(this)
+// 				.transition()
+// 				.duration(300)
+// 				.attr("opacity", 0.6)
+// 				.attr("x", (d) => xScale(abbrStates[d.Province_State]) - 5)
+// 				.attr("width", xScale.bandwidth() + 10);
+// 			const y = yScale(d.Confirmed);
+// 			chart
+// 				.append("line") // line = ...
+// 				.attr("id", "limit")
+// 				.attr("x1", 0)
+// 				.attr("y1", y)
+// 				.attr("x2", width)
+// 				.attr("y2", y);
+// 			barGroups
+// 				.append("text")
+// 				.attr("class", "divergence")
+// 				.attr(
+// 					"x",
+// 					(d) => xScale(abbrStates[d.Province_State]) + xScale.bandwidth() / 2
+// 				)
+// 				.attr("y", (d) => yScale(d.Confirmed) - 10)
+// 				.attr("fill", "white")
+// 				.attr("text-anchor", "middle")
+// 				.text((thisD, idx) => {
+// 					const divergence = (thisD.Confirmed - d.Confirmed).toFixed(1);
+// 					let text = "";
+// 					if (divergence > 0) text += "+";
+// 					text += +`${divergence}`;
+// 					// hide the text of the current bar
+// 					return thisD.Province_State !== d.Province_State ? text : "";
+// 				});
+// 		})
+// 		.on("mouseleave", function () {
+// 			d3.selectAll(".value").attr("opacity", 1);
+// 			d3.select(this)
+// 				.transition()
+// 				.duration(300)
+// 				.attr("opacity", 1)
+// 				.attr("x", (d) => xScale(abbrStates[d.Province_State]))
+// 				.attr("width", xScale.bandwidth());
+// 			chart.selectAll("#limit").remove();
+// 			chart.selectAll(".divergence").remove();
+// 		});
+// 	barGroups
+// 		.append("text")
+// 		.attr("class", "value")
+// 		.attr(
+// 			"x",
+// 			(d) => xScale(abbrStates[d.Province_State]) + xScale.bandwidth() / 2
+// 		)
+// 		.attr("y", (d) => yScale(d.Confirmed) - 10)
+// 		.attr("text-anchor", "middle")
+// 		.text((d) => +`${d.Confirmed}`);
+// }
+// var dateControl = document.getElementById("dateUpdated");
+// dateControl.onchange = function () {
+// 	// console.log("dateControl Testing:");
+// 	// console.log(parseDate(dateControl.value));
+// 	var filename = formatDate(parseDate(dateControl.value)).concat(".csv");
+// 	console.log(filename);
+// 	// clear the previous visualizations
+// 	svg.selectAll("*").remove();
+// 	draw(filename);
+// };
+// function removeAllChildNodes(parent) {
+// 	while (parent.firstChild) {
+// 		parent.removeChild(parent.firstChild);
+// 	}
+// }
+// // For later revising
+// const barSize = 48;
+// const n = 59;
+// const margin2 = { top: 16, right: 6, bottom: 6, left: 0 };
+// // function ticker(svg) {
+// //   const now = svg.append("text")
+// //                 .style("font", `bold ${barSize}px var(--sans-serif)`)
+// //                 .style("font-variant-numeric", "tabular-nums")
+// //                 .attr("text-anchor", "end")
+// //                 .attr("x", width - 6)
+// //                 .attr("y", margin2.top + barSize * (n - 0.45))
+// //                 .attr("dy", "0.32em")
+// //                 .text(formatDate(keyframes[0][0]));
+// //
+// //   return ([date], transition) => {
+// //     transition.end().then(() => now.text(formatDate(date)));
+// //   };
+// // }
+},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -532,5 +568,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","covid_mobility.js"], null)
-//# sourceMappingURL=/covid_mobility.275cb5e1.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","dd3Bar.js"], null)
+//# sourceMappingURL=/dd3Bar.a6e6b8cd.js.map
