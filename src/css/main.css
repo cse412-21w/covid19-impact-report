@@ -83,11 +83,12 @@ div.column {
 
 #map-vis-section div.column {
   position: relative;
+  height: 100%;
 }
 
 #map-vis-section #cases-map-legend {
   position: absolute;
-  bottom: 4%;
+  bottom: 10%;
 }
 
 #econIndicts, #vacState {

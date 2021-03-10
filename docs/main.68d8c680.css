@@ -83,11 +83,12 @@ div.column {
 
 #map-vis-section div.column {
   position: relative;
+  height: 100%;
 }
 
 #map-vis-section #cases-map-legend {
   position: absolute;
-  bottom: 4%;
+  bottom: 10%;
 }
 
 #econIndicts, #vacState {
@@ -193,4 +194,4 @@ span {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.53a9af5e.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.68d8c680.css.map */

@@ -84,10 +84,11 @@ div.column {
 #map-vis-section {
     div.column {
         position: relative;
+        height: 100%;
     }
     #cases-map-legend {
         position: absolute;
-        bottom: 4%;
+        bottom: 10%;
     }
 }
 
