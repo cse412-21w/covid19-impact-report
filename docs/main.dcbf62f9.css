@@ -79,6 +79,7 @@ div.column {
 
 #mapVis {
   width: 60%;
+  height: 90%;
   margin-right: 20px;
 }
 
@@ -152,12 +153,6 @@ div.column {
   text-align: left;
 }
 
-.p4 {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
 .p4 h1, .p4 h2, .p4 p {
   text-align: left;
 }
@@ -201,4 +196,4 @@ span {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.97b6e2ff.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.dcbf62f9.css.map */
