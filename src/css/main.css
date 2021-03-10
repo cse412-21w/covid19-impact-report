@@ -3,6 +3,21 @@ h1, h2, h3, p {
   text-align: center;
 }
 
+div.column ul {
+  list-style-type: none;
+}
+
+div.column ul li {
+  background: #ebebeb;
+  font-family: 'Montserrat';
+  padding: 5px;
+}
+
+ul, div.column ul li {
+  margin-left: 0;
+  padding-left: 0;
+}
+
 a {
   color: blueviolet;
   text-decoration: none;
@@ -108,7 +123,14 @@ div.column {
 }
 
 #covid_mobility {
-  width: 60%;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#mobility-instr {
+  font-size: medium;
+  color: gray;
 }
 
 #vacState {
@@ -171,6 +193,18 @@ div.column {
 
 .p6 div.column, .p7 div.column, .p10 div.column {
   padding-right: 6%;
+}
+
+.p9 p {
+  text-align: left;
+}
+
+.p9 li {
+  background: #cecece;
+}
+
+.p9 .column {
+  margin-left: 16%;
 }
 
 .p11 .content, .p12 .content {

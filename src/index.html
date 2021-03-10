@@ -59,29 +59,42 @@
             <div class="content">
                 <h1>COVID-19 Spread the World</h1>
                 <p>
-                    Background paragraph 
+                    COVID-19 is a new disease, caused by a novel (or new) coronavirus that has not 
+                    previously been seen in humans. Because it is a new virus, scientists are 
+                    learning more each day. Although most people who have COVID-19 have mild symptoms, 
+                    COVID-19 can also cause severe illness and even death.
                 </p>
                 <p>
-                    Background paragraph 
+                    After the first case of COVID-19 been identified in December 2019, 
+                    the World Health Organization (WHO) sooner declared it a pandemic on March 11th 
+                    as the number of affected countries continues to rise. Over a year of the 
+                    COVID-19 pandemic outbreak, up till March 10, 2021, United States has reached 
+                    a total case of 29,798,657, which made up about 9% of the total population 
+                    in the United States.
                 </p>
             </div>
         </div>
 
         <div class="section p4" id="map-vis-section">
-            <h1>Confirmed cases of Covid-19 in all states</h1>
+            <h1>Confirmed Cases of COVID-19 in All States</h1>
             <section id = "mapVis" class="column">
               <div class="map" id="us-map"></div>
               <div id="mySlider"></div>
             </section>
             <div class="column">
-                <h2>Some subtitle here</h2>
+                <h2>Till 2021, Feb.</h2>
                 <p>
-                    TODO: Instructions of how to read this visualization: Which does each element mean?
-                    (data points, time periods, etc). How to interact with it? What things to notice/ pay attention to?
+                    The color of each state indicates the number of confirmed cases in the 
+                    states according to the legend. Typically, the darker the color is, 
+                    the more confirmed cases in this state. If you hover the mouse over a state, 
+                    a tooltip will appear and tell you the name of the state you are pointing to 
+                    and the exact number of confirmed cases there. 
                 </p>
-                <p>Also make a summary about our discovery or intuition. What correlation or tendency exists?
-                    Express your own idea.
-                </p>
+                <ul>
+                    <li>The map shows that the spread of Covid-19 is not evenly distributed among the states.</li>
+                    <li>The great amount of confirmed cases are concentrated in California, Texas, Florida and New York. This is possibly caused by the great amount of population, intense density of population and high volume of mobility in these four states.</li>
+                    <li>The three states with the most confirmed cases (California, Texas, Florida) are all southern states. This might be correlated with local temperature and residuals’ behaviors.</li>
+                </ul>
                 <div id="cases-map-legend"></div>
             </div>
         </div>
@@ -114,7 +127,7 @@
         </div>
 
         <div class="section p7">
-            <h1>Consumer Price and Producor Price during COVID-19(p8)</h1>
+            <h1>Consumer Price and Producer Price during COVID-19(p8)</h1>
             <section id = "tableauDashboard-container" class="column">
 
                 <div class='tableauPlaceholder' id='viz1614987409863' style='position: relative'>
@@ -152,13 +165,17 @@
                 </script>
             </section>
             <div class="column">
-                <h2>Some subtitle here</h2>
+                <h2>Fluctuation of Consumer Price and Producer Price</h2>
                 <p>
-                    TODO: Instructions of how to read this visualization: Which does each element mean?
-                    (data points, time periods, etc). How to interact with it? What things to notice/ pay attention to?
-                </p>
-                <p>Also make a summary about our discovery or intuition. What correlation or tendency exists?
-                    Express your own idea.
+                    The graph describes the immediate impact of COVID-19 Cases on two of 
+                    the economic indicators: Consumer Price Index and Producer Price. 
+                    By selecting a time period on Producer scatter plot, we can visualize 
+                    the corresponding consumer prices during the same time interval. 
+                    In the graph, note that there is a drastic decrease of the index,
+                     represented by the bar has a negative value highlighted in red color. 
+                     This happened just after when the COVID-19 became a serious case 
+                     in the United States, so we can conclude that the pandemic indeed 
+                     has a negative impact on these two economic indicators.
                 </p>
             </div>
 
@@ -169,12 +186,31 @@
         </div>
 
         <div class="section p9">
-            <section id="covid_mobility">
-                <h1>Daily Cases change and Daily Mobility Change in California</h1>
-                <label for="selectButton">Please select a state: </label>
-                <select id="selectButton"></select>
-                <div id="d3-mobility"></div>
-            </section>
+            <div class="slide">
+                <section id="covid_mobility">
+                    <h1>Weekly Cases change and Weekly Mobility Changes</h1>
+                    <label for="selectButton">Please select a state: </label>
+                    <select id="selectButton"></select>
+                    <div id="d3-mobility"></div>
+                    <p id="mobility-instr">
+                        * Brush the chart to zoom. Double click to re-initialize
+                        (the color of lines corresponds to the color of axes)
+                    </p>
+                    <p>The baseline is the median value, for the corresponding day of the week, 
+                        during the 5-week period Jan 3–Feb 6, 2020.
+                    </p>
+                </section>
+            </div>
+
+            <div class="slide">
+                <div class="column">
+                    <p>
+                        At the beginning of the outbreak, the general trend of mobility does not strongly 
+                        correlate to the surge in infected cases. However, as time went on, the rise in cases 
+                        usually results in a decline in mobility.
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div class="section p10">

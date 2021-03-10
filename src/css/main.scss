@@ -3,6 +3,21 @@ h1, h2, h3, p {
     text-align: center;
 }
 
+div.column ul {
+    list-style-type: none;
+}
+
+div.column ul li {
+    background: #ebebeb;
+    font-family: 'Montserrat';
+    padding: 5px;
+}
+
+ul, div.column ul li {
+    margin-left: 0;
+    padding-left: 0;
+}
+
 a {
     color: blueviolet;
     text-decoration: none;
@@ -111,7 +126,14 @@ div.column {
 
 // For mobility
 #covid_mobility {
-    width: 60%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#mobility-instr {
+    font-size: medium;
+    color: gray;
 }
 
 // For Vaccination
@@ -190,6 +212,18 @@ div.column {
     }
     div.column {
         padding-right: 6%;
+    }
+}
+
+.p9 {
+    p {
+        text-align: left;
+    }
+    li {
+        background: #cecece;
+    }
+    .column {
+        margin-left: 16%;
     }
 }
 
