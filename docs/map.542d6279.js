@@ -5063,7 +5063,7 @@ var element = document.getElementById('mapVis');
 var positionInfo = element.getBoundingClientRect(); // const width = 900;
 // const height = 600;
 
-var width = positionInfo.width * 0.8;
+var width = positionInfo.width;
 var height = width * 0.8;
 var svg = d3v4.select("#us-map").append("svg").attr("width", width).attr("height", height);
 var projection = d3v4.geoAlbersUsa().translate([width / 2, height / 2]) // translate to center of screen
@@ -5145,4 +5145,4 @@ $(document).ready(function () {
   console.log("MAP loaded");
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.7f2fb9c1.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.542d6279.js.map
