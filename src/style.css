@@ -72,6 +72,13 @@ text.divergence {
   margin-top: 5px;
 }
 
+.axisSteelBlue text {
+	fill: steelblue;
+}
+
+.axisRed text {
+	fill: red;
+}
 
 
 /* The following is optional */
