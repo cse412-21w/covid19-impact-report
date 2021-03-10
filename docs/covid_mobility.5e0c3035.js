@@ -128,15 +128,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // ("use strict"); // the code should be executed in "strict mode".
 // With strict mode, you can not, for example, use undeclared variables
-// preparation for our svg
+var element = document.getElementById('covid_mobility');
+var positionInfo = element.getBoundingClientRect(); // preparation for our svg
+
 var margin = {
   top: 50,
   right: 35,
   bottom: 50,
   left: 150
 },
-    width = window.innerWidth - (margin.left + margin.right),
-    height = window.innerHeight / 2 - (margin.top + margin.bottom);
+    // width = window.innerWidth - (margin.left + margin.right),
+// height = window.innerHeight / 2 - (margin.top + margin.bottom);
+width = positionInfo.width - (margin.left + margin.right),
+    height = width / 2 - (margin.top + margin.bottom);
 var data = [];
 var stateSet = new Set();
 var line_svg = null;
@@ -329,4 +333,4 @@ function drawGraph(dataFilter, state) {
   .transition().duration(1000).call(xAxis);
 }
 },{"../static/covid_mobility.csv":"TDWJ"}]},{},["LGDt"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/covid_mobility.bf240d28.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/covid_mobility.5e0c3035.js.map
