@@ -2,10 +2,15 @@ import covidData from "../static/covid_mobility.csv";
 // ("use strict"); // the code should be executed in "strict mode".
 // With strict mode, you can not, for example, use undeclared variables
 
+var element = document.getElementById('covid_mobility');
+var positionInfo = element.getBoundingClientRect();
+
 // preparation for our svg
 var margin = { top: 50, right: 35, bottom: 50, left: 150 },
-	width = window.innerWidth - (margin.left + margin.right),
-	height = window.innerHeight / 2 - (margin.top + margin.bottom);
+	// width = window.innerWidth - (margin.left + margin.right),
+	// height = window.innerHeight / 2 - (margin.top + margin.bottom);
+	width = positionInfo.width - (margin.left + margin.right),
+	height = width / 2 - (margin.top + margin.bottom);
 var data = [];
 var stateSet = new Set();
 var line_svg = null;
