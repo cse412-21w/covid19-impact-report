@@ -5056,10 +5056,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var covidData = _covid.default.filter(function (p) {
   return p.Month == 2;
-});
+}); // dynamically adjust width and height
 
-var width = 900;
-var height = 600;
+
+var element = document.getElementById('econIndicts');
+var positionInfo = element.getBoundingClientRect(); // const width = 900;
+// const height = 600;
+
+var width = positionInfo.width * 0.8;
+var height = positionInfo.height * 0.8;
 var svg = d3v4.select("#us-map").append("svg").attr("width", width).attr("height", height);
 var projection = d3v4.geoAlbersUsa().translate([width / 2, height / 2]) // translate to center of screen
 .scale([1000]); // scale things down so see entire US
@@ -5140,4 +5145,4 @@ $(document).ready(function () {
   console.log("MAP loaded");
 });
 },{"../static/covid.json":"QGcX"}]},{},["quTw"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.165ae41c.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/map.2934e0b5.js.map
