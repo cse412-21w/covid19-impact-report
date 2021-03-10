@@ -81,6 +81,15 @@ div.column {
   max-width: 70%;
 }
 
+#map-vis-section div.column {
+  position: relative;
+}
+
+#map-vis-section #cases-map-legend {
+  position: absolute;
+  bottom: 4%;
+}
+
 #econIndicts, #vacState {
   margin-left: 8%;
   width: 56%;
@@ -184,4 +193,4 @@ span {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.72a2c76c.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.53a9af5e.css.map */

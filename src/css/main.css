@@ -81,6 +81,15 @@ div.column {
   max-width: 70%;
 }
 
+#map-vis-section div.column {
+  position: relative;
+}
+
+#map-vis-section #cases-map-legend {
+  position: absolute;
+  bottom: 4%;
+}
+
 #econIndicts, #vacState {
   margin-left: 8%;
   width: 56%;
