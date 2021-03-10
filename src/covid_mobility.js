@@ -172,7 +172,7 @@ function initializeCanvas(dataFilter) {
 		});
 
 	line_svg = d3
-		.select("#d3-demo")
+		.select("#d3-mobility")
 		.append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
