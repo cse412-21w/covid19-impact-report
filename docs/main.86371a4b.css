@@ -118,7 +118,7 @@ div.column {
 }
 
 #selectButton {
-  display: block;
+  display: inline-block;
   font-size: 16px;
   font-weight: 700;
   color: #444;
@@ -267,4 +267,4 @@ div.column {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.fe56637c.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.86371a4b.css.map */
