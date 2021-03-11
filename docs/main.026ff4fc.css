@@ -3,6 +3,21 @@ h1, h2, h3, p {
   text-align: center;
 }
 
+.p12 ul {
+  list-style-type: none;
+}
+
+.p12 ul li {
+  background: #ebebeb;
+  font-family: 'Montserrat';
+  padding: 5px;
+}
+
+.p12 ul li {
+  margin-left: 0;
+  padding-left: 0;
+}
+
 div.column span {
   font-size: 0.5em;
 }
@@ -271,4 +286,4 @@ div.column {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.93f885f4.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.026ff4fc.css.map */
