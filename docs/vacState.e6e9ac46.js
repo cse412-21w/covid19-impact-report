@@ -128,9 +128,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // set the dimensions and margins of the graph
 var margin = {
-  top: 50,
+  top: 150,
   right: 35,
-  bottom: 50,
+  bottom: 100,
   left: 70
 },
     width = 800 - margin.left - margin.right,
@@ -170,4 +170,4 @@ d3.csv(_vac.default).then(function (data) {
   }).style("font-size", "10px").attr("alignment-baseline", "middle");
 });
 },{"../static/vac.csv":"OVns"}]},{},["Ixoo"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/vacState.12547bb9.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/vacState.e6e9ac46.js.map
