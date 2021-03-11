@@ -228,27 +228,27 @@ div.column {
   padding-top: 0;
 }
 
-.p6 h2, .p6 h3, .p6 p, .p7 h2, .p7 h3, .p7 p, .p10 h2, .p10 h3, .p10 p {
+.p8 h2, .p8 h3, .p8 p, .p9 h2, .p9 h3, .p9 p, .p10 h2, .p10 h3, .p10 p {
   text-align: left;
 }
 
-.p6 h1, .p7 h1, .p10 h1 {
+.p8 h1, .p9 h1, .p10 h1 {
   padding: 2px 6px;
 }
 
-.p6 div.column, .p7 div.column, .p10 div.column {
+.p8 div.column, .p9 div.column, .p10 div.column {
   padding-right: 6%;
 }
 
-.p9 p {
+.p6 p {
   text-align: left;
 }
 
-.p9 li {
+.p6 li {
   background: #cecece;
 }
 
-.p9 .column {
+.p6 .column {
   margin-left: 16%;
 }
 
@@ -271,4 +271,4 @@ div.column {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.e1dbb334.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.93f885f4.css.map */
