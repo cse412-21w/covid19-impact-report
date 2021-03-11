@@ -3,7 +3,7 @@
 - Bobin Hu, bobinh@uw.edu
 - Ellie Liu: yliu617@uw.edu
 - Jonathan Zhao, zhaoy43@uw.edu
-- Mingyang Xue, mingyx@uw.edu
+- Mingyang Xue, mingyx3@uw.edu
 - Zealer Xiao zilex@uw.edu
 
 ### Contribution Statements
