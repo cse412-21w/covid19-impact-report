@@ -1,11 +1,8 @@
 import vacData from '../static/vac.csv'
 // set the dimensions and margins of the graph
-var element = document.getElementById('vac-state');
-var positionInfo = element.getBoundingClientRect();
-
 var margin = {top: 50, right: 35, bottom: 50, left: 70 },
-    width = positionInfo.width - margin.left - margin.right,
-    height = width * 0.8 - margin.top - margin.bottom,
+    width = 800 - margin.left - margin.right,
+    height = 650 - margin.top - margin.bottom,
     innerRadius = 90,
     outerRadius = Math.min(width, height) / 2;   // the outerRadius goes from the middle of the SVG area to the border
 

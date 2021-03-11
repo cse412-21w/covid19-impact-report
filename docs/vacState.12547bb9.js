@@ -127,16 +127,14 @@ var _vac = _interopRequireDefault(require("../static/vac.csv"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // set the dimensions and margins of the graph
-var element = document.getElementById('vac-state');
-var positionInfo = element.getBoundingClientRect();
 var margin = {
   top: 50,
   right: 35,
   bottom: 50,
   left: 70
 },
-    width = positionInfo.width - margin.left - margin.right,
-    height = width * 0.8 - margin.top - margin.bottom,
+    width = 800 - margin.left - margin.right,
+    height = 650 - margin.top - margin.bottom,
     innerRadius = 90,
     outerRadius = Math.min(width, height) / 2; // the outerRadius goes from the middle of the SVG area to the border
 // append the svg object
@@ -172,4 +170,4 @@ d3.csv(_vac.default).then(function (data) {
   }).style("font-size", "10px").attr("alignment-baseline", "middle");
 });
 },{"../static/vac.csv":"OVns"}]},{},["Ixoo"], null)
-//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/vacState.14958f11.js.map
+//# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/vacState.12547bb9.js.map
