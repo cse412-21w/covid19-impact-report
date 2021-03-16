@@ -50,6 +50,10 @@ label, select, option {
   position: relative;
 }
 
+.content h1 {
+  text-align: left;
+}
+
 .column {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -286,4 +290,4 @@ div.column {
 }
 
 
-/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.026ff4fc.css.map */
+/*# sourceMappingURL=https://cse412-21w.github.io/covid19-impact-report/main.7309bd79.css.map */

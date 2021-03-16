@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.css">
-    <link rel="stylesheet" href="https://cse412-21w.github.io/covid19-impact-report/main.026ff4fc.css">
+    <link rel="stylesheet" href="https://cse412-21w.github.io/covid19-impact-report/main.7309bd79.css">
     <link rel="stylesheet" href="https://cse412-21w.github.io/covid19-impact-report/style.df579e04.css">
     <!-- <script type="text/javascript" src="index.js"></script> -->
 
@@ -99,31 +99,20 @@
         </div>
 
         <div class="section p6">
-            <div class="slide">
-                <section id="covid_mobility">
-                    <h1>Weekly Cases change and Weekly Mobility Changes</h1>
-                    <label for="selectButton">Please select a state: </label>
-                    <select id="selectButton"></select>
-                    <div id="d3-mobility"></div>
-                    <p id="mobility-instr">
-                        * Brush the chart to zoom. Double click to re-initialize
-                        (the color of lines corresponds to the color of axes)
-                    </p>
-                    <p>The mobility baseline is the median value, for the corresponding day of the week, 
-                        during the 5-week period Jan 3–Feb 6, 2020.
-                    </p>
-                </section>
-            </div>
+            <section id="covid_mobility">
+                <h1>Weekly Cases change and Weekly Mobility Changes</h1>
+                <label for="selectButton">Please select a state: </label>
+                <select id="selectButton"></select>
+                <div id="d3-mobility"></div>
+                <p id="mobility-instr">
+                    * Brush the chart to zoom. Double click to re-initialize
+                    (the color of lines corresponds to the color of axes)
+                </p>
+                <p>The mobility baseline is the median value, for the corresponding day of the week, 
+                    during the 5-week period Jan 3–Feb 6, 2020.
+                </p>
+            </section>
 
-            <div class="slide">
-                <div class="column">
-                    <p>
-                        At the beginning of the outbreak, the general trend of mobility does not strongly 
-                        correlate to the surge in infected cases. However, as time went on, the rise in cases 
-                        usually results in a decline in mobility.
-                    </p>
-                </div>
-            </div>
         </div>
 
         <div class="section p7">
@@ -156,7 +145,7 @@
         </div>
 
         <div class="section p9">
-            <h1>Consumer Price and Producer Price during COVID-19(p8)</h1>
+            <h1>Consumer Price and Producer Price during COVID-19</h1>
             <section id="tableauDashboard-container" class="column">
 
                 <div class="tableauPlaceholder" id="viz1614987409863" style="position: relative">
@@ -242,6 +231,13 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
             </div>
         </div> -->
 
+        <div class="section p12pre">
+            <div class="content">
+                <h1>Demo Video</h1>
+                <iframe width="600" height="360" src="https://www.youtube.com/embed/_FFiQvGJ6Ag" frameborder="0"></iframe>
+            </div>
+        </div>
+
         <div class="section p12">
             <div class="content">
                 <h1>About this project</h1> 
@@ -281,7 +277,7 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
                             Bobin Hu, bobinh@uw.edu
                         </li>
                         <li>
-                            Ellie Liu: yliu617@uw.edu
+                            Ellie Liu, yliu617@uw.edu
                         </li>
                         <li>
                             Jonathan Zhao, zhaoy43@uw.edu
@@ -290,7 +286,7 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
                             Mingyang Xue, mingyx3@uw.edu
                         </li>
                         <li>
-                            Zealer Xiao zilex@uw.edu
+                            Zealer Xiao, zilex@uw.edu
                         </li>
                     </ul>
                 </p>
@@ -302,8 +298,8 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
     <script>var myFullpage = new fullpage('#fullPage', {
   autoScrolling: true,
   navigation: true,
-  anchors: ['Home', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10pre', 'p10', 'p12'],
-  navigationTooltips: ['Title Page', 'Cases & Deaths', 'Background', 'US Map', 'Heading', 'Mobility', 'Heading', 'Economic Facts', 'Tableau Vis', 'Heading', 'Vaccination', 'About'],
+  anchors: ['Home', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10pre', 'p10', 'p12pre', 'p12'],
+  navigationTooltips: ['Title Page', 'Cases & Deaths', 'Background', 'US Map', 'Heading', 'Mobility', 'Heading', 'Economic Facts', 'Tableau Vis', 'Heading', 'Vaccination', 'Demo', 'About'],
   scrollingSpeed: 1000,
   controlArrows: false,
   slidesNavigation: true
