@@ -47,6 +47,9 @@ label, select, option {
     display: block;
     box-sizing: border-box;
     position: relative;
+    h1 {
+        text-align: left;
+    }
 }
 
 .column {

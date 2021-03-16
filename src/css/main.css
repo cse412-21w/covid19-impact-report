@@ -50,6 +50,10 @@ label, select, option {
   position: relative;
 }
 
+.content h1 {
+  text-align: left;
+}
+
 .column {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
